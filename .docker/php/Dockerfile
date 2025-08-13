@@ -23,10 +23,12 @@ RUN docker-php-source extract && \
     docker-php-source delete
 
 # Install Intl
-RUN docker-php-source extract && \
-    docker-php-ext-configure intl && \
-    docker-php-ext-install intl && \
-    docker-php-source delete
+RUN apt-get update && apt-get install -y \
+    libicu-dev \
+    g++ \
+ && docker-php-ext-configure intl \
+ && docker-php-ext-install -j$(nproc) intl \
+ && rm -rf /var/lib/apt/lists/*
 
 # Setup php.ini
 COPY php.ini /usr/local/etc/php/php.ini

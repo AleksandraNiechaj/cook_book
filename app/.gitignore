@@ -18,3 +18,9 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+.idea/
+
+app/.env.local
+app/public/autoryzacja.php
+app/public/db-test.php
+.phpunit.result.cache

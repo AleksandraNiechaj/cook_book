@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Strona główna{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Przepisy kulinarne 🍳</h1>
+
+        <div class="row">
+            {# Sidebar z kategoriami #}
+            <div class="col-md-3">
+                <h4>Kategorie</h4>
+                {% set categories = ['Śniadania', 'Obiady', 'Desery', 'Wege'] %}
+
+                <ul class="list-group">
+                    {% for category in categories %}
+                        <li class="list-group-item">
+                            <a href="#">{{ category }}</a>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item text-muted">Brak kategorii</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {# Lista przepisów #}
+            <div class="col-md-9">
+                <div class="row">
+                    {% set recipes = [
+                        { 'title': 'Spaghetti Carbonara', 'content': 'Klasyczny włoski makaron z sosem jajecznym, boczkiem i serem pecorino.' },
+                        { 'title': 'Sałatka grecka', 'content': 'Świeże warzywa z serem feta i oliwkami, polane oliwą z oliwek.' },
+                        { 'title': 'Szarlotka', 'content': 'Tradycyjne ciasto z jabłkami i cynamonem.' }
+                    ] %}
+
+                    {% for recipe in recipes %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ recipe.title }}</h5>
+                                    <p class="card-text">{{ recipe.content }}</p>
+                                    <a href="#" class="btn btn-sm btn-primary">Zobacz przepis</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p>Brak przepisów do wyświetlenia.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

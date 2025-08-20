@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ category.name }}</h1>
+
+    {% if recipes is empty %}
+        <p>Brak przepisów w tej kategorii.</p>
+    {% else %}
+        <div class="cards">
+            {% for r in recipes %}
+                <article class="card">
+                    <h3>{{ r.title }}</h3>
+                    <p>{{ r.excerpt }}</p>
+                    <a href="{{ path('recipe_show', { id: r.id }) }}">Zobacz przepis</a>
+                </article>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <p><a href="{{ path('category_list') }}">← Wszystkie kategorie</a></p>
+{% endblock %}

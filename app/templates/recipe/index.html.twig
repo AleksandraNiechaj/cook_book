@@ -1,24 +1,38 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ category.name }}{% endblock %}
+{% block title %}Przepisy{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
-        <h1>Kategoria: {{ category.name }}</h1>
+        <h1>Przepisy</h1>
 
         {% if recipes is empty %}
-            <p class="text-muted mt-3">Brak przepisów w tej kategorii.</p>
+            <p class="text-muted mt-3">Brak przepisów.</p>
         {% else %}
             <div class="row mt-3">
                 {% for r in recipes %}
                     <div class="col-md-6 mb-3">
                         <article class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <h3 class="h5">
+                                <h3 class="h5 mb-1">
                                     <a href="{{ path('recipe_show', { id: r.id }) }}">{{ r.title }}</a>
                                 </h3>
-                                <p class="card-text">
-                                    {{ r.content|u.truncate(140, '…', true) }}
+
+                                <p class="mb-1 text-muted" style="font-size: .9rem;">
+                                    {% if r.category %}
+                                        <a href="{{ path('category_show', { slug: r.category.slug }) }}" class="badge text-bg-light">
+                                            {{ r.category.name }}
+                                        </a>
+                                        ·
+                                    {% endif %}
+                                    {% if r.createdAt is defined and r.createdAt %}
+                                        {{ r.createdAt|date('Y-m-d') }}
+                                    {% endif %}
                                 </p>
+
+                                <p class="card-text">
+                                    {{ r.content|u.truncate(160, '…', true) }}
+                                </p>
+
                                 <a class="btn btn-sm btn-primary" href="{{ path('recipe_show', { id: r.id }) }}">
                                     Zobacz przepis
                                 </a>
@@ -28,9 +42,5 @@
                 {% endfor %}
             </div>
         {% endif %}
-
-        <p class="mt-3">
-            <a href="{{ path('category_list') }}">← Wszystkie kategorie</a>
-        </p>
     </div>
 {% endblock %}

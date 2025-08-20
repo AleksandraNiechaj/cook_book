@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}Kategoria{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>{{ app.request.attributes.get('_route') == 'category_new' ? 'Nowa kategoria' : 'Edytuj kategorię' }}</h1>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary mt-2">Zapisz</button>
+        {{ form_end(form) }}
+
+        <p class="mt-3"><a href="{{ path('category_list') }}">← Wszystkie kategorie</a></p>
+    </div>
+{% endblock %}

@@ -2,10 +2,20 @@
 {% block title %}Kategorie{% endblock %}
 
 {% block body %}
-    <h1>Kategorie</h1>
-    <ul>
-        {% for c in categories %}
-            <li><a href="{{ path('category_show', { slug: c.slug }) }}">{{ c.name }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-0">Kategorie</h1>
+            <a class="btn btn-sm btn-primary" href="{{ path('category_new') }}">+ Nowa kategoria</a>
+        </div>
+
+        <ul class="list-group mt-3">
+            {% for c in categories %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{{ path('category_show', { slug: c.slug }) }}">{{ c.name }}</a>
+                </li>
+            {% else %}
+                <li class="list-group-item text-muted">Brak kategorii.</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

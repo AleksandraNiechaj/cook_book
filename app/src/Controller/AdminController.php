@@ -58,15 +58,18 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+            // pobieramy dane z poszczególnych pól
+            $currentPassword = $form->get('currentPassword')->getData();
+            $newPassword = $form->get('newPassword')->getData();
+            $confirmPassword = $form->get('confirmPassword')->getData();
 
-            if (!$passwordHasher->isPasswordValid($user, $data['currentPassword'])) {
+            if (!$passwordHasher->isPasswordValid($user, $currentPassword)) {
                 $this->addFlash('danger', 'Aktualne hasło jest nieprawidłowe.');
-            } elseif ($data['newPassword'] !== $data['confirmPassword']) {
+            } elseif ($newPassword !== $confirmPassword) {
                 $this->addFlash('danger', 'Hasła muszą być identyczne.');
             } else {
                 $user->setPassword(
-                    $passwordHasher->hashPassword($user, $data['newPassword'])
+                    $passwordHasher->hashPassword($user, $newPassword)
                 );
                 $em->flush();
 

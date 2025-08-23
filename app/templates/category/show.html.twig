@@ -37,6 +37,18 @@
             </div>
         {% endif %}
 
+        {% if is_granted('ROLE_ADMIN') %}
+            <p class="mt-3">
+                <a href="{{ path('category_edit', { id: category.id }) }}" class="btn btn-sm btn-warning">✏️ Edytuj</a>
+            </p>
+
+            <form method="post" action="{{ path('category_delete', { id: category.id }) }}" class="mt-2"
+                  onsubmit="return confirm('Na pewno chcesz usunąć tę kategorię?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+                <button class="btn btn-sm btn-danger">🗑️ Usuń</button>
+            </form>
+        {% endif %}
+
         <p class="mt-3">
             <a href="{{ path('category_list') }}">← Wszystkie kategorie</a>
         </p>

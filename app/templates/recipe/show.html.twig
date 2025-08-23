@@ -30,13 +30,49 @@
                 {% if recipe.category %}
                     <a href="{{ path('category_show', { slug: recipe.category.slug }) }}" class="btn btn-outline-secondary btn-sm">Wróć do kategorii</a>
                 {% endif %}
-                <a href="{{ path('app_recipe_edit', { id: recipe.id }) }}" class="btn btn-primary btn-sm">✏️ Edytuj</a>
-                <form method="post" action="{{ path('app_recipe_delete', { id: recipe.id }) }}" style="display:inline;"
-                      onsubmit="return confirm('Na pewno chcesz usunąć ten przepis?');">
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recipe.id) }}">
-                    <button class="btn btn-danger btn-sm">🗑️ Usuń</button>
-                </form>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_recipe_edit', { id: recipe.id }) }}" class="btn btn-primary btn-sm">✏️ Edytuj</a>
+                    <form method="post" action="{{ path('app_recipe_delete', { id: recipe.id }) }}" style="display:inline;"
+                          onsubmit="return confirm('Na pewno chcesz usunąć ten przepis?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recipe.id) }}">
+                        <button class="btn btn-danger btn-sm">🗑️ Usuń</button>
+                    </form>
+                {% endif %}
             </div>
         </article>
+
+        <hr class="my-4">
+
+        <h3>Komentarze</h3>
+        {% if recipe.comments is empty %}
+            <p class="text-muted">Brak komentarzy.</p>
+        {% else %}
+            <ul class="list-group mb-3">
+                {% for c in recipe.comments %}
+                    <li class="list-group-item">
+                        <strong>{{ c.authorName }}</strong> ({{ c.authorEmail }})<br>
+                        {{ c.content|nl2br }}
+                        <small class="text-muted d-block">{{ c.createdAt|date('Y-m-d H:i') }}</small>
+
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <form method="post" action="{{ path('app_comment_delete', { id: c.id }) }}" style="display:inline"
+                                  onsubmit="return confirm('Usunąć komentarz?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
+                                <button class="btn btn-sm btn-danger mt-1">Usuń</button>
+                            </form>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h4>Dodaj komentarz</h4>
+        {{ form_start(commentForm, {'action': path('app_comment_add', { id: recipe.id })}) }}
+        {{ form_row(commentForm.authorName) }}
+        {{ form_row(commentForm.authorEmail) }}
+        {{ form_row(commentForm.content) }}
+        <button class="btn btn-success mt-2">💬 Dodaj komentarz</button>
+        {{ form_end(commentForm) }}
     </div>
 {% endblock %}

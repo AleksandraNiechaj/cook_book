@@ -9,7 +9,9 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1>Przepisy</h1>
-            <a href="{{ path('app_recipe_new') }}" class="btn btn-success btn-sm">➕ Dodaj przepis</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_recipe_new') }}" class="btn btn-success btn-sm">➕ Dodaj przepis</a>
+            {% endif %}
         </div>
 
         {% if recipes is empty %}
@@ -42,12 +44,14 @@
 
                                 <div class="mt-2">
                                     <a class="btn btn-sm btn-primary" href="{{ path('recipe_show', { id: r.id }) }}">👀 Zobacz</a>
-                                    <a class="btn btn-sm btn-warning" href="{{ path('app_recipe_edit', { id: r.id }) }}">✏️ Edytuj</a>
-                                    <form method="post" action="{{ path('app_recipe_delete', { id: r.id }) }}" style="display:inline;"
-                                          onsubmit="return confirm('Na pewno chcesz usunąć ten przepis?');">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ r.id) }}">
-                                        <button class="btn btn-sm btn-danger">🗑️ Usuń</button>
-                                    </form>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a class="btn btn-sm btn-warning" href="{{ path('app_recipe_edit', { id: r.id }) }}">✏️ Edytuj</a>
+                                        <form method="post" action="{{ path('app_recipe_delete', { id: r.id }) }}" style="display:inline;"
+                                              onsubmit="return confirm('Na pewno chcesz usunąć ten przepis?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ r.id) }}">
+                                            <button class="btn btn-sm btn-danger">🗑️ Usuń</button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             </div>
                         </article>
@@ -55,7 +59,6 @@
                 {% endfor %}
             </div>
 
-            {# 🔹 PAGINACJA - pojawia się tylko, gdy jest więcej niż 1 strona #}
             <div class="navigation mt-4">
                 {{ knp_pagination_render(recipes) }}
             </div>

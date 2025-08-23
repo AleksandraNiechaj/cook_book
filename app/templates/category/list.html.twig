@@ -9,7 +9,9 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="mb-0">Kategorie</h1>
-            <a class="btn btn-sm btn-success" href="{{ path('category_new') }}">➕ Nowa kategoria</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-sm btn-success" href="{{ path('category_new') }}">➕ Nowa kategoria</a>
+            {% endif %}
         </div>
 
         <ul class="list-group mt-3">
@@ -17,15 +19,17 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="{{ path('category_show', { slug: c.slug }) }}">{{ c.name }}</a>
 
-                    <span>
-                        <a href="{{ path('category_edit', { id: c.id }) }}" class="btn btn-sm btn-warning">✏️ Edytuj</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <span>
+                            <a href="{{ path('category_edit', { id: c.id }) }}" class="btn btn-sm btn-warning">✏️ Edytuj</a>
 
-                        <form method="post" action="{{ path('category_delete', { id: c.id }) }}" style="display:inline"
-                              onsubmit="return confirm('Na pewno chcesz usunąć tę kategorię?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
-                            <button class="btn btn-sm btn-danger">🗑️ Usuń</button>
-                        </form>
-                    </span>
+                            <form method="post" action="{{ path('category_delete', { id: c.id }) }}" style="display:inline"
+                                  onsubmit="return confirm('Na pewno chcesz usunąć tę kategorię?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
+                                <button class="btn btn-sm btn-danger">🗑️ Usuń</button>
+                            </form>
+                        </span>
+                    {% endif %}
                 </li>
             {% else %}
                 <li class="list-group-item text-muted">Brak kategorii.</li>

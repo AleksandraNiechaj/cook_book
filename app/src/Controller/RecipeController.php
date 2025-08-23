@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Recipe;
+use App\Entity\Comment;
 use App\Form\RecipeType;
+use App\Form\CommentType;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -27,9 +29,9 @@ class RecipeController extends AbstractController
             ->getQuery();
 
         $recipes = $paginator->paginate(
-            $qb, // zapytanie
-            $request->query->getInt('page', 1), // numer strony z URL (?page=2)
-            10   // ile przepisów na stronę
+            $qb,
+            $request->query->getInt('page', 1),
+            10
         );
 
         return $this->render('recipe/index.html.twig', [
@@ -93,12 +95,29 @@ class RecipeController extends AbstractController
         return $this->redirectToRoute('app_recipe_index');
     }
 
-    // szczegóły
-    #[Route('/{id}', name: 'recipe_show', methods: ['GET'])]
-    public function show(Recipe $recipe): Response
+    // szczegóły + komentarze
+    #[Route('/{id}', name: 'recipe_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, Recipe $recipe, EntityManagerInterface $em): Response
     {
+        // formularz komentarza
+        $comment = new Comment();
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $comment->setRecipe($recipe);
+            $comment->setCreatedAt(new \DateTimeImmutable());
+
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash('success', 'Komentarz dodany.');
+            return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
+        }
+
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
+            'commentForm' => $commentForm->createView(),
         ]);
     }
 }

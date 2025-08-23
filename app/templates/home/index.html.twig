@@ -35,6 +35,10 @@
         <div class="container mt-4 mb-4">
             <p>👋 Witaj, {{ app.user.email }}!</p>
             <a href="{{ path('app_logout') }}" class="btn btn-outline-danger btn-sm">Wyloguj</a>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_admin') }}" class="btn btn-outline-primary btn-sm ms-2">⚙️ Panel administratora</a>
+            {% endif %}
         </div>
     {% endif %}
 

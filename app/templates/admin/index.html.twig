@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panel administratora{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>⚙️ Panel administratora</h1>
+
+        <p>Witaj, {{ app.user.email }}!</p>
+
+        <ul class="list-group mt-3">
+            <li class="list-group-item">
+                <a href="{{ path('admin_profile') }}" class="btn btn-sm btn-outline-primary">✉️ Zmień email</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ path('admin_change_password') }}" class="btn btn-sm btn-outline-warning">🔑 Zmień hasło</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ path('app_home') }}" class="btn btn-sm btn-outline-secondary">🏠 Powrót do strony głównej</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ path('app_logout') }}" class="btn btn-sm btn-outline-danger">🚪 Wyloguj się</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

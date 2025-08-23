@@ -25,12 +25,18 @@
                 {{ recipe.content|nl2br }}
             </div>
 
-            <p class="mt-4">
-                <a href="{{ path('app_recipe_index') }}">← Wszystkie przepisy</a>
+            <div class="mt-4">
+                <a href="{{ path('app_recipe_index') }}" class="btn btn-outline-secondary btn-sm">← Wszystkie przepisy</a>
                 {% if recipe.category %}
-                    | <a href="{{ path('category_show', { slug: recipe.category.slug }) }}">Wróć do kategorii</a>
+                    <a href="{{ path('category_show', { slug: recipe.category.slug }) }}" class="btn btn-outline-secondary btn-sm">Wróć do kategorii</a>
                 {% endif %}
-            </p>
+                <a href="{{ path('app_recipe_edit', { id: recipe.id }) }}" class="btn btn-primary btn-sm">✏️ Edytuj</a>
+                <form method="post" action="{{ path('app_recipe_delete', { id: recipe.id }) }}" style="display:inline;"
+                      onsubmit="return confirm('Na pewno chcesz usunąć ten przepis?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recipe.id) }}">
+                    <button class="btn btn-danger btn-sm">🗑️ Usuń</button>
+                </form>
+            </div>
         </article>
     </div>
 {% endblock %}

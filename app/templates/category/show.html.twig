@@ -31,6 +31,10 @@
                     </div>
                 {% endfor %}
             </div>
+
+            <div class="pagination mt-4">
+                {{ knp_pagination_render(recipes) }}
+            </div>
         {% endif %}
 
         <p class="mt-3">

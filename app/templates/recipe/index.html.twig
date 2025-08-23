@@ -40,13 +40,24 @@
                                     {{ r.content|u.truncate(160, '…', true) }}
                                 </p>
 
-                                <a class="btn btn-sm btn-primary" href="{{ path('recipe_show', { id: r.id }) }}">
-                                    Zobacz przepis
-                                </a>
+                                <div class="mt-2">
+                                    <a class="btn btn-sm btn-primary" href="{{ path('recipe_show', { id: r.id }) }}">👀 Zobacz</a>
+                                    <a class="btn btn-sm btn-warning" href="{{ path('app_recipe_edit', { id: r.id }) }}">✏️ Edytuj</a>
+                                    <form method="post" action="{{ path('app_recipe_delete', { id: r.id }) }}" style="display:inline;"
+                                          onsubmit="return confirm('Na pewno chcesz usunąć ten przepis?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ r.id) }}">
+                                        <button class="btn btn-sm btn-danger">🗑️ Usuń</button>
+                                    </form>
+                                </div>
                             </div>
                         </article>
                     </div>
                 {% endfor %}
+            </div>
+
+            {# 🔹 PAGINACJA - pojawia się tylko, gdy jest więcej niż 1 strona #}
+            <div class="navigation mt-4">
+                {{ knp_pagination_render(recipes) }}
             </div>
         {% endif %}
     </div>

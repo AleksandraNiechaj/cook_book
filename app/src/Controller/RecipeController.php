@@ -6,6 +6,7 @@ use App\Entity\Recipe;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +15,22 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/recipe')]
 class RecipeController extends AbstractController
 {
-    // lista (później dodamy paginację)
+    // lista z paginacją (10 na stronę, sortowanie od najnowszych)
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
-    public function index(RecipeRepository $repo): Response
-    {
-        $recipes = $repo->findBy([], ['createdAt' => 'DESC']);
+    public function index(
+        RecipeRepository $repo,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+        $qb = $repo->createQueryBuilder('r')
+            ->orderBy('r.createdAt', 'DESC')
+            ->getQuery();
+
+        $recipes = $paginator->paginate(
+            $qb, // zapytanie
+            $request->query->getInt('page', 1), // numer strony z URL (?page=2)
+            10   // ile przepisów na stronę
+        );
 
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipes,

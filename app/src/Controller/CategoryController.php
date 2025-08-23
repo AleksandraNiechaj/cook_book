@@ -7,6 +7,7 @@ use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface; // 👈 dodane
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,19 +51,28 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{slug}', name: 'category_show', methods: ['GET'])]
-    public function show(string $slug, CategoryRepository $categoryRepo, RecipeRepository $recipeRepo): Response
-    {
+    public function show(
+        string $slug,
+        CategoryRepository $categoryRepo,
+        RecipeRepository $recipeRepo,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
         $category = $categoryRepo->findOneBy(['slug' => $slug]);
         if (!$category) {
             throw $this->createNotFoundException('Kategoria nie istnieje');
         }
 
-        $recipes = $recipeRepo->createQueryBuilder('r')
+        $qb = $recipeRepo->createQueryBuilder('r')
             ->andWhere('r.category = :cat')
             ->setParameter('cat', $category)
-            ->orderBy('r.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('r.createdAt', 'DESC');
+
+        $recipes = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1), // numer strony z URL
+            10 // ile rekordów na stronę
+        );
 
         return $this->render('category/show.html.twig', [
             'category' => $category,

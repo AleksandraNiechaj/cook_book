@@ -2,6 +2,10 @@
 {% block title %}{{ recipe.title }}{% endblock %}
 
 {% block body %}
+    <p class="mt-3">
+        <a href="{{ path('app_home') }}" class="btn btn-outline-primary btn-sm">🏠 Powrót do strony głównej</a>
+    </p>
+
     <div class="container mt-4">
         <article class="recipe">
             <h1 class="mb-3">{{ recipe.title }}</h1>

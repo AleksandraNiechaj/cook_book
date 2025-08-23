@@ -3,6 +3,14 @@
 {% block title %}Strona główna{% endblock %}
 
 {% block body %}
+
+    <p class="mb-3">
+        <a href="{{ path('app_recipe_new') }}" class="btn btn-success btn-sm">➕ Dodaj nowy przepis</a>
+        <a href="{{ path('app_recipe_index') }}" class="btn btn-outline-secondary btn-sm">
+            📖 Przejdź do wszystkich przepisów
+        </a>
+    </p>
+
     <div class="container mt-4">
         <h1 class="mb-4">Przepisy kulinarne 🍳</h1>
 
@@ -13,17 +21,9 @@
         </p>
 
         <div class="row">
-            {# Sidebar z kategoriami #}
+            {# Sidebar z kategoriami z bazy danych #}
             <div class="col-md-3">
                 <h4>Kategorie</h4>
-                {# name + slug, żeby dało się linkować #}
-                {% set categories = [
-                    { 'name': 'Śniadania', 'slug': 'sniadania' },
-                    { 'name': 'Obiady',    'slug': 'obiady' },
-                    { 'name': 'Desery',    'slug': 'desery' },
-                    { 'name': 'Wege',      'slug': 'wege' }
-                ] %}
-
                 <ul class="list-group">
                     {% for c in categories %}
                         <li class="list-group-item">
@@ -35,22 +35,15 @@
                 </ul>
             </div>
 
-            {# Lista przepisów #}
+            {# Lista przepisów z bazy danych #}
             <div class="col-md-9">
                 <div class="row">
-                    {# dodajemy ID, żeby linkować do recipe_show #}
-                    {% set recipes = [
-                        { 'id': 1, 'title': 'Spaghetti Carbonara', 'content': 'Klasyczny włoski makaron z sosem jajecznym, boczkiem i serem pecorino.' },
-                        { 'id': 2, 'title': 'Sałatka grecka',      'content': 'Świeże warzywa z serem feta i oliwkami, polane oliwą z oliwek.' },
-                        { 'id': 3, 'title': 'Szarlotka',           'content': 'Tradycyjne ciasto z jabłkami i cynamonem.' }
-                    ] %}
-
                     {% for recipe in recipes %}
                         <div class="col-md-6 mb-3">
                             <div class="card shadow-sm h-100">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">{{ recipe.title }}</h5>
-                                    <p class="card-text">{{ recipe.content }}</p>
+                                    <p class="card-text">{{ recipe.content|u.truncate(160, '…', true) }}</p>
                                     <div class="mt-auto">
                                         <a href="{{ path('recipe_show', { id: recipe.id }) }}" class="btn btn-sm btn-primary">Zobacz przepis</a>
                                     </div>

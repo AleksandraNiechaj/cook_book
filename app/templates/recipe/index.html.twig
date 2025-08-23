@@ -2,8 +2,15 @@
 {% block title %}Przepisy{% endblock %}
 
 {% block body %}
+    <p class="mt-3">
+        <a href="{{ path('app_home') }}" class="btn btn-outline-primary btn-sm">🏠 Powrót do strony głównej</a>
+    </p>
+
     <div class="container mt-4">
-        <h1>Przepisy</h1>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>Przepisy</h1>
+            <a href="{{ path('app_recipe_new') }}" class="btn btn-success btn-sm">➕ Dodaj przepis</a>
+        </div>
 
         {% if recipes is empty %}
             <p class="text-muted mt-3">Brak przepisów.</p>

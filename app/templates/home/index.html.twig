@@ -17,12 +17,13 @@
 
                 <div class="mb-3">
                     <label for="inputEmail">Email</label>
-                    <input type="email" name="_username" id="inputEmail" class="form-control" required autofocus>
+                    <input type="email" name="email" id="inputEmail" class="form-control"
+                           value="{{ last_username|default('') }}" required autofocus>
                 </div>
 
                 <div class="mb-3">
                     <label for="inputPassword">Hasło</label>
-                    <input type="password" name="_password" id="inputPassword" class="form-control" required>
+                    <input type="password" name="password" id="inputPassword" class="form-control" required>
                 </div>
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -38,7 +39,9 @@
     {% endif %}
 
     <p class="mb-3">
-        <a href="{{ path('app_recipe_new') }}" class="btn btn-success btn-sm">➕ Dodaj nowy przepis</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_recipe_new') }}" class="btn btn-success btn-sm">➕ Dodaj nowy przepis</a>
+        {% endif %}
         <a href="{{ path('app_recipe_index') }}" class="btn btn-outline-secondary btn-sm">
             📖 Przejdź do wszystkich przepisów
         </a>
@@ -54,7 +57,7 @@
         </p>
 
         <div class="row">
-            {# Sidebar z kategoriami z bazy danych #}
+            {# Sidebar z kategoriami #}
             <div class="col-md-3">
                 <h4>Kategorie</h4>
                 <ul class="list-group">
@@ -68,7 +71,7 @@
                 </ul>
             </div>
 
-            {# Lista przepisów z bazy danych #}
+            {# Lista przepisów #}
             <div class="col-md-9">
                 <div class="row">
                     {% for recipe in recipes %}

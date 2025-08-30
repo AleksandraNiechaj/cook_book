@@ -23,6 +23,26 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
+     * Zapis encji kategorii.
+     */
+    public function save(Category $entity): void
+    {
+        $em = $this->getEntityManager();
+        $em->persist($entity);
+        $em->flush();
+    }
+
+    /**
+     * Usunięcie encji kategorii.
+     */
+    public function delete(Category $entity): void
+    {
+        $em = $this->getEntityManager();
+        $em->remove($entity);
+        $em->flush();
+    }
+
+    /**
      * Zwraca wszystkie kategorie posortowane alfabetycznie (po nazwie).
      *
      * @return Category[]

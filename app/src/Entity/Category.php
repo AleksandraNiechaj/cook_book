@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -8,7 +9,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'categories')]
-
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
@@ -20,7 +20,8 @@ class Category
     #[ORM\Column(length: 100)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 100)]
+    // unikalny slug (szybkie wyszukiwanie po slugu i gwarancja unikalności)
+    #[ORM\Column(length: 100, unique: true)]
     private ?string $slug = null;
 
     #[ORM\Column]
@@ -32,7 +33,11 @@ class Category
     /**
      * @var Collection<int, Recipe>
      */
-    #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'category')]
+    #[ORM\OneToMany(
+        targetEntity: Recipe::class,
+        mappedBy: 'category',
+        fetch: 'EXTRA_LAZY'   // <- optymalizacja dla kolekcji
+    )]
     private Collection $recipes;
 
     public function __construct()
@@ -40,66 +45,22 @@ class Category
         $this->recipes = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    public function getId(): ?int { return $this->id; }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
+    public function getName(): ?string { return $this->name; }
+    public function setName(string $name): static { $this->name = $name; return $this; }
 
-    public function setName(string $name): static
-    {
-        $this->name = $name;
+    public function getSlug(): ?string { return $this->slug; }
+    public function setSlug(string $slug): static { $this->slug = $slug; return $this; }
 
-        return $this;
-    }
+    public function getCreatedAt(): ?\DateTimeImmutable { return $this->createdAt; }
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static { $this->createdAt = $createdAt; return $this; }
 
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
+    public function getUpdatedAt(): ?\DateTimeImmutable { return $this->updatedAt; }
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static { $this->updatedAt = $updatedAt; return $this; }
 
-    public function setSlug(string $slug): static
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Recipe>
-     */
-    public function getRecipes(): Collection
-    {
-        return $this->recipes;
-    }
+    /** @return Collection<int, Recipe> */
+    public function getRecipes(): Collection { return $this->recipes; }
 
     public function addRecipe(Recipe $recipe): static
     {
@@ -107,19 +68,16 @@ class Category
             $this->recipes->add($recipe);
             $recipe->setCategory($this);
         }
-
         return $this;
     }
 
     public function removeRecipe(Recipe $recipe): static
     {
         if ($this->recipes->removeElement($recipe)) {
-            // set the owning side to null (unless already changed)
             if ($recipe->getCategory() === $this) {
                 $recipe->setCategory(null);
             }
         }
-
         return $this;
     }
 }

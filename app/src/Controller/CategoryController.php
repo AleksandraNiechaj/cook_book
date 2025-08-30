@@ -1,13 +1,17 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * Cook Book — educational project
+ * (c) 2025 Aleksandra Niechaj
+ */
+
 namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Service\CategoryService;
 use App\Service\RecipeService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +29,7 @@ final class CategoryController extends AbstractController
     }
 
     #[Route('/new', name: 'category_new', methods: ['GET','POST'])]
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function new(Request $request, CategoryService $categories): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -36,8 +40,7 @@ final class CategoryController extends AbstractController
             $category->setCreatedAt($now);
             $category->setUpdatedAt($now);
 
-            $em->persist($category);
-            $em->flush();
+            $categories->save($category); // przez serwis → repo
 
             $this->addFlash('success', 'Kategoria dodana.');
             return $this->redirectToRoute('category_list');
@@ -67,20 +70,19 @@ final class CategoryController extends AbstractController
 
         return $this->render('category/show.html.twig', [
             'category' => $category,
-            // zachowuję nazwę 'recipes' jak w Twoim szablonie
             'recipes'  => $pagination,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'category_edit', methods: ['GET','POST'])]
-    public function edit(Request $request, Category $category, EntityManagerInterface $em): Response
+    public function edit(Request $request, Category $category, CategoryService $categories): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category->setUpdatedAt(new \DateTimeImmutable());
-            $em->flush();
+            $categories->save($category); // przez serwis → repo
 
             $this->addFlash('success', 'Kategoria zaktualizowana.');
             return $this->redirectToRoute('category_list');
@@ -92,11 +94,10 @@ final class CategoryController extends AbstractController
     }
 
     #[Route('/{id}', name: 'category_delete', methods: ['POST'])]
-    public function delete(Request $request, Category $category, EntityManagerInterface $em): Response
+    public function delete(Request $request, Category $category, CategoryService $categories): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), (string) $request->request->get('_token'))) {
-            $em->remove($category);
-            $em->flush();
+            $categories->delete($category); // przez serwis → repo
             $this->addFlash('success', 'Kategoria usunięta.');
         }
 

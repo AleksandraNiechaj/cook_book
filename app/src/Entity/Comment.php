@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -6,6 +7,7 @@ use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Index(name: 'idx_comments_recipe_id', columns: ['recipe_id'])]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
@@ -30,63 +32,20 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?Recipe $recipe = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    public function getId(): ?int { return $this->id; }
 
-    public function getAuthorName(): ?string
-    {
-        return $this->authorName;
-    }
+    public function getAuthorName(): ?string { return $this->authorName; }
+    public function setAuthorName(string $authorName): static { $this->authorName = $authorName; return $this; }
 
-    public function setAuthorName(string $authorName): static
-    {
-        $this->authorName = $authorName;
-        return $this;
-    }
+    public function getAuthorEmail(): ?string { return $this->authorEmail; }
+    public function setAuthorEmail(string $authorEmail): static { $this->authorEmail = $authorEmail; return $this; }
 
-    public function getAuthorEmail(): ?string
-    {
-        return $this->authorEmail;
-    }
+    public function getContent(): ?string { return $this->content; }
+    public function setContent(string $content): static { $this->content = $content; return $this; }
 
-    public function setAuthorEmail(string $authorEmail): static
-    {
-        $this->authorEmail = $authorEmail;
-        return $this;
-    }
+    public function getCreatedAt(): ?\DateTimeImmutable { return $this->createdAt; }
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static { $this->createdAt = $createdAt; return $this; }
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): static
-    {
-        $this->content = $content;
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    public function getRecipe(): ?Recipe
-    {
-        return $this->recipe;
-    }
-
-    public function setRecipe(?Recipe $recipe): static
-    {
-        $this->recipe = $recipe;
-        return $this;
-    }
+    public function getRecipe(): ?Recipe { return $this->recipe; }
+    public function setRecipe(?Recipe $recipe): static { $this->recipe = $recipe; return $this; }
 }

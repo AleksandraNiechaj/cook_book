@@ -1,25 +1,31 @@
 <?php
+declare(strict_types=1);
+
+/**
+ * Cook Book — educational project
+ * (c) 2025 Aleksandra Niechaj
+ */
 
 namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Recipe;
 use App\Form\CommentType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\CommentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/comment')]
-class CommentController extends AbstractController
+final class CommentController extends AbstractController
 {
     // Dodawanie komentarza do przepisu
     #[Route('/add/{id}', name: 'app_comment_add', methods: ['POST'])]
     public function add(
         Recipe $recipe,
         Request $request,
-        EntityManagerInterface $em
+        CommentService $comments
     ): Response {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -29,9 +35,7 @@ class CommentController extends AbstractController
             $comment->setRecipe($recipe);
             $comment->setCreatedAt(new \DateTimeImmutable());
 
-            $em->persist($comment);
-            $em->flush();
-
+            $comments->save($comment); // przez serwis → repo
             $this->addFlash('success', 'Komentarz został dodany!');
         }
 
@@ -40,11 +44,10 @@ class CommentController extends AbstractController
 
     // Usuwanie komentarza (tylko admin)
     #[Route('/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
-    public function delete(Comment $comment, Request $request, EntityManagerInterface $em): Response
+    public function delete(Comment $comment, Request $request, CommentService $comments): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
-            $em->remove($comment);
-            $em->flush();
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), (string) $request->request->get('_token'))) {
+            $comments->delete($comment); // przez serwis → repo
             $this->addFlash('success', 'Komentarz został usunięty.');
         }
 

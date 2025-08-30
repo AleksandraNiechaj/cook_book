@@ -1,14 +1,19 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * Cook Book — educational project
+ * (c) 2025 Aleksandra Niechaj
+ */
+
 namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Recipe;
 use App\Form\CommentType;
 use App\Form\RecipeType;
+use App\Service\CommentService;
 use App\Service\RecipeService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,14 +30,13 @@ final class RecipeController extends AbstractController
         $pagination = $recipes->paginateLatest($page, 10);
 
         return $this->render('recipe/index.html.twig', [
-            // zachowuję nazwę 'recipes', bo tak masz w szablonie
             'recipes' => $pagination,
         ]);
     }
 
     // nowy przepis
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function new(Request $request, RecipeService $recipes): Response
     {
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -43,9 +47,7 @@ final class RecipeController extends AbstractController
             $recipe->setCreatedAt($now);
             $recipe->setUpdatedAt($now);
 
-            $em->persist($recipe);
-            $em->flush();
-
+            $recipes->save($recipe); // przez serwis → repo
             return $this->redirectToRoute('app_recipe_index');
         }
 
@@ -56,14 +58,14 @@ final class RecipeController extends AbstractController
 
     // edycja
     #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Recipe $recipe, EntityManagerInterface $em): Response
+    public function edit(Request $request, Recipe $recipe, RecipeService $recipes): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $recipe->setUpdatedAt(new \DateTimeImmutable());
-            $em->flush();
+            $recipes->save($recipe); // przez serwis → repo
 
             return $this->redirectToRoute('app_recipe_index');
         }
@@ -76,11 +78,10 @@ final class RecipeController extends AbstractController
 
     // usuwanie
     #[Route('/{id}/delete', name: 'app_recipe_delete', methods: ['POST'])]
-    public function delete(Request $request, Recipe $recipe, EntityManagerInterface $em): Response
+    public function delete(Request $request, Recipe $recipe, RecipeService $recipes): Response
     {
         if ($this->isCsrfTokenValid('delete'.$recipe->getId(), (string) $request->request->get('_token'))) {
-            $em->remove($recipe);
-            $em->flush();
+            $recipes->delete($recipe); // przez serwis → repo
         }
 
         return $this->redirectToRoute('app_recipe_index');
@@ -88,7 +89,7 @@ final class RecipeController extends AbstractController
 
     // szczegóły + komentarze (pobranie przepisu przez serwis, z JOIN FETCH komentarzy)
     #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function show(int $id, Request $request, RecipeService $recipes, EntityManagerInterface $em): Response
+    public function show(int $id, Request $request, RecipeService $recipes, CommentService $comments): Response
     {
         $recipe = $recipes->findWithComments($id);
         if (!$recipe) {
@@ -104,8 +105,7 @@ final class RecipeController extends AbstractController
             $comment->setRecipe($recipe);
             $comment->setCreatedAt(new \DateTimeImmutable());
 
-            $em->persist($comment);
-            $em->flush();
+            $comments->save($comment); // przez serwis → repo
 
             $this->addFlash('success', 'Komentarz dodany.');
             return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);

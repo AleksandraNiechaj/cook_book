@@ -1,34 +1,36 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
-use App\Repository\RecipeRepository;
+use App\Service\CategoryService;
+use App\Service\RecipeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class HomeController extends AbstractController
+final class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(
-        RecipeRepository $recipeRepo,
-        CategoryRepository $categoryRepo,
+        RecipeService $recipes,
+        CategoryService $categories,
         AuthenticationUtils $authenticationUtils
     ): Response {
-        // pobieramy wszystkie kategorie
-        $categories = $categoryRepo->findAll();
+        // kategorie (posortowane) + 3 najnowsze przepisy
+        $allCategories = $categories->allOrdered();
+        $latest = $recipes->latest(3);
 
-        // pobieramy 3 najnowsze przepisy
-        $recipes = $recipeRepo->findBy([], ['createdAt' => 'DESC'], 3);
-
-        // obsługa błędów logowania
+        // obsługa logowania
         $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('home/index.html.twig', [
-            'categories' => $categories,
-            'recipes' => $recipes,
-            'error' => $error,
+            'categories'    => $allCategories,
+            'recipes'       => $latest,
+            'error'         => $error,
+            'last_username' => $lastUsername,
         ]);
     }
 }

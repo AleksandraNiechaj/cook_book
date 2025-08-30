@@ -1,28 +1,26 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
-use App\Repository\CategoryRepository;
-use App\Repository\RecipeRepository;
+use App\Service\CategoryService;
+use App\Service\RecipeService;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface; // 👈 dodane
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/categories')]
-class CategoryController extends AbstractController
+final class CategoryController extends AbstractController
 {
     #[Route('', name: 'category_list', methods: ['GET'])]
-    public function list(CategoryRepository $categoryRepo): Response
+    public function list(CategoryService $categories): Response
     {
-        $categories = $categoryRepo->findBy([], ['name' => 'ASC']);
-
         return $this->render('category/list.html.twig', [
-            'categories' => $categories,
+            'categories' => $categories->allOrdered(),
         ]);
     }
 
@@ -53,30 +51,24 @@ class CategoryController extends AbstractController
     #[Route('/{slug}', name: 'category_show', methods: ['GET'])]
     public function show(
         string $slug,
-        CategoryRepository $categoryRepo,
-        RecipeRepository $recipeRepo,
-        PaginatorInterface $paginator,
-        Request $request
+        Request $request,
+        CategoryService $categories,
+        RecipeService $recipes
     ): Response {
-        $category = $categoryRepo->findOneBy(['slug' => $slug]);
+        // kategoria po slug (przez serwis)
+        $category = $categories->bySlug($slug);
         if (!$category) {
             throw $this->createNotFoundException('Kategoria nie istnieje');
         }
 
-        $qb = $recipeRepo->createQueryBuilder('r')
-            ->andWhere('r.category = :cat')
-            ->setParameter('cat', $category)
-            ->orderBy('r.createdAt', 'DESC');
-
-        $recipes = $paginator->paginate(
-            $qb,
-            $request->query->getInt('page', 1), // numer strony z URL
-            10 // ile rekordów na stronę
-        );
+        // paginacja przepisów tej kategorii (przez serwis)
+        $page = $request->query->getInt('page', 1);
+        $pagination = $recipes->paginateByCategory($category, $page, 10);
 
         return $this->render('category/show.html.twig', [
             'category' => $category,
-            'recipes'  => $recipes,
+            // zachowuję nazwę 'recipes' jak w Twoim szablonie
+            'recipes'  => $pagination,
         ]);
     }
 
@@ -102,7 +94,7 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$category->getId(), (string) $request->request->get('_token'))) {
             $em->remove($category);
             $em->flush();
             $this->addFlash('success', 'Kategoria usunięta.');

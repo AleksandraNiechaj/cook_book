@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="messages">
+    <body>
+      <!-- App / layout -->
+      <trans-unit id="app.title"><source>app.title</source><target>Cook Book</target></trans-unit>
+      <trans-unit id="layout.default_title"><source>layout.default_title</source><target>Welcome!</target></trans-unit>
+
+      <!-- Navigation -->
+      <trans-unit id="nav.home"><source>nav.home</source><target>Home</target></trans-unit>
+      <trans-unit id="nav.recipes"><source>nav.recipes</source><target>Recipes</target></trans-unit>
+      <trans-unit id="nav.categories"><source>nav.categories</source><target>Categories</target></trans-unit>
+      <trans-unit id="nav.login"><source>nav.login</source><target>Log in</target></trans-unit>
+      <trans-unit id="nav.logout"><source>nav.logout</source><target>Log out</target></trans-unit>
+      <trans-unit id="nav.admin"><source>nav.admin</source><target>Admin panel</target></trans-unit>
+      <trans-unit id="nav.profile"><source>nav.profile</source><target>Profile</target></trans-unit>
+
+      <!-- Recipes -->
+      <trans-unit id="recipe.list.title"><source>recipe.list.title</source><target>Recipes</target></trans-unit>
+      <trans-unit id="recipe.new"><source>recipe.new</source><target>Add recipe</target></trans-unit>
+      <trans-unit id="recipe.edit"><source>recipe.edit</source><target>Edit recipe</target></trans-unit>
+      <trans-unit id="recipe.delete"><source>recipe.delete</source><target>Delete recipe</target></trans-unit>
+      <trans-unit id="recipe.show"><source>recipe.show</source><target>Show recipe</target></trans-unit>
+      <trans-unit id="recipe.title"><source>recipe.title</source><target>Title</target></trans-unit>
+      <trans-unit id="recipe.content"><source>recipe.content</source><target>Content</target></trans-unit>
+      <trans-unit id="recipe.created_at"><source>recipe.created_at</source><target>Created at</target></trans-unit>
+      <trans-unit id="recipe.updated_at"><source>recipe.updated_at</source><target>Updated at</target></trans-unit>
+
+      <!-- Categories -->
+      <trans-unit id="category.list.title"><source>category.list.title</source><target>Categories</target></trans-unit>
+      <trans-unit id="category.new"><source>category.new</source><target>Add category</target></trans-unit>
+      <trans-unit id="category.edit"><source>category.edit</source><target>Edit category</target></trans-unit>
+      <trans-unit id="category.delete"><source>category.delete</source><target>Delete category</target></trans-unit>
+      <trans-unit id="category.name"><source>category.name</source><target>Name</target></trans-unit>
+      <trans-unit id="category.slug"><source>category.slug</source><target>Slug</target></trans-unit>
+
+      <!-- Comments -->
+      <trans-unit id="comment.add.title"><source>comment.add.title</source><target>Add a comment</target></trans-unit>
+      <trans-unit id="comment.author"><source>comment.author</source><target>Nickname</target></trans-unit>
+      <trans-unit id="comment.email"><source>comment.email</source><target>Email</target></trans-unit>
+      <trans-unit id="comment.content"><source>comment.content</source><target>Content</target></trans-unit>
+      <trans-unit id="comment.submit"><source>comment.submit</source><target>Send</target></trans-unit>
+
+      <!-- Forms / buttons -->
+      <trans-unit id="form.save"><source>form.save</source><target>Save</target></trans-unit>
+      <trans-unit id="form.cancel"><source>form.cancel</source><target>Cancel</target></trans-unit>
+      <trans-unit id="form.edit"><source>form.edit</source><target>Edit</target></trans-unit>
+      <trans-unit id="form.create"><source>form.create</source><target>Create</target></trans-unit>
+      <trans-unit id="form.delete"><source>form.delete</source><target>Delete</target></trans-unit>
+
+      <!-- Auth -->
+      <trans-unit id="auth.login.title"><source>auth.login.title</source><target>Sign in</target></trans-unit>
+      <trans-unit id="auth.email"><source>auth.email</source><target>Email address</target></trans-unit>
+      <trans-unit id="auth.password"><source>auth.password</source><target>Password</target></trans-unit>
+      <trans-unit id="auth.remember_me"><source>auth.remember_me</source><target>Remember me</target></trans-unit>
+      <trans-unit id="auth.sign_in"><source>auth.sign_in</source><target>Log in</target></trans-unit>
+      <trans-unit id="auth.sign_out"><source>auth.sign_out</source><target>Log out</target></trans-unit>
+
+      <!-- Flash / messages -->
+      <trans-unit id="flash.success.saved"><source>flash.success.saved</source><target>Saved successfully.</target></trans-unit>
+      <trans-unit id="flash.success.updated"><source>flash.success.updated</source><target>Updated successfully.</target></trans-unit>
+      <trans-unit id="flash.success.deleted"><source>flash.success.deleted</source><target>Deleted successfully.</target></trans-unit>
+      <trans-unit id="flash.error.generic"><source>flash.error.generic</source><target>An error occurred. Please try again.</target></trans-unit>
+
+      <!-- Pagination -->
+      <trans-unit id="pagination.previous"><source>pagination.previous</source><target>Previous</target></trans-unit>
+      <trans-unit id="pagination.next"><source>pagination.next</source><target>Next</target></trans-unit>
+    </body>
+  </file>
+</xliff>

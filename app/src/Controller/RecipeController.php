@@ -25,7 +25,6 @@ use App\Service\RecipeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Kontroler odpowiedzialny za obsługę przepisów.
@@ -35,10 +34,10 @@ final class RecipeController extends AbstractController
     /**
      * Lista przepisów z paginacją.
      *
-     * @param Request       $request Obiekt żądania HTTP.
-     * @param RecipeService $recipes Serwis obsługujący przepisy.
+     * @param Request       $request obiekt żądania HTTP
+     * @param RecipeService $recipes serwis obsługujący przepisy
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/recipe/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(Request $request, RecipeService $recipes): Response
@@ -50,13 +49,14 @@ final class RecipeController extends AbstractController
             'recipes' => $pagination,
         ]);
     }
+
     /**
      * Dodanie nowego przepisu.
      *
-     * @param Request       $request Obiekt żądania HTTP.
-     * @param RecipeService $recipes Serwis obsługujący przepisy.
+     * @param Request       $request obiekt żądania HTTP
+     * @param RecipeService $recipes serwis obsługujący przepisy
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/recipe/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, RecipeService $recipes): Response
@@ -79,14 +79,15 @@ final class RecipeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * Edycja przepisu.
      *
-     * @param Request       $request Obiekt żądania HTTP.
-     * @param Recipe        $recipe  Edytowany przepis.
-     * @param RecipeService $recipes Serwis obsługujący przepisy.
+     * @param Request       $request obiekt żądania HTTP
+     * @param Recipe        $recipe  edytowany przepis
+     * @param RecipeService $recipes serwis obsługujący przepisy
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/recipe/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, RecipeService $recipes): Response
@@ -106,14 +107,15 @@ final class RecipeController extends AbstractController
             'recipe' => $recipe,
         ]);
     }
+
     /**
      * Usuwanie przepisu.
      *
-     * @param Request       $request Obiekt żądania HTTP.
-     * @param Recipe        $recipe  Usuwany przepis.
-     * @param RecipeService $recipes Serwis obsługujący przepisy.
+     * @param Request       $request obiekt żądania HTTP
+     * @param Recipe        $recipe  usuwany przepis
+     * @param RecipeService $recipes serwis obsługujący przepisy
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/recipe/{id}/delete', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, RecipeService $recipes): Response
@@ -124,21 +126,22 @@ final class RecipeController extends AbstractController
 
         return $this->redirectToRoute('app_recipe_index');
     }
+
     /**
      * Szczegóły przepisu + komentarze.
      *
-     * @param int            $id       Id przepisu.
-     * @param Request        $request  Obiekt żądania HTTP.
-     * @param RecipeService  $recipes  Serwis obsługujący przepisy.
-     * @param CommentService $comments Serwis obsługujący komentarze.
+     * @param int            $id       id przepisu
+     * @param Request        $request  obiekt żądania HTTP
+     * @param RecipeService  $recipes  serwis obsługujący przepisy
+     * @param CommentService $comments serwis obsługujący komentarze
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/recipe/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function show(int $id, Request $request, RecipeService $recipes, CommentService $comments): Response
     {
         $recipe = $recipes->findWithComments($id);
-        if (!$recipe instanceof \App\Entity\Recipe) {
+        if (!$recipe instanceof Recipe) {
             throw $this->createNotFoundException();
         }
 

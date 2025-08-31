@@ -21,7 +21,7 @@ final class CategoryService
     /**
      * Konstruktor.
      *
-     * @param CategoryRepository $categories Repozytorium kategorii.
+     * @param CategoryRepository $categories repozytorium kategorii
      */
     public function __construct(private readonly CategoryRepository $categories)
     {
@@ -30,9 +30,7 @@ final class CategoryService
     /**
      * Zapis kategorii.
      *
-     * @param Category $category Encja kategorii.
-     *
-     * @return void
+     * @param Category $category encja kategorii
      */
     public function save(Category $category): void
     {
@@ -42,9 +40,7 @@ final class CategoryService
     /**
      * Usunięcie kategorii.
      *
-     * @param Category $category Encja kategorii.
-     *
-     * @return void
+     * @param Category $category encja kategorii
      */
     public function delete(Category $category): void
     {
@@ -54,7 +50,7 @@ final class CategoryService
     /**
      * Wszystkie kategorie posortowane po nazwie.
      *
-     * @return Category[] Lista kategorii.
+     * @return Category[] lista kategorii
      */
     public function allOrdered(): array
     {
@@ -64,9 +60,9 @@ final class CategoryService
     /**
      * Znajdź kategorię po slug.
      *
-     * @param string $slug Slug kategorii.
+     * @param string $slug slug kategorii
      *
-     * @return Category|null Znaleziona encja lub null.
+     * @return Category|null znaleziona encja lub null
      */
     public function bySlug(string $slug): ?Category
     {

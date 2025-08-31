@@ -23,7 +23,6 @@ use App\Service\RecipeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Kontroler odpowiedzialny za obsługę kategorii.
@@ -33,9 +32,9 @@ final class CategoryController extends AbstractController
     /**
      * Lista wszystkich kategorii.
      *
-     * @param CategoryService $categories Serwis obsługujący kategorie.
+     * @param CategoryService $categories serwis obsługujący kategorie
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/categories', name: 'category_list', methods: ['GET'])]
     public function list(CategoryService $categories): Response
@@ -44,13 +43,14 @@ final class CategoryController extends AbstractController
             'categories' => $categories->allOrdered(),
         ]);
     }
+
     /**
      * Dodawanie nowej kategorii.
      *
-     * @param Request         $request    Obiekt żądania HTTP.
-     * @param CategoryService $categories Serwis obsługujący kategorie.
+     * @param Request         $request    obiekt żądania HTTP
+     * @param CategoryService $categories serwis obsługujący kategorie
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/categories/new', name: 'category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CategoryService $categories): Response
@@ -75,21 +75,22 @@ final class CategoryController extends AbstractController
             'form' => $form,
         ]);
     }
+
     /**
      * Wyświetlanie pojedynczej kategorii.
      *
-     * @param string          $slug       Unikalny identyfikator kategorii.
-     * @param Request         $request    Obiekt żądania HTTP.
-     * @param CategoryService $categories Serwis obsługujący kategorie.
-     * @param RecipeService   $recipes    Serwis obsługujący przepisy.
+     * @param string          $slug       unikalny identyfikator kategorii
+     * @param Request         $request    obiekt żądania HTTP
+     * @param CategoryService $categories serwis obsługujący kategorie
+     * @param RecipeService   $recipes    serwis obsługujący przepisy
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/categories/{slug}', name: 'category_show', methods: ['GET'])]
     public function show(string $slug, Request $request, CategoryService $categories, RecipeService $recipes): Response
     {
         $category = $categories->bySlug($slug);
-        if (!$category instanceof \App\Entity\Category) {
+        if (!$category instanceof Category) {
             throw $this->createNotFoundException('Kategoria nie istnieje');
         }
 
@@ -101,14 +102,15 @@ final class CategoryController extends AbstractController
             'recipes' => $pagination,
         ]);
     }
+
     /**
      * Edycja kategorii.
      *
-     * @param Request         $request    Obiekt żądania HTTP.
-     * @param Category        $category   Edytowana kategoria.
-     * @param CategoryService $categories Serwis obsługujący kategorie.
+     * @param Request         $request    obiekt żądania HTTP
+     * @param Category        $category   edytowana kategoria
+     * @param CategoryService $categories serwis obsługujący kategorie
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/categories/{id}/edit', name: 'category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, CategoryService $categories): Response
@@ -129,14 +131,15 @@ final class CategoryController extends AbstractController
             'form' => $form,
         ]);
     }
+
     /**
      * Usuwanie kategorii.
      *
-     * @param Request         $request    Obiekt żądania HTTP.
-     * @param Category        $category   Usuwana kategoria.
-     * @param CategoryService $categories Serwis obsługujący kategorie.
+     * @param Request         $request    obiekt żądania HTTP
+     * @param Category        $category   usuwana kategoria
+     * @param CategoryService $categories serwis obsługujący kategorie
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/categories/{id}', name: 'category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, CategoryService $categories): Response

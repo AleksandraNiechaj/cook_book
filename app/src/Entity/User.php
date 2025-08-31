@@ -1,8 +1,15 @@
 <?php
+
 /**
  * This file is part of the Cook Book project.
- * (c) 2025 Aleksandra Niechaj
- * License: For educational purposes (course project).
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
  */
 
 declare(strict_types=1);
@@ -51,8 +58,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia e-mail.
      *
      * @param string $email E-mail użytkownika
-     *
-     * @return self
      */
     public function setEmail(string $email): self
     {
@@ -80,8 +85,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia role użytkownika.
      *
      * @param string[] $roles Tablica ról użytkownika
-     *
-     * @return self
      */
     public function setRoles(array $roles): self
     {
@@ -100,8 +103,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia zaszyfrowane hasło.
      *
      * @param string $password Zaszyfrowane hasło
-     *
-     * @return self
      */
     public function setPassword(string $password): self
     {

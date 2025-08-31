@@ -20,7 +20,6 @@ use App\Service\CategoryService;
 use App\Service\RecipeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -31,11 +30,11 @@ final class HomeController extends AbstractController
     /**
      * Strona główna z listą kategorii i najnowszymi przepisami.
      *
-     * @param RecipeService       $recipes             Serwis do obsługi przepisów.
-     * @param CategoryService     $categories          Serwis do obsługi kategorii.
-     * @param AuthenticationUtils $authenticationUtils Obsługa logowania użytkownika.
+     * @param RecipeService       $recipes             serwis do obsługi przepisów
+     * @param CategoryService     $categories          serwis do obsługi kategorii
+     * @param AuthenticationUtils $authenticationUtils obsługa logowania użytkownika
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/', name: 'app_home', methods: ['GET'])]
     public function index(RecipeService $recipes, CategoryService $categories, AuthenticationUtils $authenticationUtils): Response

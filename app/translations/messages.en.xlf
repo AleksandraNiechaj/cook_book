@@ -66,19 +66,47 @@
       <trans-unit id="pagination.previous"><source>pagination.previous</source><target>Previous</target></trans-unit>
       <trans-unit id="pagination.next"><source>pagination.next</source><target>Next</target></trans-unit>
 
-    <trans-unit id="recipe.form.title"><source>recipe.form.title</source><target>Title</target></trans-unit>
-    <trans-unit id="recipe.form.content"><source>recipe.form.content</source><target>Content</target></trans-unit>
-    <trans-unit id="recipe.form.category"><source>recipe.form.category</source><target>Category</target></trans-unit>
-    <trans-unit id="recipe.form.choose_category"><source>recipe.form.choose_category</source><target>Choose a category</target></trans-unit>
+      <!-- Form labels (extra) -->
+      <trans-unit id="recipe.form.title"><source>recipe.form.title</source><target>Title</target></trans-unit>
+      <trans-unit id="recipe.form.content"><source>recipe.form.content</source><target>Content</target></trans-unit>
+      <trans-unit id="recipe.form.category"><source>recipe.form.category</source><target>Category</target></trans-unit>
+      <trans-unit id="recipe.form.choose_category"><source>recipe.form.choose_category</source><target>Choose a category</target></trans-unit>
+      <trans-unit id="recipe.form.category_placeholder"><source>recipe.form.category_placeholder</source><target>Choose a category</target></trans-unit>
 
-    <trans-unit id="category.form.name"><source>category.form.name</source><target>Category name</target></trans-unit>
-    <trans-unit id="category.form.slug"><source>category.form.slug</source><target>Slug</target></trans-unit>
-    <trans-unit id="category.form.slug_help"><source>category.form.slug_help</source><target>Use lowercase letters, numbers and hyphens</target></trans-unit>
+      <trans-unit id="category.form.name"><source>category.form.name</source><target>Category name</target></trans-unit>
+      <trans-unit id="category.form.slug"><source>category.form.slug</source><target>Slug</target></trans-unit>
+      <trans-unit id="category.form.slug_help"><source>category.form.slug_help</source><target>Use lowercase letters, numbers and hyphens</target></trans-unit>
 
-    <trans-unit id="comment.form.name"><source>comment.form.name</source><target>Name</target></trans-unit>
-    <trans-unit id="comment.form.email"><source>comment.form.email</source><target>Email address</target></trans-unit>
-    <trans-unit id="comment.form.content"><source>comment.form.content</source><target>Comment</target></trans-unit>
+      <trans-unit id="comment.form.name"><source>comment.form.name</source><target>Name</target></trans-unit>
+      <trans-unit id="comment.form.email"><source>comment.form.email</source><target>Email address</target></trans-unit>
+      <trans-unit id="comment.form.content"><source>comment.form.content</source><target>Comment</target></trans-unit>
 
+      <!-- Registration & account -->
+      <trans-unit id="auth.register.title"><source>auth.register.title</source><target>Register</target></trans-unit>
+      <trans-unit id="auth.register.email"><source>auth.register.email</source><target>Email address</target></trans-unit>
+      <trans-unit id="auth.register.password"><source>auth.register.password</source><target>Password</target></trans-unit>
+      <trans-unit id="auth.register.password_repeat"><source>auth.register.password_repeat</source><target>Repeat password</target></trans-unit>
+      <trans-unit id="auth.register.password_mismatch"><source>auth.register.password_mismatch</source><target>Passwords do not match.</target></trans-unit>
+      <trans-unit id="auth.register.submit"><source>auth.register.submit</source><target>Create account</target></trans-unit>
+
+      <trans-unit id="account.profile.title"><source>account.profile.title</source><target>My profile</target></trans-unit>
+      <trans-unit id="account.password.title"><source>account.password.title</source><target>Change password</target></trans-unit>
+      <trans-unit id="account.password.current"><source>account.password.current</source><target>Current password</target></trans-unit>
+      <trans-unit id="account.password.current_invalid"><source>account.password.current_invalid</source><target>The current password is invalid.</target></trans-unit>
+      <trans-unit id="account.password.new"><source>account.password.new</source><target>New password</target></trans-unit>
+      <trans-unit id="account.password.new_repeat"><source>account.password.new_repeat</source><target>Repeat new password</target></trans-unit>
+      <trans-unit id="account.password.mismatch"><source>account.password.mismatch</source><target>Passwords do not match.</target></trans-unit>
+      <trans-unit id="account.password.submit"><source>account.password.submit</source><target>Update password</target></trans-unit>
+
+      <trans-unit id="nav.my_account"><source>nav.my_account</source><target>My account</target></trans-unit>
+      <trans-unit id="nav.change_password"><source>nav.change_password</source><target>Change password</target></trans-unit>
+      <trans-unit id="nav.register"><source>nav.register</source><target>Register</target></trans-unit>
+
+      <trans-unit id="flash.registration_success"><source>flash.registration_success</source><target>Your account has been created. Please sign in.</target></trans-unit>
+      <trans-unit id="flash.profile_updated"><source>flash.profile_updated</source><target>Profile updated.</target></trans-unit>
+      <trans-unit id="flash.password_changed"><source>flash.password_changed</source><target>Password changed.</target></trans-unit>
+
+      <trans-unit id="common.save"><source>common.save</source><target>Save</target></trans-unit>
     </body>
   </file>
 </xliff>

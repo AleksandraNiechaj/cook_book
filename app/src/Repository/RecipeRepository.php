@@ -59,8 +59,6 @@ class RecipeRepository extends ServiceEntityRepository
 
     /**
      * Lista od najnowszych — JOIN kategorii + partial select.
-     *
-     * @return QueryBuilder
      */
     public function qbLatest(): QueryBuilder
     {
@@ -77,8 +75,6 @@ class RecipeRepository extends ServiceEntityRepository
      * Lista przepisów dla kategorii.
      *
      * @param Category $category Kategoria przepisu
-     *
-     * @return QueryBuilder
      */
     public function qbByCategory(Category $category): QueryBuilder
     {
@@ -93,8 +89,6 @@ class RecipeRepository extends ServiceEntityRepository
      * Szczegóły: pobieramy przepis wraz z komentarzami i kategorią.
      *
      * @param int $id Id przepisu
-     *
-     * @return Recipe|null
      */
     public function findWithComments(int $id): ?Recipe
     {

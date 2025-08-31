@@ -5,21 +5,22 @@ declare(strict_types=1);
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Change password form for authenticated users.
+ * Registration form type.
  */
-final class ChangePasswordType extends AbstractType
+final class RegistrationType extends AbstractType
 {
     /**
-     * Build change password form.
+     * Build registration form.
      *
      * @param FormBuilderInterface $builder The form builder
      * @param array<string,mixed>  $options The options
@@ -29,20 +30,19 @@ final class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('currentPassword', PasswordType::class, [
-                'label' => 'account.password.current',
-                'mapped' => false,
+            ->add('email', EmailType::class, [
+                'label' => 'auth.register.email',
                 'constraints' => [
                     new NotBlank(),
-                    new UserPassword(message: 'account.password.current_invalid'),
+                    new EmailConstraint(),
                 ],
             ])
-            ->add('newPassword', RepeatedType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'first_options' => ['label' => 'account.password.new'],
-                'second_options' => ['label' => 'account.password.new_repeat'],
-                'invalid_message' => 'account.password.mismatch',
+                'first_options' => ['label' => 'auth.register.password'],
+                'second_options' => ['label' => 'auth.register.password_repeat'],
+                'invalid_message' => 'auth.register.password_mismatch',
                 'constraints' => [
                     new NotBlank(),
                     new Length(min: 8, max: 4096),

@@ -24,8 +24,8 @@ class ProfileType extends AbstractType
     /**
      * Buduje formularz profilu.
      *
-     * @param FormBuilderInterface $builder Builder formularza.
-     * @param array<string,mixed>  $options Opcje formularza.
+     * @param FormBuilderInterface $builder builder formularza
+     * @param array<string,mixed>  $options opcje formularza
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -41,7 +41,7 @@ class ProfileType extends AbstractType
     /**
      * Konfiguracja domyślnych opcji.
      *
-     * @param OptionsResolver $resolver Resolver opcji.
+     * @param OptionsResolver $resolver resolver opcji
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

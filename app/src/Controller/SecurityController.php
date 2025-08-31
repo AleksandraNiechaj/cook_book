@@ -18,7 +18,6 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -29,9 +28,9 @@ final class SecurityController extends AbstractController
     /**
      * Formularz logowania.
      *
-     * @param AuthenticationUtils $authenticationUtils Obsługa logowania.
+     * @param AuthenticationUtils $authenticationUtils obsługa logowania
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -49,11 +48,8 @@ final class SecurityController extends AbstractController
         ]);
     }
 
-
     /**
      * Wylogowanie użytkownika (obsługiwane przez Symfony).
-     *
-     * @return never
      */
     #[\Symfony\Component\Routing\Attribute\Route(path: '/logout', name: 'app_logout')]
     public function logout(): never

@@ -28,7 +28,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * Konstruktor.
      *
-     * @param UrlGeneratorInterface $urlGenerator Generator URL.
+     * @param UrlGeneratorInterface $urlGenerator generator URL
      */
     public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
     {
@@ -37,9 +37,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * Tworzy paszport użytkownika na podstawie danych z formularza.
      *
-     * @param Request $request Obiekt żądania HTTP.
+     * @param Request $request obiekt żądania HTTP
      *
-     * @return Passport Paszport logowania.
+     * @return Passport paszport logowania
      */
     public function authenticate(Request $request): Passport
     {
@@ -56,11 +56,11 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * Akcja po poprawnym zalogowaniu.
      *
-     * @param Request        $request      Żądanie HTTP.
-     * @param TokenInterface $token        Token uwierzytelnienia.
-     * @param string         $firewallName Nazwa firewalla.
+     * @param Request        $request      żądanie HTTP
+     * @param TokenInterface $token        token uwierzytelnienia
+     * @param string         $firewallName nazwa firewalla
      *
-     * @return RedirectResponse|null Przekierowanie po logowaniu.
+     * @return RedirectResponse|null przekierowanie po logowaniu
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?RedirectResponse
     {
@@ -70,9 +70,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * Zwraca URL do strony logowania.
      *
-     * @param Request $request Żądanie HTTP.
+     * @param Request $request żądanie HTTP
      *
-     * @return string Ścieżka do logowania.
+     * @return string ścieżka do logowania
      */
     protected function getLoginUrl(Request $request): string
     {

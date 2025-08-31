@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 /**
  * This file is part of the Cook Book project.
- * (c) 2025 Aleksandra Niechaj
- * License: For educational purposes (course project).
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
  */
 
 namespace App\Entity;
@@ -75,8 +81,6 @@ class Comment
      * Ustawia nazwę autora komentarza.
      *
      * @param string $authorName Nick autora
-     *
-     * @return static
      */
     public function setAuthorName(string $authorName): static
     {
@@ -99,8 +103,6 @@ class Comment
      * Ustawia adres e-mail autora komentarza.
      *
      * @param string $authorEmail Adres e-mail
-     *
-     * @return static
      */
     public function setAuthorEmail(string $authorEmail): static
     {
@@ -123,8 +125,6 @@ class Comment
      * Ustawia treść komentarza.
      *
      * @param string $content Treść komentarza
-     *
-     * @return static
      */
     public function setContent(string $content): static
     {
@@ -147,8 +147,6 @@ class Comment
      * Ustawia datę utworzenia komentarza.
      *
      * @param \DateTimeImmutable $createdAt Data utworzenia
-     *
-     * @return static
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
@@ -171,8 +169,6 @@ class Comment
      * Ustawia powiązany przepis.
      *
      * @param Recipe|null $recipe Przepis
-     *
-     * @return static
      */
     public function setRecipe(?Recipe $recipe): static
     {

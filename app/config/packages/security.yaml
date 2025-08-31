@@ -17,17 +17,42 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+
             form_login:
                 login_path: app_login
                 check_path: app_login
                 default_target_path: app_home
                 username_parameter: email
                 password_parameter: password
+
             logout:
                 path: app_logout
                 target: app_home
 
+            # Ochrona przed brute force przy logowaniu
+            login_throttling:
+                max_attempts: 5
+                interval: '1 minute'
+
+            # Wygodny "pamiętaj mnie"
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 1209600   # 14 dni
+                path: /
+
     access_control:
+        # Dostęp publiczny do logowania/rejestracji
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+
+        # Strefa konta – tylko zalogowani
+        - { path: ^/account, roles: ROLE_USER }
+
+        # Panel admina i akcje admin-only
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/comment/\d+/delete, roles: ROLE_ADMIN, methods: [ POST ] }
+
+        # Istniejące reguły (zostawiamy)
         - { path: ^/recipe/new, roles: ROLE_ADMIN }
         - { path: ^/recipe/\d+/edit, roles: ROLE_ADMIN }
         - { path: ^/recipe/\d+/delete, roles: ROLE_ADMIN }

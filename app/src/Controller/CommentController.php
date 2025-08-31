@@ -23,7 +23,6 @@ use App\Service\CommentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Kontroler odpowiedzialny za dodawanie i usuwanie komentarzy.
@@ -33,11 +32,11 @@ final class CommentController extends AbstractController
     /**
      * Dodaje nowy komentarz do przepisu.
      *
-     * @param Recipe         $recipe   Przepis, do którego dodajemy komentarz.
-     * @param Request        $request  Obiekt żądania HTTP.
-     * @param CommentService $comments Serwis do obsługi komentarzy.
+     * @param Recipe         $recipe   przepis, do którego dodajemy komentarz
+     * @param Request        $request  obiekt żądania HTTP
+     * @param CommentService $comments serwis do obsługi komentarzy
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/comment/add/{id}', name: 'app_comment_add', methods: ['POST'])]
     public function add(Recipe $recipe, Request $request, CommentService $comments): Response
@@ -56,14 +55,15 @@ final class CommentController extends AbstractController
 
         return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
     }
+
     /**
      * Usuwa komentarz (dostęp tylko dla admina).
      *
-     * @param Comment        $comment  Komentarz do usunięcia.
-     * @param Request        $request  Obiekt żądania HTTP.
-     * @param CommentService $comments Serwis do obsługi komentarzy.
+     * @param Comment        $comment  komentarz do usunięcia
+     * @param Request        $request  obiekt żądania HTTP
+     * @param CommentService $comments serwis do obsługi komentarzy
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, Request $request, CommentService $comments): Response

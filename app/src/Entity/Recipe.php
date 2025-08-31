@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 /**
  * This file is part of the Cook Book project.
- * (c) 2025 Aleksandra Niechaj
- * License: For educational purposes (course project).
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
  */
 
 namespace App\Entity;
@@ -92,8 +98,6 @@ class Recipe
      * Ustawia tytuł przepisu.
      *
      * @param string $title Tytuł przepisu
-     *
-     * @return static
      */
     public function setTitle(string $title): static
     {
@@ -116,8 +120,6 @@ class Recipe
      * Ustawia treść przepisu.
      *
      * @param string $content Treść przepisu
-     *
-     * @return static
      */
     public function setContent(string $content): static
     {
@@ -140,8 +142,6 @@ class Recipe
      * Ustawia datę utworzenia przepisu.
      *
      * @param \DateTimeImmutable $createdAt Data utworzenia
-     *
-     * @return static
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
@@ -164,8 +164,6 @@ class Recipe
      * Ustawia datę ostatniej modyfikacji.
      *
      * @param \DateTimeImmutable $updatedAt Data modyfikacji
-     *
-     * @return static
      */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
@@ -188,8 +186,6 @@ class Recipe
      * Ustawia kategorię przepisu.
      *
      * @param Category|null $category Kategoria
-     *
-     * @return static
      */
     public function setCategory(?Category $category): static
     {
@@ -212,8 +208,6 @@ class Recipe
      * Dodaje komentarz do przepisu.
      *
      * @param Comment $comment Komentarz
-     *
-     * @return static
      */
     public function addComment(Comment $comment): static
     {
@@ -229,8 +223,6 @@ class Recipe
      * Usuwa komentarz z przepisu.
      *
      * @param Comment $comment Komentarz
-     *
-     * @return static
      */
     public function removeComment(Comment $comment): static
     {

@@ -21,7 +21,7 @@ final class CommentService
     /**
      * Konstruktor.
      *
-     * @param CommentRepository $comments Repozytorium komentarzy.
+     * @param CommentRepository $comments repozytorium komentarzy
      */
     public function __construct(private readonly CommentRepository $comments)
     {
@@ -30,9 +30,7 @@ final class CommentService
     /**
      * Zapisuje komentarz.
      *
-     * @param Comment $comment Encja komentarza.
-     *
-     * @return void
+     * @param Comment $comment encja komentarza
      */
     public function save(Comment $comment): void
     {
@@ -42,9 +40,7 @@ final class CommentService
     /**
      * Usuwa komentarz.
      *
-     * @param Comment $comment Encja komentarza.
-     *
-     * @return void
+     * @param Comment $comment encja komentarza
      */
     public function delete(Comment $comment): void
     {

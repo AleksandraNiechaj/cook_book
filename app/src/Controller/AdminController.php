@@ -24,7 +24,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Kontroler odpowiedzialny za panel administracyjny użytkownika
@@ -35,20 +34,21 @@ class AdminController extends AbstractController
     /**
      * Widok strony głównej panelu administracyjnego.
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
     }
+
     /**
      * Edycja profilu zalogowanego użytkownika.
      *
-     * @param Request                $request Obiekt żądania HTTP.
-     * @param EntityManagerInterface $em      Menedżer encji Doctrine.
+     * @param Request                $request obiekt żądania HTTP
+     * @param EntityManagerInterface $em      menedżer encji Doctrine
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/profile', name: 'admin_profile')]
     public function editProfile(Request $request, EntityManagerInterface $em): Response
@@ -72,14 +72,15 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * Zmiana hasła zalogowanego użytkownika.
      *
-     * @param Request                     $request        Obiekt żądania HTTP.
-     * @param EntityManagerInterface      $em             Menedżer encji Doctrine.
-     * @param UserPasswordHasherInterface $passwordHasher Hasher haseł.
+     * @param Request                     $request        obiekt żądania HTTP
+     * @param EntityManagerInterface      $em             menedżer encji Doctrine
+     * @param UserPasswordHasherInterface $passwordHasher hasher haseł
      *
-     * @return Response Odpowiedź HTTP.
+     * @return Response odpowiedź HTTP
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/change-password', name: 'admin_change_password')]
     public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response

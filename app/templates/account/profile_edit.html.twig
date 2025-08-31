@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'account.profile.title'|trans }}{% endblock %}
+
+{% block body %}
+    <h1 class="mb-3">{{ 'account.profile.title'|trans }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">{{ 'common.save'|trans }}</button>
+    {{ form_end(form) }}
+{% endblock %}

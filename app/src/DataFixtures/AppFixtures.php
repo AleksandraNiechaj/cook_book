@@ -27,9 +27,7 @@ class AppFixtures extends Fixture
     /**
      * Ładuje dane do bazy danych.
      *
-     * @param ObjectManager $manager Menedżer encji Doctrine.
-     *
-     * @return void
+     * @param ObjectManager $manager menedżer encji Doctrine
      */
     public function load(ObjectManager $manager): void
     {

@@ -23,9 +23,9 @@ final class RecipeService
     /**
      * Konstruktor.
      *
-     * @param RecipeRepository   $recipes   Repozytorium
-     *                                      przepisów.
-     * @param PaginatorInterface $paginator Komponent paginacji.
+     * @param RecipeRepository   $recipes   repozytorium
+     *                                      przepisów
+     * @param PaginatorInterface $paginator komponent paginacji
      */
     public function __construct(private readonly RecipeRepository $recipes, private readonly PaginatorInterface $paginator)
     {
@@ -34,9 +34,7 @@ final class RecipeService
     /**
      * Zapis przepisu.
      *
-     * @param Recipe $recipe Encja przepisu.
-     *
-     * @return void
+     * @param Recipe $recipe encja przepisu
      */
     public function save(Recipe $recipe): void
     {
@@ -46,9 +44,7 @@ final class RecipeService
     /**
      * Usunięcie przepisu.
      *
-     * @param Recipe $recipe Encja przepisu.
-     *
-     * @return void
+     * @param Recipe $recipe encja przepisu
      */
     public function delete(Recipe $recipe): void
     {
@@ -58,10 +54,10 @@ final class RecipeService
     /**
      * Paginacja najnowszych przepisów.
      *
-     * @param int $page    Numer strony.
-     * @param int $perPage Liczba elementów na stronę.
+     * @param int $page    numer strony
+     * @param int $perPage liczba elementów na stronę
      *
-     * @return mixed Wynik paginacji.
+     * @return mixed wynik paginacji
      */
     public function paginateLatest(int $page, int $perPage = 10): mixed
     {
@@ -75,11 +71,11 @@ final class RecipeService
     /**
      * Paginacja przepisów dla danej kategorii.
      *
-     * @param Category $category Kategoria.
-     * @param int      $page     Numer strony.
-     * @param int      $perPage  Liczba elementów na stronę.
+     * @param Category $category kategoria
+     * @param int      $page     numer strony
+     * @param int      $perPage  liczba elementów na stronę
      *
-     * @return mixed Wynik paginacji.
+     * @return mixed wynik paginacji
      */
     public function paginateByCategory(Category $category, int $page, int $perPage = 10): mixed
     {
@@ -93,9 +89,9 @@ final class RecipeService
     /**
      * Zwraca przepis wraz z komentarzami i kategorią.
      *
-     * @param int $id Id przepisu.
+     * @param int $id id przepisu
      *
-     * @return Recipe|null Encja przepisu lub null.
+     * @return Recipe|null encja przepisu lub null
      */
     public function findWithComments(int $id): ?Recipe
     {
@@ -105,9 +101,9 @@ final class RecipeService
     /**
      * Zwraca najnowsze przepisy (np. na stronę główną).
      *
-     * @param int $limit Maksymalna liczba wyników.
+     * @param int $limit maksymalna liczba wyników
      *
-     * @return Recipe[] Tablica przepisów.
+     * @return Recipe[] tablica przepisów
      */
     public function latest(int $limit = 3): array
     {

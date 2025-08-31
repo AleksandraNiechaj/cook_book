@@ -2,49 +2,52 @@
 
 declare(strict_types=1);
 
-/**
- * This file is part of the Cook Book project.
- * (c) 2025 Aleksandra Niechaj
- * License: For educational purposes (course project).
- */
-
 namespace App\Form;
 
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Formularz do edycji profilu użytkownika.
+ * Profile edit form bound to User entity.
  */
-class ProfileType extends AbstractType
+final class ProfileType extends AbstractType
 {
     /**
-     * Buduje formularz profilu.
+     * Build profile form.
      *
-     * @param FormBuilderInterface $builder builder formularza
-     * @param array<string,mixed>  $options opcje formularza
+     * @param FormBuilderInterface $builder The form builder
+     * @param array<string, mixed> $options The options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('email', EmailType::class, [
-                'label' => 'profile.form.email',
-            ])
-            ->add('name', TextType::class, [
-                'label' => 'profile.form.name',
-            ]);
+        $builder->add('email', EmailType::class, [
+            'label' => 'auth.email',
+            'constraints' => [
+                new NotBlank(),
+                new EmailConstraint(),
+            ],
+        ]);
     }
 
     /**
-     * Konfiguracja domyślnych opcji.
+     * Configure options.
      *
-     * @param OptionsResolver $resolver resolver opcji
+     * @param OptionsResolver $resolver The resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            'data_class' => User::class,
+            'csrf_protection' => true,
+        ]);
     }
 }

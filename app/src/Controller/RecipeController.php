@@ -30,7 +30,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Kontroler odpowiedzialny za obsługę przepisów.
  */
-#[Route('/recipe')]
 final class RecipeController extends AbstractController
 {
     /**
@@ -41,7 +40,7 @@ final class RecipeController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/recipe/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(Request $request, RecipeService $recipes): Response
     {
         $page = $request->query->getInt('page', 1);
@@ -51,8 +50,6 @@ final class RecipeController extends AbstractController
             'recipes' => $pagination,
         ]);
     }
-
-
     /**
      * Dodanie nowego przepisu.
      *
@@ -61,7 +58,7 @@ final class RecipeController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/recipe/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, RecipeService $recipes): Response
     {
         $recipe = new Recipe();
@@ -82,8 +79,6 @@ final class RecipeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-
     /**
      * Edycja przepisu.
      *
@@ -93,7 +88,7 @@ final class RecipeController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/recipe/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, RecipeService $recipes): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -111,8 +106,6 @@ final class RecipeController extends AbstractController
             'recipe' => $recipe,
         ]);
     }
-
-
     /**
      * Usuwanie przepisu.
      *
@@ -122,7 +115,7 @@ final class RecipeController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/{id}/delete', name: 'app_recipe_delete', methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/recipe/{id}/delete', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, RecipeService $recipes): Response
     {
         if ($this->isCsrfTokenValid('delete'.$recipe->getId(), (string) $request->request->get('_token'))) {
@@ -131,8 +124,6 @@ final class RecipeController extends AbstractController
 
         return $this->redirectToRoute('app_recipe_index');
     }
-
-
     /**
      * Szczegóły przepisu + komentarze.
      *
@@ -143,11 +134,11 @@ final class RecipeController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/recipe/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function show(int $id, Request $request, RecipeService $recipes, CommentService $comments): Response
     {
         $recipe = $recipes->findWithComments($id);
-        if (!$recipe) {
+        if (!$recipe instanceof \App\Entity\Recipe) {
             throw $this->createNotFoundException();
         }
 

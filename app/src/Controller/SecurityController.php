@@ -33,10 +33,10 @@ final class SecurityController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route(path: '/login', name: 'app_login')]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {
+        if ($this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             return $this->redirectToRoute('app_home');
         }
 
@@ -55,7 +55,7 @@ final class SecurityController extends AbstractController
      *
      * @return never
      */
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/logout', name: 'app_logout')]
     public function logout(): never
     {
         throw new \LogicException('This method is intercepted by Symfony logout mechanism.');

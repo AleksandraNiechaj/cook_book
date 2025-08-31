@@ -28,7 +28,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Kontroler odpowiedzialny za dodawanie i usuwanie komentarzy.
  */
-#[Route('/comment')]
 final class CommentController extends AbstractController
 {
     /**
@@ -40,7 +39,7 @@ final class CommentController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/add/{id}', name: 'app_comment_add', methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/comment/add/{id}', name: 'app_comment_add', methods: ['POST'])]
     public function add(Recipe $recipe, Request $request, CommentService $comments): Response
     {
         $comment = new Comment();
@@ -57,8 +56,6 @@ final class CommentController extends AbstractController
 
         return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
     }
-
-
     /**
      * Usuwa komentarz (dostęp tylko dla admina).
      *
@@ -68,7 +65,7 @@ final class CommentController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, Request $request, CommentService $comments): Response
     {
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), (string) $request->request->get('_token'))) {

@@ -30,7 +30,6 @@ use Symfony\Component\Routing\Annotation\Route;
  * Kontroler odpowiedzialny za panel administracyjny użytkownika
  * (dashboard, edycja profilu i zmiana hasła).
  */
-#[Route('/admin')]
 class AdminController extends AbstractController
 {
     /**
@@ -38,13 +37,11 @@ class AdminController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('', name: 'app_admin')]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
     }
-
-
     /**
      * Edycja profilu zalogowanego użytkownika.
      *
@@ -53,7 +50,7 @@ class AdminController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/profile', name: 'admin_profile')]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin/profile', name: 'admin_profile')]
     public function editProfile(Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
@@ -75,8 +72,6 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-
     /**
      * Zmiana hasła zalogowanego użytkownika.
      *
@@ -86,7 +81,7 @@ class AdminController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/change-password', name: 'admin_change_password')]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin/change-password', name: 'admin_change_password')]
     public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = $this->getUser();

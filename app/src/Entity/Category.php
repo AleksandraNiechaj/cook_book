@@ -212,10 +212,8 @@ class Category
      */
     public function removeRecipe(Recipe $recipe): static
     {
-        if ($this->recipes->removeElement($recipe)) {
-            if ($recipe->getCategory() === $this) {
-                $recipe->setCategory(null);
-            }
+        if ($this->recipes->removeElement($recipe) && $recipe->getCategory() === $this) {
+            $recipe->setCategory(null);
         }
 
         return $this;

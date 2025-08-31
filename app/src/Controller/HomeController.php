@@ -37,7 +37,7 @@ final class HomeController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/', name: 'app_home', methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/', name: 'app_home', methods: ['GET'])]
     public function index(RecipeService $recipes, CategoryService $categories, AuthenticationUtils $authenticationUtils): Response
     {
         $allCategories = $categories->allOrdered();

@@ -234,10 +234,8 @@ class Recipe
      */
     public function removeComment(Comment $comment): static
     {
-        if ($this->comments->removeElement($comment)) {
-            if ($comment->getRecipe() === $this) {
-                $comment->setRecipe(null);
-            }
+        if ($this->comments->removeElement($comment) && $comment->getRecipe() === $this) {
+            $comment->setRecipe(null);
         }
 
         return $this;

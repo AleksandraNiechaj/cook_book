@@ -28,7 +28,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Kontroler odpowiedzialny za obsługę kategorii.
  */
-#[Route('/categories')]
 final class CategoryController extends AbstractController
 {
     /**
@@ -38,15 +37,13 @@ final class CategoryController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('', name: 'category_list', methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/categories', name: 'category_list', methods: ['GET'])]
     public function list(CategoryService $categories): Response
     {
         return $this->render('category/list.html.twig', [
             'categories' => $categories->allOrdered(),
         ]);
     }
-
-
     /**
      * Dodawanie nowej kategorii.
      *
@@ -55,7 +52,7 @@ final class CategoryController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/new', name: 'category_new', methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/categories/new', name: 'category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CategoryService $categories): Response
     {
         $category = new Category();
@@ -78,8 +75,6 @@ final class CategoryController extends AbstractController
             'form' => $form,
         ]);
     }
-
-
     /**
      * Wyświetlanie pojedynczej kategorii.
      *
@@ -90,11 +85,11 @@ final class CategoryController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/{slug}', name: 'category_show', methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/categories/{slug}', name: 'category_show', methods: ['GET'])]
     public function show(string $slug, Request $request, CategoryService $categories, RecipeService $recipes): Response
     {
         $category = $categories->bySlug($slug);
-        if (!$category) {
+        if (!$category instanceof \App\Entity\Category) {
             throw $this->createNotFoundException('Kategoria nie istnieje');
         }
 
@@ -106,8 +101,6 @@ final class CategoryController extends AbstractController
             'recipes' => $pagination,
         ]);
     }
-
-
     /**
      * Edycja kategorii.
      *
@@ -117,7 +110,7 @@ final class CategoryController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/{id}/edit', name: 'category_edit', methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/categories/{id}/edit', name: 'category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, CategoryService $categories): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
@@ -136,8 +129,6 @@ final class CategoryController extends AbstractController
             'form' => $form,
         ]);
     }
-
-
     /**
      * Usuwanie kategorii.
      *
@@ -147,7 +138,7 @@ final class CategoryController extends AbstractController
      *
      * @return Response Odpowiedź HTTP.
      */
-    #[Route('/{id}', name: 'category_delete', methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/categories/{id}', name: 'category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, CategoryService $categories): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), (string) $request->request->get('_token'))) {

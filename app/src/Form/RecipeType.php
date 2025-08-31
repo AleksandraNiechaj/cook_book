@@ -26,8 +26,6 @@ final class RecipeType extends AbstractType
      *
      * @param FormBuilderInterface $builder The form builder
      * @param array<string, mixed> $options The form options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -53,10 +51,8 @@ final class RecipeType extends AbstractType
                 'choice_label' => 'name',
                 'placeholder' => 'recipe.form.category_placeholder',
                 'required' => true,
-                'query_builder' => static function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->orderBy('c.name', 'ASC');
-                },
+                'query_builder' => static fn (EntityRepository $er) => $er->createQueryBuilder('c')
+                    ->orderBy('c.name', 'ASC'),
             ]);
     }
 
@@ -64,8 +60,6 @@ final class RecipeType extends AbstractType
      * Configure options.
      *
      * @param OptionsResolver $resolver The resolver
-     *
-     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

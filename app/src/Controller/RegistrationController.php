@@ -26,17 +26,15 @@ final class RegistrationController extends AbstractController
      * @param EntityManagerInterface      $em         The entity manager
      * @param UserPasswordHasherInterface $hasher     The password hasher
      * @param TranslatorInterface         $translator The translator
-     *
-     * @return Response
      */
     #[Route(path: '/register', name: 'auth_register', methods: ['GET', 'POST'])]
     public function register(
         Request $request,
         EntityManagerInterface $em,
         UserPasswordHasherInterface $hasher,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
     ): Response {
-        if (null !== $this->getUser()) {
+        if ($this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             return $this->redirectToRoute('app_home');
         }
 

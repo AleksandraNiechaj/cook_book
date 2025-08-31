@@ -65,6 +65,20 @@
       <!-- Pagination -->
       <trans-unit id="pagination.previous"><source>pagination.previous</source><target>Previous</target></trans-unit>
       <trans-unit id="pagination.next"><source>pagination.next</source><target>Next</target></trans-unit>
+
+    <trans-unit id="recipe.form.title"><source>recipe.form.title</source><target>Title</target></trans-unit>
+    <trans-unit id="recipe.form.content"><source>recipe.form.content</source><target>Content</target></trans-unit>
+    <trans-unit id="recipe.form.category"><source>recipe.form.category</source><target>Category</target></trans-unit>
+    <trans-unit id="recipe.form.choose_category"><source>recipe.form.choose_category</source><target>Choose a category</target></trans-unit>
+
+    <trans-unit id="category.form.name"><source>category.form.name</source><target>Category name</target></trans-unit>
+    <trans-unit id="category.form.slug"><source>category.form.slug</source><target>Slug</target></trans-unit>
+    <trans-unit id="category.form.slug_help"><source>category.form.slug_help</source><target>Use lowercase letters, numbers and hyphens</target></trans-unit>
+
+    <trans-unit id="comment.form.name"><source>comment.form.name</source><target>Name</target></trans-unit>
+    <trans-unit id="comment.form.email"><source>comment.form.email</source><target>Email address</target></trans-unit>
+    <trans-unit id="comment.form.content"><source>comment.form.content</source><target>Comment</target></trans-unit>
+
     </body>
   </file>
 </xliff>

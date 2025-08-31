@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Index(name: 'idx_recipes_created_at', columns: ['created_at'])]
 #[ORM\Index(name: 'idx_recipes_category_id', columns: ['category_id'])]
@@ -19,9 +20,13 @@ class Recipe
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: 'Title is required.')]
+    #[Assert\Length(min: 3, max: 255, minMessage: 'Title is too short.', maxMessage: 'Title is too long.')]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Assert\NotBlank(message: 'Content is required.')]
+    #[Assert\Length(min: 10, minMessage: 'Content is too short.')]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
@@ -31,6 +36,7 @@ class Recipe
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[Assert\NotNull(message: 'Category is required.')]
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;

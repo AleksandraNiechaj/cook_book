@@ -16,13 +16,18 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('authorName', TextType::class, [
-                'label' => 'Nick',
+                'label' => 'comment.form.name',
+                'empty_data' => '',
+                'attr' => ['maxlength' => 100],
             ])
             ->add('authorEmail', EmailType::class, [
-                'label' => 'Adres e-mail',
+                'label' => 'comment.form.email',
+                'empty_data' => '',
+                'attr' => ['maxlength' => 180],
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Treść komentarza',
+                'label' => 'comment.form.content',
+                'empty_data' => '',
                 'attr' => ['rows' => 4],
             ]);
     }

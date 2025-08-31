@@ -7,8 +7,11 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Table(name: 'categories')]
+#[UniqueEntity(fields: ['slug'], message: 'Slug must be unique.')]
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
@@ -17,10 +20,17 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: 'Category name is required.')]
+    #[Assert\Length(min: 2, max: 100, minMessage: 'Name is too short.', maxMessage: 'Name is too long.')]
     #[ORM\Column(length: 100)]
     private ?string $name = null;
 
-    // unikalny slug (szybkie wyszukiwanie po slugu i gwarancja unikalności)
+    #[Assert\NotBlank(message: 'Slug is required.')]
+    #[Assert\Length(max: 100, maxMessage: 'Slug is too long.')]
+    #[Assert\Regex(
+        pattern: '/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
+        message: 'Slug may contain lowercase letters, numbers and hyphens.'
+    )]
     #[ORM\Column(length: 100, unique: true)]
     private ?string $slug = null;
 
@@ -36,7 +46,7 @@ class Category
     #[ORM\OneToMany(
         targetEntity: Recipe::class,
         mappedBy: 'category',
-        fetch: 'EXTRA_LAZY'   // <- optymalizacja dla kolekcji
+        fetch: 'EXTRA_LAZY'
     )]
     private Collection $recipes;
 

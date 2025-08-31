@@ -6,6 +6,7 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Index(name: 'idx_comments_recipe_id', columns: ['recipe_id'])]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -16,18 +17,26 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: 'Name is required.')]
+    #[Assert\Length(max: 100, maxMessage: 'Name is too long.')]
     #[ORM\Column(length: 100)]
     private ?string $authorName = null;
 
+    #[Assert\NotBlank(message: 'Email is required.')]
+    #[Assert\Email(message: 'Please enter a valid email.')]
+    #[Assert\Length(max: 180, maxMessage: 'Email is too long.')]
     #[ORM\Column(length: 180)]
     private ?string $authorEmail = null;
 
+    #[Assert\NotBlank(message: 'Comment cannot be empty.')]
+    #[Assert\Length(min: 3, minMessage: 'Comment is too short.')]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[Assert\NotNull]
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Recipe $recipe = null;

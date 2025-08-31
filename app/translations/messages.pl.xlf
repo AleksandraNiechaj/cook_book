@@ -65,6 +65,20 @@
       <!-- Pagination -->
       <trans-unit id="pagination.previous"><source>pagination.previous</source><target>Poprzednia</target></trans-unit>
       <trans-unit id="pagination.next"><source>pagination.next</source><target>Następna</target></trans-unit>
+
+      <trans-unit id="recipe.form.title"><source>recipe.form.title</source><target>Tytuł</target></trans-unit>
+      <trans-unit id="recipe.form.content"><source>recipe.form.content</source><target>Treść</target></trans-unit>
+      <trans-unit id="recipe.form.category"><source>recipe.form.category</source><target>Kategoria</target></trans-unit>
+      <trans-unit id="recipe.form.choose_category"><source>recipe.form.choose_category</source><target>Wybierz kategorię</target></trans-unit>
+
+      <trans-unit id="category.form.name"><source>category.form.name</source><target>Nazwa kategorii</target></trans-unit>
+      <trans-unit id="category.form.slug"><source>category.form.slug</source><target>Slug</target></trans-unit>
+      <trans-unit id="category.form.slug_help"><source>category.form.slug_help</source><target>Użyj małych liter, cyfr i myślników</target></trans-unit>
+
+      <trans-unit id="comment.form.name"><source>comment.form.name</source><target>Nick</target></trans-unit>
+      <trans-unit id="comment.form.email"><source>comment.form.email</source><target>Adres e-mail</target></trans-unit>
+      <trans-unit id="comment.form.content"><source>comment.form.content</source><target>Treść komentarza</target></trans-unit>
+
     </body>
   </file>
 </xliff>

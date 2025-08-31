@@ -22,10 +22,10 @@ final class RegistrationController extends AbstractController
     /**
      * Register a new user.
      *
-     * @param Request                         $request The current HTTP request
-     * @param EntityManagerInterface          $em      The entity manager
-     * @param UserPasswordHasherInterface     $hasher  The password hasher
-     * @param TranslatorInterface             $translator The translator service
+     * @param Request                     $request    The current HTTP request
+     * @param EntityManagerInterface      $em         The entity manager
+     * @param UserPasswordHasherInterface $hasher     The password hasher
+     * @param TranslatorInterface         $translator The translator
      *
      * @return Response
      */
@@ -36,18 +36,22 @@ final class RegistrationController extends AbstractController
         UserPasswordHasherInterface $hasher,
         TranslatorInterface $translator
     ): Response {
+        if (null !== $this->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(RegistrationType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var array{email:string, plainPassword:string} $data */
-            $data = (array) $form->getData();
+            /** @var string $email */
+            $email = (string) $form->get('email')->getData();
+            /** @var string $plainPassword */
+            $plainPassword = (string) $form->get('plainPassword')->getData();
 
             $user = new User();
-            $user->setEmail($data['email']);
-            $user->setPassword($hasher->hashPassword($user, $data['plainPassword']));
-
-            // Default role for regular users
+            $user->setEmail($email);
+            $user->setPassword($hasher->hashPassword($user, $plainPassword));
             $user->setRoles(['ROLE_USER']);
 
             $em->persist($user);

@@ -22,7 +22,7 @@ final class ChangePasswordType extends AbstractType
      * Build change password form.
      *
      * @param FormBuilderInterface $builder The form builder
-     * @param array<string,mixed>  $options The options
+     * @param array<string, mixed>  $options The options
      *
      * @return void
      */
@@ -45,7 +45,7 @@ final class ChangePasswordType extends AbstractType
                 'invalid_message' => 'account.password.mismatch',
                 'constraints' => [
                     new NotBlank(),
-                    new Length(min: 8, max: 4096),
+                    new Length(min: 6, max: 4096), // było 8 → 6
                 ],
             ]);
     }

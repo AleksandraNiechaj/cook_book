@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Registration form type.
+ * Registration form type (simple DTO, no data_class).
  */
 final class RegistrationType extends AbstractType
 {
@@ -23,7 +23,7 @@ final class RegistrationType extends AbstractType
      * Build registration form.
      *
      * @param FormBuilderInterface $builder The form builder
-     * @param array<string,mixed>  $options The options
+     * @param array<string, mixed> $options The options
      *
      * @return void
      */
@@ -45,7 +45,7 @@ final class RegistrationType extends AbstractType
                 'invalid_message' => 'auth.register.password_mismatch',
                 'constraints' => [
                     new NotBlank(),
-                    new Length(min: 8, max: 4096),
+                    new Length(min: 6, max: 4096), // było 8 → 6 (np. "user123" przejdzie)
                 ],
             ]);
     }

@@ -4,44 +4,6 @@
 
 {% block body %}
 
-    {# 🔹 Sekcja logowania / powitania #}
-    {% if not app.user %}
-        <div class="container mt-4 mb-4">
-            <h2>Zaloguj się</h2>
-            <form method="post" action="{{ path('app_login') }}">
-                {% if error is defined and error %}
-                    <div class="alert alert-danger">
-                        {{ error.messageKey|trans(error.messageData, 'security') }}
-                    </div>
-                {% endif %}
-
-                <div class="mb-3">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" name="email" id="inputEmail" class="form-control"
-                           value="{{ last_username|default('') }}" required autofocus>
-                </div>
-
-                <div class="mb-3">
-                    <label for="inputPassword">Hasło</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" required>
-                </div>
-
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                <button class="btn btn-primary" type="submit">Zaloguj</button>
-            </form>
-        </div>
-    {% else %}
-        <div class="container mt-4 mb-4">
-            <p>👋 Witaj, {{ app.user.email }}!</p>
-            <a href="{{ path('app_logout') }}" class="btn btn-outline-danger btn-sm">Wyloguj</a>
-
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('app_admin') }}" class="btn btn-outline-primary btn-sm ms-2">⚙️ Panel administratora</a>
-            {% endif %}
-        </div>
-    {% endif %}
-
     <p class="mb-3">
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('app_recipe_new') }}" class="btn btn-success btn-sm">➕ Dodaj nowy przepis</a>

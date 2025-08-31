@@ -1,10 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
+ */
+
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\ProfileType;
 use App\Form\ChangePasswordType;
+use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,15 +26,33 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Kontroler odpowiedzialny za panel administracyjny użytkownika
+ * (dashboard, edycja profilu i zmiana hasła).
+ */
 #[Route('/admin')]
 class AdminController extends AbstractController
 {
+    /**
+     * Widok strony głównej panelu administracyjnego.
+     *
+     * @return Response Odpowiedź HTTP.
+     */
     #[Route('', name: 'app_admin')]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
     }
 
+
+    /**
+     * Edycja profilu zalogowanego użytkownika.
+     *
+     * @param Request                $request Obiekt żądania HTTP.
+     * @param EntityManagerInterface $em      Menedżer encji Doctrine.
+     *
+     * @return Response Odpowiedź HTTP.
+     */
     #[Route('/profile', name: 'admin_profile')]
     public function editProfile(Request $request, EntityManagerInterface $em): Response
     {
@@ -35,6 +67,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Dane zostały zaktualizowane.');
+
             return $this->redirectToRoute('app_admin');
         }
 
@@ -43,12 +76,19 @@ class AdminController extends AbstractController
         ]);
     }
 
+
+    /**
+     * Zmiana hasła zalogowanego użytkownika.
+     *
+     * @param Request                     $request        Obiekt żądania HTTP.
+     * @param EntityManagerInterface      $em             Menedżer encji Doctrine.
+     * @param UserPasswordHasherInterface $passwordHasher Hasher haseł.
+     *
+     * @return Response Odpowiedź HTTP.
+     */
     #[Route('/change-password', name: 'admin_change_password')]
-    public function changePassword(
-        Request $request,
-        EntityManagerInterface $em,
-        UserPasswordHasherInterface $passwordHasher
-    ): Response {
+    public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
+    {
         $user = $this->getUser();
         if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
@@ -58,7 +98,6 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // pobieramy dane z poszczególnych pól
             $currentPassword = $form->get('currentPassword')->getData();
             $newPassword = $form->get('newPassword')->getData();
             $confirmPassword = $form->get('confirmPassword')->getData();
@@ -74,6 +113,7 @@ class AdminController extends AbstractController
                 $em->flush();
 
                 $this->addFlash('success', 'Hasło zostało zmienione.');
+
                 return $this->redirectToRoute('app_admin');
             }
         }

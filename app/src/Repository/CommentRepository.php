@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 /**
- * Cook Book — educational project
+ * This file is part of the Cook Book project.
  * (c) 2025 Aleksandra Niechaj
+ * License: For educational purposes (course project).
  */
 
 namespace App\Repository;
@@ -13,10 +15,17 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Repozytorium encji Comment.
+ *
  * @extends ServiceEntityRepository<Comment>
  */
 class CommentRepository extends ServiceEntityRepository
 {
+    /**
+     * Konstruktor repozytorium komentarzy.
+     *
+     * @param ManagerRegistry $registry Manager registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
@@ -24,6 +33,8 @@ class CommentRepository extends ServiceEntityRepository
 
     /**
      * Zapis encji komentarza.
+     *
+     * @param Comment $entity Encja komentarza
      */
     public function save(Comment $entity): void
     {
@@ -34,6 +45,8 @@ class CommentRepository extends ServiceEntityRepository
 
     /**
      * Usunięcie encji komentarza.
+     *
+     * @param Comment $entity Encja komentarza
      */
     public function delete(Comment $entity): void
     {

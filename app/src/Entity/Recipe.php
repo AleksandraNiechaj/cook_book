@@ -1,5 +1,12 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * This file is part of the Cook Book project.
+ * (c) 2025 Aleksandra Niechaj
+ * License: For educational purposes (course project).
+ */
 
 namespace App\Entity;
 
@@ -13,6 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Index(name: 'idx_recipes_created_at', columns: ['created_at'])]
 #[ORM\Index(name: 'idx_recipes_category_id', columns: ['category_id'])]
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
+/**
+ * Przepis (tytuł, treść, kategoria, komentarze, znaczniki czasowe).
+ */
 class Recipe
 {
     #[ORM\Id]
@@ -52,40 +62,176 @@ class Recipe
     )]
     private Collection $comments;
 
+    /** Konstruktor. */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
     }
 
-    public function getId(): ?int { return $this->id; }
+    /**
+     * Pobiera identyfikator przepisu.
+     *
+     * @return int|null Id przepisu
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
-    public function getTitle(): ?string { return $this->title; }
-    public function setTitle(string $title): static { $this->title = $title; return $this; }
+    /**
+     * Pobiera tytuł przepisu.
+     *
+     * @return string|null Tytuł przepisu
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
 
-    public function getContent(): ?string { return $this->content; }
-    public function setContent(string $content): static { $this->content = $content; return $this; }
+    /**
+     * Ustawia tytuł przepisu.
+     *
+     * @param string $title Tytuł przepisu
+     *
+     * @return static
+     */
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
 
-    public function getCreatedAt(): ?\DateTimeImmutable { return $this->createdAt; }
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static { $this->createdAt = $createdAt; return $this; }
+        return $this;
+    }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable { return $this->updatedAt; }
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static { $this->updatedAt = $updatedAt; return $this; }
+    /**
+     * Pobiera treść przepisu.
+     *
+     * @return string|null Treść przepisu
+     */
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
 
-    public function getCategory(): ?Category { return $this->category; }
-    public function setCategory(?Category $category): static { $this->category = $category; return $this; }
+    /**
+     * Ustawia treść przepisu.
+     *
+     * @param string $content Treść przepisu
+     *
+     * @return static
+     */
+    public function setContent(string $content): static
+    {
+        $this->content = $content;
 
-    /** @return Collection<int, Comment> */
-    public function getComments(): Collection { return $this->comments; }
+        return $this;
+    }
 
+    /**
+     * Pobiera datę utworzenia przepisu.
+     *
+     * @return \DateTimeImmutable|null Data utworzenia
+     */
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Ustawia datę utworzenia przepisu.
+     *
+     * @param \DateTimeImmutable $createdAt Data utworzenia
+     *
+     * @return static
+     */
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Pobiera datę ostatniej modyfikacji.
+     *
+     * @return \DateTimeImmutable|null Data modyfikacji
+     */
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Ustawia datę ostatniej modyfikacji.
+     *
+     * @param \DateTimeImmutable $updatedAt Data modyfikacji
+     *
+     * @return static
+     */
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Pobiera kategorię przepisu.
+     *
+     * @return Category|null Kategoria
+     */
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    /**
+     * Ustawia kategorię przepisu.
+     *
+     * @param Category|null $category Kategoria
+     *
+     * @return static
+     */
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Pobiera komentarze przypisane do przepisu.
+     *
+     * @return Collection<int, Comment> Lista komentarzy
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Dodaje komentarz do przepisu.
+     *
+     * @param Comment $comment Komentarz
+     *
+     * @return static
+     */
     public function addComment(Comment $comment): static
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
             $comment->setRecipe($this);
         }
+
         return $this;
     }
 
+    /**
+     * Usuwa komentarz z przepisu.
+     *
+     * @param Comment $comment Komentarz
+     *
+     * @return static
+     */
     public function removeComment(Comment $comment): static
     {
         if ($this->comments->removeElement($comment)) {
@@ -93,6 +239,7 @@ class Recipe
                 $comment->setRecipe(null);
             }
         }
+
         return $this;
     }
 }

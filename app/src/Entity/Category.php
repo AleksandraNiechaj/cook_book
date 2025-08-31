@@ -1,5 +1,12 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * This file is part of the Cook Book project.
+ * (c) 2025 Aleksandra Niechaj
+ * License: For educational purposes (course project).
+ */
 
 namespace App\Entity;
 
@@ -7,12 +14,15 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name: 'categories')]
 #[UniqueEntity(fields: ['slug'], message: 'Slug must be unique.')]
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+/**
+ * Kategoria przepisu (nazwa, slug, znaczniki czasowe).
+ */
 class Category
 {
     #[ORM\Id]
@@ -41,6 +51,8 @@ class Category
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
+     * Kolekcja przepisów powiązanych z kategorią.
+     *
      * @var Collection<int, Recipe>
      */
     #[ORM\OneToMany(
@@ -50,37 +62,154 @@ class Category
     )]
     private Collection $recipes;
 
+    /**
+     * Konstruktor inicjalizujący kolekcję przepisów.
+     */
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
     }
 
-    public function getId(): ?int { return $this->id; }
+    /**
+     * Pobiera identyfikator kategorii.
+     *
+     * @return int|null Id kategorii
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
-    public function getName(): ?string { return $this->name; }
-    public function setName(string $name): static { $this->name = $name; return $this; }
+    /**
+     * Pobiera nazwę kategorii.
+     *
+     * @return string|null Nazwa kategorii
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
 
-    public function getSlug(): ?string { return $this->slug; }
-    public function setSlug(string $slug): static { $this->slug = $slug; return $this; }
+    /**
+     * Ustawia nazwę kategorii.
+     *
+     * @param string $name Nazwa kategorii
+     *
+     * @return static
+     */
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
-    public function getCreatedAt(): ?\DateTimeImmutable { return $this->createdAt; }
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static { $this->createdAt = $createdAt; return $this; }
+        return $this;
+    }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable { return $this->updatedAt; }
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static { $this->updatedAt = $updatedAt; return $this; }
+    /**
+     * Pobiera slug kategorii.
+     *
+     * @return string|null Slug kategorii
+     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
 
-    /** @return Collection<int, Recipe> */
-    public function getRecipes(): Collection { return $this->recipes; }
+    /**
+     * Ustawia slug kategorii.
+     *
+     * @param string $slug Slug
+     *
+     * @return static
+     */
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
+        return $this;
+    }
+
+    /**
+     * Pobiera datę utworzenia kategorii.
+     *
+     * @return \DateTimeImmutable|null Data utworzenia
+     */
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Ustawia datę utworzenia kategorii.
+     *
+     * @param \DateTimeImmutable $createdAt Data utworzenia
+     *
+     * @return static
+     */
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Pobiera datę ostatniej modyfikacji.
+     *
+     * @return \DateTimeImmutable|null Data modyfikacji
+     */
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Ustawia datę ostatniej modyfikacji.
+     *
+     * @param \DateTimeImmutable $updatedAt Data modyfikacji
+     *
+     * @return static
+     */
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Pobiera wszystkie przepisy powiązane z kategorią.
+     *
+     * @return Collection<int, Recipe> Kolekcja przepisów
+     */
+    public function getRecipes(): Collection
+    {
+        return $this->recipes;
+    }
+
+    /**
+     * Dodaje przepis do kategorii.
+     *
+     * @param Recipe $recipe Przepis
+     *
+     * @return static
+     */
     public function addRecipe(Recipe $recipe): static
     {
         if (!$this->recipes->contains($recipe)) {
             $this->recipes->add($recipe);
             $recipe->setCategory($this);
         }
+
         return $this;
     }
 
+    /**
+     * Usuwa przepis z kategorii.
+     *
+     * @param Recipe $recipe Przepis
+     *
+     * @return static
+     */
     public function removeRecipe(Recipe $recipe): static
     {
         if ($this->recipes->removeElement($recipe)) {
@@ -88,6 +217,7 @@ class Category
                 $recipe->setCategory(null);
             }
         }
+
         return $this;
     }
 }

@@ -1,5 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
+ */
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -7,19 +21,26 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityController extends AbstractController
+/**
+ * Kontroler odpowiedzialny za logowanie i wylogowanie użytkownika.
+ */
+final class SecurityController extends AbstractController
 {
+    /**
+     * Formularz logowania.
+     *
+     * @param AuthenticationUtils $authenticationUtils Obsługa logowania.
+     *
+     * @return Response Odpowiedź HTTP.
+     */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // jeśli użytkownik jest już zalogowany → przekieruj na stronę główną
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
 
-        // ostatni błąd logowania (jeśli był)
         $error = $authenticationUtils->getLastAuthenticationError();
-        // ostatni wpisany login
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
@@ -28,8 +49,14 @@ class SecurityController extends AbstractController
         ]);
     }
 
+
+    /**
+     * Wylogowanie użytkownika (obsługiwane przez Symfony).
+     *
+     * @return never
+     */
     #[Route(path: '/logout', name: 'app_logout')]
-    public function logout(): void
+    public function logout(): never
     {
         throw new \LogicException('This method is intercepted by Symfony logout mechanism.');
     }

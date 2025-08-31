@@ -85,7 +85,12 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "cs": "php-cs-fixer fix --diff --dry-run",
+        "cs:fix": "php-cs-fixer fix --diff",
+        "phpcs": "phpcs -p",
+        "rector": "rector process --ansi",
+        "analyse": "phpstan analyse --ansi"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -98,8 +103,13 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.1",
+        "escapestudios/symfony2-coding-standard": "^3.16",
         "fakerphp/faker": "^1.24",
+        "friendsofphp/php-cs-fixer": "^3.86",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^12.3",
+        "rector/rector": "^2.1",
+        "squizlabs/php_codesniffer": "^3.13",
         "symfony/browser-kit": "6.4.*",
         "symfony/css-selector": "6.4.*",
         "symfony/debug-bundle": "6.4.*",

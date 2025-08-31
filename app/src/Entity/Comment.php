@@ -1,5 +1,12 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * This file is part of the Cook Book project.
+ * (c) 2025 Aleksandra Niechaj
+ * License: For educational purposes (course project).
+ */
 
 namespace App\Entity;
 
@@ -10,6 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Index(name: 'idx_comments_recipe_id', columns: ['recipe_id'])]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
+/**
+ * Komentarz do przepisu (autor, email, treść, data, powiązanie z przepisem).
+ */
 class Comment
 {
     #[ORM\Id]
@@ -41,20 +51,133 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?Recipe $recipe = null;
 
-    public function getId(): ?int { return $this->id; }
+    /**
+     * Pobiera identyfikator komentarza.
+     *
+     * @return int|null Id komentarza
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
-    public function getAuthorName(): ?string { return $this->authorName; }
-    public function setAuthorName(string $authorName): static { $this->authorName = $authorName; return $this; }
+    /**
+     * Pobiera nazwę autora komentarza.
+     *
+     * @return string|null Nick autora
+     */
+    public function getAuthorName(): ?string
+    {
+        return $this->authorName;
+    }
 
-    public function getAuthorEmail(): ?string { return $this->authorEmail; }
-    public function setAuthorEmail(string $authorEmail): static { $this->authorEmail = $authorEmail; return $this; }
+    /**
+     * Ustawia nazwę autora komentarza.
+     *
+     * @param string $authorName Nick autora
+     *
+     * @return static
+     */
+    public function setAuthorName(string $authorName): static
+    {
+        $this->authorName = $authorName;
 
-    public function getContent(): ?string { return $this->content; }
-    public function setContent(string $content): static { $this->content = $content; return $this; }
+        return $this;
+    }
 
-    public function getCreatedAt(): ?\DateTimeImmutable { return $this->createdAt; }
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static { $this->createdAt = $createdAt; return $this; }
+    /**
+     * Pobiera adres e-mail autora komentarza.
+     *
+     * @return string|null Adres e-mail autora
+     */
+    public function getAuthorEmail(): ?string
+    {
+        return $this->authorEmail;
+    }
 
-    public function getRecipe(): ?Recipe { return $this->recipe; }
-    public function setRecipe(?Recipe $recipe): static { $this->recipe = $recipe; return $this; }
+    /**
+     * Ustawia adres e-mail autora komentarza.
+     *
+     * @param string $authorEmail Adres e-mail
+     *
+     * @return static
+     */
+    public function setAuthorEmail(string $authorEmail): static
+    {
+        $this->authorEmail = $authorEmail;
+
+        return $this;
+    }
+
+    /**
+     * Pobiera treść komentarza.
+     *
+     * @return string|null Treść komentarza
+     */
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    /**
+     * Ustawia treść komentarza.
+     *
+     * @param string $content Treść komentarza
+     *
+     * @return static
+     */
+    public function setContent(string $content): static
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Pobiera datę utworzenia komentarza.
+     *
+     * @return \DateTimeImmutable|null Data utworzenia
+     */
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Ustawia datę utworzenia komentarza.
+     *
+     * @param \DateTimeImmutable $createdAt Data utworzenia
+     *
+     * @return static
+     */
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Pobiera przepis powiązany z komentarzem.
+     *
+     * @return Recipe|null Powiązany przepis
+     */
+    public function getRecipe(): ?Recipe
+    {
+        return $this->recipe;
+    }
+
+    /**
+     * Ustawia powiązany przepis.
+     *
+     * @param Recipe|null $recipe Przepis
+     *
+     * @return static
+     */
+    public function setRecipe(?Recipe $recipe): static
+    {
+        $this->recipe = $recipe;
+
+        return $this;
+    }
 }

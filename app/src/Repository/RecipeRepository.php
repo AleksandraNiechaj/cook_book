@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 /**
- * Cook Book — educational project
+ * This file is part of the Cook Book project.
  * (c) 2025 Aleksandra Niechaj
+ * License: For educational purposes (course project).
  */
 
 namespace App\Repository;
@@ -15,16 +17,27 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Repozytorium encji Recipe.
+ *
  * @extends ServiceEntityRepository<Recipe>
  */
 class RecipeRepository extends ServiceEntityRepository
 {
+    /**
+     * Konstruktor repozytorium przepisów.
+     *
+     * @param ManagerRegistry $registry Manager registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Recipe::class);
     }
 
-    /** Zapis encji przepisu. */
+    /**
+     * Zapis encji przepisu.
+     *
+     * @param Recipe $entity Encja przepisu
+     */
     public function save(Recipe $entity): void
     {
         $em = $this->getEntityManager();
@@ -32,7 +45,11 @@ class RecipeRepository extends ServiceEntityRepository
         $em->flush();
     }
 
-    /** Usunięcie encji przepisu. */
+    /**
+     * Usunięcie encji przepisu.
+     *
+     * @param Recipe $entity Encja przepisu
+     */
     public function delete(Recipe $entity): void
     {
         $em = $this->getEntityManager();
@@ -41,14 +58,14 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
     /**
-     * Lista od najnowszych — JOIN kategorii + partial select
-     * (unikamy N+1 i nie ściągamy zbędnych kolumn).
+     * Lista od najnowszych — JOIN kategorii + partial select.
+     *
+     * @return QueryBuilder
      */
     public function qbLatest(): QueryBuilder
     {
         return $this->createQueryBuilder('r')
             ->select(
-            // wybieramy tylko to, co wyświetlasz na listach
                 'partial r.{id, title, content, createdAt}',
                 'partial c.{id, name, slug}'
             )
@@ -57,25 +74,27 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
     /**
-     * Lista przepisów dla kategorii — też JOIN + partial
-     * (na stronie kategorii i tak wyświetlasz tytuł/treść przepisu).
+     * Lista przepisów dla kategorii.
+     *
+     * @param Category $category Kategoria przepisu
+     *
+     * @return QueryBuilder
      */
     public function qbByCategory(Category $category): QueryBuilder
     {
         return $this->createQueryBuilder('r')
             ->select('partial r.{id, title, content, createdAt}')
-            // JOIN nie jest konieczny dla samego WHERE,
-            // ale często i tak odwołujemy się do r.category.* w twigach;
-            // można zostawić bez JOIN jeśli nic z kategorią nie renderujesz.
-            // ->join('r.category', 'c')
             ->andWhere('r.category = :cat')
             ->setParameter('cat', $category)
             ->orderBy('r.createdAt', 'DESC');
     }
 
     /**
-     * Szczegóły: pobieramy przepis wraz z komentarzami i kategorią (JOIN FETCH),
-     * żeby nie było N+1 na widoku pojedynczego przepisu.
+     * Szczegóły: pobieramy przepis wraz z komentarzami i kategorią.
+     *
+     * @param int $id Id przepisu
+     *
+     * @return Recipe|null
      */
     public function findWithComments(int $id): ?Recipe
     {

@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 /**
- * Cook Book — educational project
+ * This file is part of the Cook Book project.
  * (c) 2025 Aleksandra Niechaj
+ * License: For educational purposes (course project).
  */
 
 namespace App\Repository;
@@ -13,10 +15,17 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Repozytorium encji Category.
+ *
  * @extends ServiceEntityRepository<Category>
  */
 class CategoryRepository extends ServiceEntityRepository
 {
+    /**
+     * Konstruktor repozytorium kategorii.
+     *
+     * @param ManagerRegistry $registry Manager registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
@@ -24,6 +33,8 @@ class CategoryRepository extends ServiceEntityRepository
 
     /**
      * Zapis encji kategorii.
+     *
+     * @param Category $entity Encja kategorii
      */
     public function save(Category $entity): void
     {
@@ -34,6 +45,8 @@ class CategoryRepository extends ServiceEntityRepository
 
     /**
      * Usunięcie encji kategorii.
+     *
+     * @param Category $entity Encja kategorii
      */
     public function delete(Category $entity): void
     {

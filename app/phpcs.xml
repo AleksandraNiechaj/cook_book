@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<ruleset name="CookBook Standard">
+    <description>
+        PSR-12 + komentarze phpDoc + blok licencji na górze pliku
+    </description>
+
+    <!-- Katalogi do sprawdzania -->
+    <file>src</file>
+    <file>tests</file>
+
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+
+    <!-- Styl bazowy -->
+    <rule ref="PSR12"/>
+
+    <!-- Wymagaj komentarzy plik/klasa/metoda -->
+    <rule ref="Squiz.Commenting.FileComment"/>
+    <rule ref="Squiz.Commenting.ClassComment"/>
+    <rule ref="Squiz.Commenting.FunctionComment"/>
+
+    <!-- Drobne style zgodne z uwagami prowadzącego -->
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing"/>
+    <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="140"/>
+            <property name="absoluteLineLimit" value="0"/>
+        </properties>
+    </rule>
+</ruleset>

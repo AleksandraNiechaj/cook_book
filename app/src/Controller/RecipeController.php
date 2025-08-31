@@ -1,9 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 /**
- * Cook Book — educational project
- * (c) 2025 Aleksandra Niechaj
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
  */
 
 namespace App\Controller;
@@ -19,10 +27,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Kontroler odpowiedzialny za obsługę przepisów.
+ */
 #[Route('/recipe')]
 final class RecipeController extends AbstractController
 {
-    // lista z paginacją (10 na stronę, sortowanie od najnowszych)
+    /**
+     * Lista przepisów z paginacją.
+     *
+     * @param Request       $request Obiekt żądania HTTP.
+     * @param RecipeService $recipes Serwis obsługujący przepisy.
+     *
+     * @return Response Odpowiedź HTTP.
+     */
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(Request $request, RecipeService $recipes): Response
     {
@@ -34,7 +52,15 @@ final class RecipeController extends AbstractController
         ]);
     }
 
-    // nowy przepis
+
+    /**
+     * Dodanie nowego przepisu.
+     *
+     * @param Request       $request Obiekt żądania HTTP.
+     * @param RecipeService $recipes Serwis obsługujący przepisy.
+     *
+     * @return Response Odpowiedź HTTP.
+     */
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, RecipeService $recipes): Response
     {
@@ -47,7 +73,8 @@ final class RecipeController extends AbstractController
             $recipe->setCreatedAt($now);
             $recipe->setUpdatedAt($now);
 
-            $recipes->save($recipe); // przez serwis → repo
+            $recipes->save($recipe);
+
             return $this->redirectToRoute('app_recipe_index');
         }
 
@@ -56,7 +83,16 @@ final class RecipeController extends AbstractController
         ]);
     }
 
-    // edycja
+
+    /**
+     * Edycja przepisu.
+     *
+     * @param Request       $request Obiekt żądania HTTP.
+     * @param Recipe        $recipe  Edytowany przepis.
+     * @param RecipeService $recipes Serwis obsługujący przepisy.
+     *
+     * @return Response Odpowiedź HTTP.
+     */
     #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, RecipeService $recipes): Response
     {
@@ -65,7 +101,7 @@ final class RecipeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $recipe->setUpdatedAt(new \DateTimeImmutable());
-            $recipes->save($recipe); // przez serwis → repo
+            $recipes->save($recipe);
 
             return $this->redirectToRoute('app_recipe_index');
         }
@@ -76,18 +112,37 @@ final class RecipeController extends AbstractController
         ]);
     }
 
-    // usuwanie
+
+    /**
+     * Usuwanie przepisu.
+     *
+     * @param Request       $request Obiekt żądania HTTP.
+     * @param Recipe        $recipe  Usuwany przepis.
+     * @param RecipeService $recipes Serwis obsługujący przepisy.
+     *
+     * @return Response Odpowiedź HTTP.
+     */
     #[Route('/{id}/delete', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, RecipeService $recipes): Response
     {
         if ($this->isCsrfTokenValid('delete'.$recipe->getId(), (string) $request->request->get('_token'))) {
-            $recipes->delete($recipe); // przez serwis → repo
+            $recipes->delete($recipe);
         }
 
         return $this->redirectToRoute('app_recipe_index');
     }
 
-    // szczegóły + komentarze (pobranie przepisu przez serwis, z JOIN FETCH komentarzy)
+
+    /**
+     * Szczegóły przepisu + komentarze.
+     *
+     * @param int            $id       Id przepisu.
+     * @param Request        $request  Obiekt żądania HTTP.
+     * @param RecipeService  $recipes  Serwis obsługujący przepisy.
+     * @param CommentService $comments Serwis obsługujący komentarze.
+     *
+     * @return Response Odpowiedź HTTP.
+     */
     #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function show(int $id, Request $request, RecipeService $recipes, CommentService $comments): Response
     {
@@ -96,7 +151,6 @@ final class RecipeController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        // formularz komentarza
         $comment = new Comment();
         $commentForm = $this->createForm(CommentType::class, $comment);
         $commentForm->handleRequest($request);
@@ -105,9 +159,10 @@ final class RecipeController extends AbstractController
             $comment->setRecipe($recipe);
             $comment->setCreatedAt(new \DateTimeImmutable());
 
-            $comments->save($comment); // przez serwis → repo
+            $comments->save($comment);
 
             $this->addFlash('success', 'Komentarz dodany.');
+
             return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
         }
 

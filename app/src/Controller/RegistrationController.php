@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
+ */
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -26,14 +38,12 @@ final class RegistrationController extends AbstractController
      * @param EntityManagerInterface      $em         The entity manager
      * @param UserPasswordHasherInterface $hasher     The password hasher
      * @param TranslatorInterface         $translator The translator
+     *
+     * @return Response
      */
     #[Route(path: '/register', name: 'auth_register', methods: ['GET', 'POST'])]
-    public function register(
-        Request $request,
-        EntityManagerInterface $em,
-        UserPasswordHasherInterface $hasher,
-        TranslatorInterface $translator,
-    ): Response {
+    public function register(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $hasher, TranslatorInterface $translator): Response
+    {
         if ($this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             return $this->redirectToRoute('app_home');
         }

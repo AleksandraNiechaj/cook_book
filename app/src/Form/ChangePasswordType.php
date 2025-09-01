@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj
+ *
+ * @copyright 2025
+ *
+ * @license   For educational purposes (course project).
+ */
+
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -23,6 +35,8 @@ final class ChangePasswordType extends AbstractType
      *
      * @param FormBuilderInterface $builder The form builder
      * @param array<string, mixed> $options The options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -43,7 +57,7 @@ final class ChangePasswordType extends AbstractType
                 'invalid_message' => 'account.password.mismatch',
                 'constraints' => [
                     new NotBlank(),
-                    new Length(min: 6, max: 4096), // było 8 → 6
+                    new Length(min: 6, max: 4096),
                 ],
             ]);
     }
@@ -52,6 +66,8 @@ final class ChangePasswordType extends AbstractType
      * Configure options.
      *
      * @param OptionsResolver $resolver The resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

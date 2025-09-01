@@ -35,6 +35,8 @@ final class AdminController extends AbstractController
 {
     /**
      * Dashboard admina.
+     *
+     * @return Response
      */
     #[Route('/admin', name: 'app_admin', methods: ['GET'])]
     public function index(): Response
@@ -47,6 +49,8 @@ final class AdminController extends AbstractController
      *
      * @param Request                $request Żądanie
      * @param EntityManagerInterface $em      Menedżer encji
+     *
+     * @return Response
      */
     #[Route('/admin/profile', name: 'admin_profile', methods: ['GET', 'POST'])]
     public function editProfile(Request $request, EntityManagerInterface $em): Response
@@ -77,19 +81,17 @@ final class AdminController extends AbstractController
      * @param Request                     $request Żądanie
      * @param EntityManagerInterface      $em      Menedżer encji
      * @param UserPasswordHasherInterface $hasher  Hasher haseł
+     *
+     * @return Response
      */
     #[Route('/admin/change-password', name: 'admin_change_password', methods: ['GET', 'POST'])]
-    public function changePassword(
-        Request $request,
-        EntityManagerInterface $em,
-        UserPasswordHasherInterface $hasher,
-    ): Response {
+    public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $hasher): Response
+    {
         $user = $this->getUser();
         if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         }
 
-        // Używamy Twojego globalnego ChangePasswordType (z currentPassword + newPassword RepeatedType)
         $form = $this->createForm(ChangePasswordType::class);
         $form->handleRequest($request);
 

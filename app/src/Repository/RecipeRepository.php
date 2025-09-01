@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 /**
  * This file is part of the Cook Book project.
- * (c) 2025 Aleksandra Niechaj
- * License: For educational purposes (course project).
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj
+ *
+ * @copyright 2025
+ *
+ * @license   For educational purposes (course project).
  */
 
 namespace App\Repository;
@@ -37,6 +43,8 @@ class RecipeRepository extends ServiceEntityRepository
      * Zapis encji przepisu.
      *
      * @param Recipe $entity Encja przepisu
+     *
+     * @return void
      */
     public function save(Recipe $entity): void
     {
@@ -49,6 +57,8 @@ class RecipeRepository extends ServiceEntityRepository
      * Usunięcie encji przepisu.
      *
      * @param Recipe $entity Encja przepisu
+     *
+     * @return void
      */
     public function delete(Recipe $entity): void
     {
@@ -59,6 +69,8 @@ class RecipeRepository extends ServiceEntityRepository
 
     /**
      * Lista od najnowszych — JOIN kategorii + partial select.
+     *
+     * @return QueryBuilder Query builder
      */
     public function qbLatest(): QueryBuilder
     {
@@ -75,6 +87,8 @@ class RecipeRepository extends ServiceEntityRepository
      * Lista przepisów dla kategorii.
      *
      * @param Category $category Kategoria przepisu
+     *
+     * @return QueryBuilder Query builder
      */
     public function qbByCategory(Category $category): QueryBuilder
     {
@@ -89,6 +103,8 @@ class RecipeRepository extends ServiceEntityRepository
      * Szczegóły: pobieramy przepis wraz z komentarzami i kategorią.
      *
      * @param int $id Id przepisu
+     *
+     * @return Recipe|null Przepis lub null
      */
     public function findWithComments(int $id): ?Recipe
     {

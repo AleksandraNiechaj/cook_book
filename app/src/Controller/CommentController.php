@@ -24,12 +24,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Obsługa komentarzy (dodawanie i usuwanie).
+ */
 final class CommentController extends AbstractController
 {
+    /**
+     * Dodanie komentarza do przepisu.
+     *
+     * @param Recipe         $recipe   Przepis
+     * @param Request        $request  Żądanie
+     * @param CommentService $comments Serwis komentarzy
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/comment/add/{id}', name: 'app_comment_add', methods: ['POST'])]
     public function add(Recipe $recipe, Request $request, CommentService $comments): Response
     {
-        if (!$this->getUser()) {
+        if (!$this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             $this->addFlash('warning', 'Musisz być zalogowana/y, aby dodać komentarz.');
 
             return $this->redirectToRoute('app_login');
@@ -37,16 +49,14 @@ final class CommentController extends AbstractController
 
         $comment = new Comment();
 
-        // ✅ Ustawiamy wymagane pola PRZED walidacją (walidator widzi komplet danych)
         $email = (string) $this->getUser()?->getUserIdentifier();
         $nick  = \strstr($email, '@', true) ?: $email;
 
         $comment->setAuthorEmail($email);
         $comment->setAuthorName($nick);
-        $comment->setRecipe($recipe);                    // <- potrzebne do Assert\NotNull
-        $comment->setCreatedAt(new \DateTimeImmutable()); // opcjonalnie tu, bez wpływu na walidację
+        $comment->setRecipe($recipe);
+        $comment->setCreatedAt(new \DateTimeImmutable());
 
-        // Formularz mapuje tylko pola: content + rating
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
@@ -57,23 +67,31 @@ final class CommentController extends AbstractController
             return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
         }
 
-        // Jeśli są błędy, pokaż przyczynę (np. brak wybranej oceny)
         $errors = [];
         foreach ($form->getErrors(true, true) as $error) {
             $errors[] = $error->getMessage();
         }
         $msg = \count($errors) > 0
-            ? 'Nie udało się dodać komentarza: ' . \implode(' ', $errors)
+            ? 'Nie udało się dodać komentarza: '.\implode(' ', $errors)
             : 'Nie udało się dodać komentarza.';
         $this->addFlash('error', $msg);
 
         return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
     }
 
+    /**
+     * Usunięcie komentarza.
+     *
+     * @param Comment        $comment  Komentarz
+     * @param Request        $request  Żądanie
+     * @param CommentService $comments Serwis komentarzy
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, Request $request, CommentService $comments): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $comment->getId(), (string) $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), (string) $request->request->get('_token'))) {
             $comments->delete($comment);
             $this->addFlash('success', 'Komentarz został usunięty.');
         }

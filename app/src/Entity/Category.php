@@ -23,12 +23,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Table(name: 'categories')]
-#[UniqueEntity(fields: ['slug'], message: 'Slug must be unique.')]
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
 /**
  * Kategoria przepisu (nazwa, slug, znaczniki czasowe).
  */
+#[ORM\Table(name: 'categories')]
+#[UniqueEntity(fields: ['slug'], message: 'Slug must be unique.')]
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
     #[ORM\Id]
@@ -100,6 +100,8 @@ class Category
      * Ustawia nazwę kategorii.
      *
      * @param string $name Nazwa kategorii
+     *
+     * @return static
      */
     public function setName(string $name): static
     {
@@ -122,6 +124,8 @@ class Category
      * Ustawia slug kategorii.
      *
      * @param string $slug Slug
+     *
+     * @return static
      */
     public function setSlug(string $slug): static
     {
@@ -144,6 +148,8 @@ class Category
      * Ustawia datę utworzenia kategorii.
      *
      * @param \DateTimeImmutable $createdAt Data utworzenia
+     *
+     * @return static
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
@@ -166,6 +172,8 @@ class Category
      * Ustawia datę ostatniej modyfikacji.
      *
      * @param \DateTimeImmutable $updatedAt Data modyfikacji
+     *
+     * @return static
      */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
@@ -188,6 +196,8 @@ class Category
      * Dodaje przepis do kategorii.
      *
      * @param Recipe $recipe Przepis
+     *
+     * @return static
      */
     public function addRecipe(Recipe $recipe): static
     {
@@ -203,6 +213,8 @@ class Category
      * Usuwa przepis z kategorii.
      *
      * @param Recipe $recipe Przepis
+     *
+     * @return static
      */
     public function removeRecipe(Recipe $recipe): static
     {

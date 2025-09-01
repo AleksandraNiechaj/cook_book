@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
+ */
+
 namespace App\Controller;
 
 use App\Entity\Tag;
@@ -16,8 +28,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+/**
+ * Zarządzanie tagami i publiczne wyświetlanie przypisanych przepisów.
+ */
 final class TagController extends AbstractController
 {
+    /**
+     * Lista wszystkich tagów.
+     *
+     * @param TagRepository $tags Repozytorium tagów
+     *
+     * @return Response
+     */
     #[Route('/tags', name: 'tag_index', methods: ['GET'])]
     public function index(TagRepository $tags): Response
     {
@@ -26,6 +48,14 @@ final class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Utworzenie nowego tagu.
+     *
+     * @param Request                $request Żądanie
+     * @param EntityManagerInterface $em      Menedżer encji
+     *
+     * @return Response
+     */
     #[Route('/tags/new', name: 'tag_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $em): Response
@@ -48,6 +78,15 @@ final class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Edycja istniejącego tagu.
+     *
+     * @param Tag                    $tag     Tag
+     * @param Request                $request Żądanie
+     * @param EntityManagerInterface $em      Menedżer encji
+     *
+     * @return Response
+     */
     #[Route('/tags/{id}/edit', name: 'tag_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Tag $tag, Request $request, EntityManagerInterface $em): Response
@@ -68,6 +107,15 @@ final class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Usunięcie tagu.
+     *
+     * @param Tag                    $tag     Tag
+     * @param Request                $request Żądanie
+     * @param EntityManagerInterface $em      Menedżer encji
+     *
+     * @return Response
+     */
     #[Route('/tags/{id}/delete', name: 'tag_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(Tag $tag, Request $request, EntityManagerInterface $em): Response
@@ -83,6 +131,13 @@ final class TagController extends AbstractController
 
     /**
      * Publiczny widok: lista przepisów w danym tagu (paginacja po 10, najnowsze najpierw).
+     *
+     * @param string           $slug    Slug tagu
+     * @param TagRepository    $tags    Repozytorium tagów
+     * @param RecipeRepository $recipes Repozytorium przepisów
+     * @param Request          $request Żądanie
+     *
+     * @return Response
      */
     #[Route('/tags/{slug}', name: 'tag_show', methods: ['GET'])]
     public function show(string $slug, TagRepository $tags, RecipeRepository $recipes, Request $request): Response

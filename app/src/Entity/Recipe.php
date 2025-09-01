@@ -23,12 +23,12 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Index(name: 'idx_recipes_created_at', columns: ['created_at'])]
-#[ORM\Index(name: 'idx_recipes_category_id', columns: ['category_id'])]
-#[ORM\Entity(repositoryClass: RecipeRepository::class)]
 /**
  * Przepis (tytuł, treść, kategoria, komentarze, znaczniki czasowe, tagi).
  */
+#[ORM\Index(name: 'idx_recipes_created_at', columns: ['created_at'])]
+#[ORM\Index(name: 'idx_recipes_category_id', columns: ['category_id'])]
+#[ORM\Entity(repositoryClass: RecipeRepository::class)]
 class Recipe
 {
     #[ORM\Id]
@@ -85,8 +85,6 @@ class Recipe
     }
 
     /**
-     * Pobiera identyfikator przepisu.
-     *
      * @return int|null Id przepisu
      */
     public function getId(): ?int
@@ -95,8 +93,6 @@ class Recipe
     }
 
     /**
-     * Pobiera tytuł przepisu.
-     *
      * @return string|null Tytuł przepisu
      */
     public function getTitle(): ?string
@@ -105,9 +101,9 @@ class Recipe
     }
 
     /**
-     * Ustawia tytuł przepisu.
-     *
      * @param string $title Tytuł przepisu
+     *
+     * @return static
      */
     public function setTitle(string $title): static
     {
@@ -117,8 +113,6 @@ class Recipe
     }
 
     /**
-     * Pobiera treść przepisu.
-     *
      * @return string|null Treść przepisu
      */
     public function getContent(): ?string
@@ -127,9 +121,9 @@ class Recipe
     }
 
     /**
-     * Ustawia treść przepisu.
-     *
      * @param string $content Treść przepisu
+     *
+     * @return static
      */
     public function setContent(string $content): static
     {
@@ -139,8 +133,6 @@ class Recipe
     }
 
     /**
-     * Pobiera datę utworzenia przepisu.
-     *
      * @return \DateTimeImmutable|null Data utworzenia
      */
     public function getCreatedAt(): ?\DateTimeImmutable
@@ -149,9 +141,9 @@ class Recipe
     }
 
     /**
-     * Ustawia datę utworzenia przepisu.
-     *
      * @param \DateTimeImmutable $createdAt Data utworzenia
+     *
+     * @return static
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
@@ -161,8 +153,6 @@ class Recipe
     }
 
     /**
-     * Pobiera datę ostatniej modyfikacji.
-     *
      * @return \DateTimeImmutable|null Data modyfikacji
      */
     public function getUpdatedAt(): ?\DateTimeImmutable
@@ -171,9 +161,9 @@ class Recipe
     }
 
     /**
-     * Ustawia datę ostatniej modyfikacji.
-     *
      * @param \DateTimeImmutable $updatedAt Data modyfikacji
+     *
+     * @return static
      */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
@@ -183,8 +173,6 @@ class Recipe
     }
 
     /**
-     * Pobiera kategorię przepisu.
-     *
      * @return Category|null Kategoria
      */
     public function getCategory(): ?Category
@@ -193,9 +181,9 @@ class Recipe
     }
 
     /**
-     * Ustawia kategorię przepisu.
-     *
      * @param Category|null $category Kategoria
+     *
+     * @return static
      */
     public function setCategory(?Category $category): static
     {
@@ -205,8 +193,6 @@ class Recipe
     }
 
     /**
-     * Pobiera komentarze przypisane do przepisu.
-     *
      * @return Collection<int, Comment> Lista komentarzy
      */
     public function getComments(): Collection
@@ -215,9 +201,9 @@ class Recipe
     }
 
     /**
-     * Dodaje komentarz do przepisu.
-     *
      * @param Comment $comment Komentarz
+     *
+     * @return static
      */
     public function addComment(Comment $comment): static
     {
@@ -230,9 +216,9 @@ class Recipe
     }
 
     /**
-     * Usuwa komentarz z przepisu.
-     *
      * @param Comment $comment Komentarz
+     *
+     * @return static
      */
     public function removeComment(Comment $comment): static
     {
@@ -244,8 +230,6 @@ class Recipe
     }
 
     /**
-     * Pobiera tagi przypięte do przepisu.
-     *
      * @return Collection<int, Tag> Kolekcja tagów
      */
     public function getTags(): Collection
@@ -254,9 +238,9 @@ class Recipe
     }
 
     /**
-     * Dodaje tag do przepisu.
-     *
      * @param Tag $tag Tag
+     *
+     * @return static
      */
     public function addTag(Tag $tag): static
     {
@@ -268,9 +252,9 @@ class Recipe
     }
 
     /**
-     * Usuwa tag z przepisu.
-     *
      * @param Tag $tag Tag
+     *
+     * @return static
      */
     public function removeTag(Tag $tag): static
     {

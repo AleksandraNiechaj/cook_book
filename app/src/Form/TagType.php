@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj
+ *
+ * @copyright 2025
+ *
+ * @license   For educational purposes (course project).
+ */
+
 namespace App\Form;
 
 use App\Entity\Tag;
@@ -10,10 +22,18 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Formularz tagu.
+ */
 final class TagType extends AbstractType
 {
     /**
-     * @param array<string, mixed> $options
+     * Build tag form.
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array<string, mixed> $options The options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -27,6 +47,13 @@ final class TagType extends AbstractType
             ]);
     }
 
+    /**
+     * Configure options.
+     *
+     * @param OptionsResolver $resolver The resolver
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

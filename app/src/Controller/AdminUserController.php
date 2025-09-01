@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
+ */
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -27,6 +39,8 @@ final class AdminUserController extends AbstractController
      *
      * @param Request        $request Żądanie HTTP
      * @param UserRepository $users   Repozytorium użytkowników
+     *
+     * @return Response
      */
     #[Route('/admin/users', name: 'admin_user_index', methods: ['GET'])]
     public function index(Request $request, UserRepository $users): Response
@@ -74,6 +88,8 @@ final class AdminUserController extends AbstractController
      * @param Request                $request Żądanie HTTP
      * @param EntityManagerInterface $em      Menedżer encji
      * @param User                   $user    Użytkownik do edycji (param converter)
+     *
+     * @return Response
      */
     #[Route('/admin/users/{id}/edit', name: 'admin_user_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $em, User $user): Response
@@ -101,14 +117,12 @@ final class AdminUserController extends AbstractController
      * @param EntityManagerInterface      $em      Menedżer encji
      * @param UserPasswordHasherInterface $hasher  Hasher haseł
      * @param User                        $user    Użytkownik
+     *
+     * @return Response
      */
     #[Route('/admin/users/{id}/password', name: 'admin_user_password', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function changePassword(
-        Request $request,
-        EntityManagerInterface $em,
-        UserPasswordHasherInterface $hasher,
-        User $user,
-    ): Response {
+    public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $hasher, User $user): Response
+    {
         $form = $this->createForm(AdminChangePasswordType::class);
         $form->handleRequest($request);
 

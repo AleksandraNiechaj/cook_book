@@ -21,11 +21,11 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Index(name: 'idx_comments_recipe_id', columns: ['recipe_id'])]
-#[ORM\Entity(repositoryClass: CommentRepository::class)]
 /**
  * Komentarz do przepisu (autor, email, treść, data, ocena, powiązanie z przepisem).
  */
+#[ORM\Index(name: 'idx_comments_recipe_id', columns: ['recipe_id'])]
+#[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
     #[ORM\Id]
@@ -79,6 +79,8 @@ class Comment
 
     /**
      * @param string $authorName Nick autora
+     *
+     * @return static
      */
     public function setAuthorName(string $authorName): static
     {
@@ -97,6 +99,8 @@ class Comment
 
     /**
      * @param string $authorEmail Adres e-mail
+     *
+     * @return static
      */
     public function setAuthorEmail(string $authorEmail): static
     {
@@ -115,6 +119,8 @@ class Comment
 
     /**
      * @param string $content Treść komentarza
+     *
+     * @return static
      */
     public function setContent(string $content): static
     {
@@ -133,6 +139,8 @@ class Comment
 
     /**
      * @param int|null $rating Ocena 1–5
+     *
+     * @return static
      */
     public function setRating(?int $rating): static
     {
@@ -151,6 +159,8 @@ class Comment
 
     /**
      * @param \DateTimeImmutable $createdAt Data utworzenia
+     *
+     * @return static
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
@@ -169,6 +179,8 @@ class Comment
 
     /**
      * @param Recipe|null $recipe Przepis
+     *
+     * @return static
      */
     public function setRecipe(?Recipe $recipe): static
     {

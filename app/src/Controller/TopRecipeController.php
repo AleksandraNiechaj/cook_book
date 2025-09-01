@@ -27,6 +27,8 @@ use Symfony\Component\Routing\Attribute\Route;
 final class TopRecipeController extends AbstractController
 {
     /**
+     * Wyświetlenie listy najwyżej ocenianych przepisów.
+     *
      * @param RecipeRepository $recipes Repozytorium przepisów
      *
      * @return Response

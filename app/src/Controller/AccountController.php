@@ -40,13 +40,12 @@ final class AccountController extends AbstractController
      * @param Request                $request    The current request
      * @param EntityManagerInterface $em         The entity manager
      * @param TranslatorInterface    $translator The translator
+     *
+     * @return Response HTTP response
      */
     #[Route(path: '/account/profile', name: 'account_profile_edit', methods: ['GET', 'POST'])]
-    public function editProfile(
-        Request $request,
-        EntityManagerInterface $em,
-        TranslatorInterface $translator,
-    ): Response {
+    public function editProfile(Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response
+    {
         /** @var User $user */
         $user = $this->getUser();
 
@@ -73,14 +72,12 @@ final class AccountController extends AbstractController
      * @param EntityManagerInterface      $em         The entity manager
      * @param UserPasswordHasherInterface $hasher     The password hasher
      * @param TranslatorInterface         $translator The translator
+     *
+     * @return Response HTTP response
      */
     #[Route(path: '/account/password', name: 'account_password_change', methods: ['GET', 'POST'])]
-    public function changePassword(
-        Request $request,
-        EntityManagerInterface $em,
-        UserPasswordHasherInterface $hasher,
-        TranslatorInterface $translator,
-    ): Response {
+    public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $hasher, TranslatorInterface $translator): Response
+    {
         /** @var User $user */
         $user = $this->getUser();
 

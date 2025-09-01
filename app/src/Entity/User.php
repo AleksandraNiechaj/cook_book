@@ -42,13 +42,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private ?string $password = null;
 
-    /** @return int|null Id użytkownika */
+    /**
+     * Pobiera ID użytkownika.
+     *
+     * @return int|null Id użytkownika
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /** @return string|null E-mail użytkownika */
+    /**
+     * Pobiera e-mail użytkownika.
+     *
+     * @return string|null E-mail użytkownika
+     */
     public function getEmail(): ?string
     {
         return $this->email;
@@ -58,6 +66,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia e-mail.
      *
      * @param string $email E-mail użytkownika
+     *
+     * @return self
      */
     public function setEmail(string $email): self
     {
@@ -66,13 +76,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /** @return string Unikalny identyfikator logowania */
+    /**
+     * Zwraca unikalny identyfikator logowania.
+     *
+     * @return string Identyfikator logowania
+     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /** @return string[] Role użytkownika (zawsze co najmniej ROLE_USER) */
+    /**
+     * Pobiera role użytkownika (zawsze zawiera co najmniej ROLE_USER).
+     *
+     * @return string[] Role użytkownika
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -85,6 +103,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia role użytkownika – zawsze dopisuje ROLE_USER.
      *
      * @param string[] $roles Tablica ról użytkownika
+     *
+     * @return self
      */
     public function setRoles(array $roles): self
     {
@@ -94,7 +114,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /** @return string Zaszyfrowane hasło */
+    /**
+     * Pobiera zaszyfrowane hasło.
+     *
+     * @return string Zaszyfrowane hasło
+     */
     public function getPassword(): string
     {
         return $this->password ?? '';
@@ -104,6 +128,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia zaszyfrowane hasło.
      *
      * @param string $password Zaszyfrowane hasło
+     *
+     * @return self
      */
     public function setPassword(string $password): self
     {
@@ -112,7 +138,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /** Czyści dane tymczasowe (np. plainPassword). @return void */
+    /**
+     * Czyści dane tymczasowe (np. plainPassword).
+     *
+     * @return void
+     */
     public function eraseCredentials(): void
     {
     }

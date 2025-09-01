@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
+ */
+
 namespace App\Entity;
 
 use App\Repository\TagRepository;
@@ -9,6 +21,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Tag przypisany do przepisu (unikalna nazwa i slug).
+ */
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 #[ORM\Table(name: 'tags')]
 #[ORM\UniqueConstraint(name: 'uniq_tags_slug', columns: ['slug'])]
@@ -33,16 +48,27 @@ final class Tag implements \Stringable
     #[ORM\Column(length: 80)]
     private ?string $slug = null;
 
+    /**
+     * @return int|null Id tagu
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null Nazwa tagu
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name Nazwa tagu
+     *
+     * @return self
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -50,11 +76,19 @@ final class Tag implements \Stringable
         return $this;
     }
 
+    /**
+     * @return string|null Slug tagu
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * @param string $slug Slug tagu
+     *
+     * @return self
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -62,6 +96,9 @@ final class Tag implements \Stringable
         return $this;
     }
 
+    /**
+     * @return string Reprezentacja tagu jako string
+     */
     public function __toString(): string
     {
         return (string) $this->name;

@@ -100,7 +100,7 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
     /**
-     * Szczegóły: pobieramy przepis wraz z komentarzami i kategorią.
+     * Szczegóły: pobieramy przepis wraz z komentarzami, kategorią i tagami.
      *
      * @param int $id Id przepisu
      *
@@ -111,6 +111,7 @@ class RecipeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('r')
             ->leftJoin('r.comments', 'c')->addSelect('c')
             ->leftJoin('r.category', 'cat')->addSelect('cat')
+            ->leftJoin('r.tags', 't')->addSelect('t') // 👈 dociągamy tagi
             ->andWhere('r.id = :id')->setParameter('id', $id)
             ->orderBy('c.createdAt', 'DESC')
             ->getQuery()

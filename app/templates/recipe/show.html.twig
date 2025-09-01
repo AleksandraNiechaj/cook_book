@@ -21,6 +21,16 @@
                 {% endif %}
             </p>
 
+            {# ✅ Tagi #}
+            {% if recipe.tags|length > 0 %}
+                <p class="text-muted">
+                    <em>Tagi:</em>
+                    {% for tag in recipe.tags %}
+                        <a href="{{ path('tag_show', { slug: tag.slug }) }}">{{ tag.name }}</a>{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            {% endif %}
+
             {# Średnia ocena z komentarzy posiadających rating #}
             {% set sum = 0 %}
             {% set cnt = 0 %}

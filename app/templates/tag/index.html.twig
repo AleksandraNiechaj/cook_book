@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}Tagi{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Tagi</h1>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <p><a class="nav-link" href="{{ path('tag_new') }}">➕ Dodaj tag</a></p>
+        {% endif %}
+
+        <ul class="list-group">
+            {% for t in items %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="{{ path('tag_show', { slug: t.slug }) }}"><strong>#{{ t.name }}</strong></a>
+                        <span class="text-muted">({{ t.slug }})</span>
+                    </div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <span>
+              <a class="btn btn-sm btn-outline-primary" href="{{ path('tag_edit', { id: t.id }) }}">Edytuj</a>
+              <form method="post" action="{{ path('tag_delete', { id: t.id }) }}" style="display:inline" onsubmit="return confirm('Usunąć tag?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ t.id) }}">
+                <button class="btn btn-sm btn-outline-danger">Usuń</button>
+              </form>
+            </span>
+                    {% endif %}
+                </li>
+            {% else %}
+                <li class="list-group-item text-muted">Brak tagów.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

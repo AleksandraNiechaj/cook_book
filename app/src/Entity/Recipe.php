@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Index(name: 'idx_recipes_category_id', columns: ['category_id'])]
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 /**
- * Przepis (tytuł, treść, kategoria, komentarze, znaczniki czasowe).
+ * Przepis (tytuł, treść, kategoria, komentarze, znaczniki czasowe, tagi).
  */
 class Recipe
 {
@@ -68,10 +68,20 @@ class Recipe
     )]
     private Collection $comments;
 
-    /** Konstruktor. */
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class)]
+    #[ORM\JoinTable(name: 'recipe_tag')]
+    private Collection $tags;
+
+    /**
+     * Konstruktor.
+     */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -229,6 +239,42 @@ class Recipe
         if ($this->comments->removeElement($comment) && $comment->getRecipe() === $this) {
             $comment->setRecipe(null);
         }
+
+        return $this;
+    }
+
+    /**
+     * Pobiera tagi przypięte do przepisu.
+     *
+     * @return Collection<int, Tag> Kolekcja tagów
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Dodaje tag do przepisu.
+     *
+     * @param Tag $tag Tag
+     */
+    public function addTag(Tag $tag): static
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Usuwa tag z przepisu.
+     *
+     * @param Tag $tag Tag
+     */
+    public function removeTag(Tag $tag): static
+    {
+        $this->tags->removeElement($tag);
 
         return $this;
     }

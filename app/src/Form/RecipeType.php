@@ -2,64 +2,73 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Cook Book project.
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
+ */
+
 namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Recipe;
-use Doctrine\ORM\EntityRepository;
+use App\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Form type for creating and editing recipes.
+ * Formularz przepisu (z tagami).
  */
 final class RecipeType extends AbstractType
 {
     /**
-     * Build recipe form.
+     * @param FormBuilderInterface $builder Builder
+     * @param array<string,mixed>  $options Options
      *
-     * @param FormBuilderInterface $builder The form builder
-     * @param array<string, mixed> $options The form options
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title', TextType::class, [
                 'label' => 'recipe.form.title',
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(min: 3, max: 255),
-                ],
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'recipe.form.content',
                 'attr' => ['rows' => 8],
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(min: 10),
-                ],
             ])
             ->add('category', EntityType::class, [
-                'label' => 'recipe.form.category',
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'placeholder' => 'recipe.form.category_placeholder',
-                'required' => true,
-                'query_builder' => static fn (EntityRepository $er) => $er->createQueryBuilder('c')
-                    ->orderBy('c.name', 'ASC'),
+                'placeholder' => 'recipe.form.choose_category',
+                'label' => 'recipe.form.category',
+                'required' => false,
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'required' => false,
+                'by_reference' => false, // użyje addTag()/removeTag() zamiast setTags()
+                'label' => 'Tagi',
             ]);
     }
 
     /**
-     * Configure options.
+     * @param OptionsResolver $resolver Resolver
      *
-     * @param OptionsResolver $resolver The resolver
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

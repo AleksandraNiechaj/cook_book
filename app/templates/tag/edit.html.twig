@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edytuj tag{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Edytuj tag</h1>
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.slug) }}
+        <button class="btn btn-primary mt-2">Zapisz</button>
+        {{ form_end(form) }}
+        <p class="mt-3"><a class="btn btn-sm btn-outline-secondary" href="{{ path('tag_index') }}">← Wróć</a></p>
+    </div>
+{% endblock %}

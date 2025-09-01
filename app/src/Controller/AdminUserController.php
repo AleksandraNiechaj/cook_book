@@ -20,7 +20,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
  * Admin: zarządzanie kontami użytkowników.
  */
 #[IsGranted('ROLE_ADMIN')]
-#[Route('/admin/users')]
 final class AdminUserController extends AbstractController
 {
     /**
@@ -28,10 +27,8 @@ final class AdminUserController extends AbstractController
      *
      * @param Request        $request Żądanie HTTP
      * @param UserRepository $users   Repozytorium użytkowników
-     *
-     * @return Response
      */
-    #[Route('', name: 'admin_user_index', methods: ['GET'])]
+    #[Route('/admin/users', name: 'admin_user_index', methods: ['GET'])]
     public function index(Request $request, UserRepository $users): Response
     {
         $page   = \max(1, (int) $request->query->get('page', 1));
@@ -47,7 +44,7 @@ final class AdminUserController extends AbstractController
         $dir = \in_array($dir, ['ASC', 'DESC'], true) ? $dir : 'ASC';
 
         $qb = $users->createQueryBuilder('u')
-            ->orderBy('u.' . $sort, $dir)
+            ->orderBy('u.'.$sort, $dir)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 
@@ -77,10 +74,8 @@ final class AdminUserController extends AbstractController
      * @param Request                $request Żądanie HTTP
      * @param EntityManagerInterface $em      Menedżer encji
      * @param User                   $user    Użytkownik do edycji (param converter)
-     *
-     * @return Response
      */
-    #[Route('/{id}/edit', name: 'admin_user_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/admin/users/{id}/edit', name: 'admin_user_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $em, User $user): Response
     {
         $form = $this->createForm(AdminUserType::class, $user);
@@ -106,15 +101,13 @@ final class AdminUserController extends AbstractController
      * @param EntityManagerInterface      $em      Menedżer encji
      * @param UserPasswordHasherInterface $hasher  Hasher haseł
      * @param User                        $user    Użytkownik
-     *
-     * @return Response
      */
-    #[Route('/{id}/password', name: 'admin_user_password', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/admin/users/{id}/password', name: 'admin_user_password', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function changePassword(
         Request $request,
         EntityManagerInterface $em,
         UserPasswordHasherInterface $hasher,
-        User $user
+        User $user,
     ): Response {
         $form = $this->createForm(AdminChangePasswordType::class);
         $form->handleRequest($request);

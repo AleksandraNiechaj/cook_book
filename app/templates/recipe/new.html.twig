@@ -2,26 +2,29 @@
 {% block title %}Nowy przepis{% endblock %}
 
 {% block body %}
-    {% if is_granted('ROLE_ADMIN') %}
-        <div class="container mt-4">
-            <h1>Dodaj nowy przepis</h1>
+    <div class="container mt-4">
+        <h1>➕ Dodaj nowy przepis</h1>
 
-            {{ form_start(form) }}
-            {{ form_row(form.title) }}
-            {{ form_row(form.content) }}
-            {{ form_row(form.category) }}
+        {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.content) }}
+        {{ form_row(form.category) }}
 
-            <button class="btn btn-success mt-3">💾 Zapisz</button>
-            {{ form_end(form) }}
+        {{ form_row(form.tags) }}
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="mb-3">
+                <small>Brak potrzebnego tagu?
+                    <a class="nav-link" style="display:inline; padding:0" href="{{ path('tag_new') }}">➕ Dodaj tag</a>
+                    (otworzy w tym samym oknie)
+                </small>
+            </div>
+        {% endif %}
 
-            <p class="mt-3">
-                <a href="{{ path('app_recipe_index') }}">← Wróć do listy przepisów</a>
-            </p>
-        </div>
-    {% else %}
-        <div class="container mt-4">
-            <div class="alert alert-warning">Brak uprawnień do dodania przepisu.</div>
-        </div>
+        <button class="btn btn-success mt-2">💾 Zapisz</button>
+        {{ form_end(form) }}
 
-    {% endif %}
+        <p class="mt-3">
+            <a href="{{ path('app_recipe_index') }}" class="btn btn-outline-secondary btn-sm">← Wszystkie przepisy</a>
+        </p>
+    </div>
 {% endblock %}

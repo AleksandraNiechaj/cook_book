@@ -51,7 +51,12 @@
             <ul class="list-group mb-3">
                 {% for c in recipe.comments %}
                     <li class="list-group-item">
-                        <strong>{{ c.authorName }}</strong> ({{ c.authorEmail }})<br>
+                        {% if c.user %}
+                            <strong>{{ c.user.email }}</strong>
+                        {% else %}
+                            <strong>{{ c.authorName }}</strong> ({{ c.authorEmail }})
+                        {% endif %}
+                        <br>
                         {{ c.content|nl2br }}
                         <small class="text-muted d-block">{{ c.createdAt|date('Y-m-d H:i') }}</small>
 
@@ -68,11 +73,17 @@
         {% endif %}
 
         <h4>Dodaj komentarz</h4>
-        {{ form_start(commentForm, {'action': path('app_comment_add', { id: recipe.id })}) }}
-        {{ form_row(commentForm.authorName) }}
-        {{ form_row(commentForm.authorEmail) }}
-        {{ form_row(commentForm.content) }}
-        <button class="btn btn-success mt-2">💬 Dodaj komentarz</button>
-        {{ form_end(commentForm) }}
+        {% if app.user %}
+            {{ form_start(commentForm, {'action': path('app_comment_add', { id: recipe.id })}) }}
+            {{ form_row(commentForm.content) }}
+            <button class="btn btn-success mt-2">💬 Dodaj komentarz</button>
+            {{ form_end(commentForm) }}
+        {% else %}
+            <p class="text-muted">
+                Musisz być zalogowany, aby dodać komentarz.
+                <a href="{{ path('app_login') }}">Zaloguj się</a> lub
+                <a href="{{ path('auth_register') }}">zarejestruj</a>.
+            </p>
+        {% endif %}
     </div>
 {% endblock %}

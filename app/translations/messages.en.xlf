@@ -107,6 +107,11 @@
       <trans-unit id="flash.password_changed"><source>flash.password_changed</source><target>Password changed.</target></trans-unit>
 
       <trans-unit id="common.save"><source>common.save</source><target>Save</target></trans-unit>
+
+      <trans-unit id="comment.form.rating"><source>comment.form.rating</source><target>Rating</target></trans-unit>
+      <trans-unit id="comment.form.choose_rating"><source>comment.form.choose_rating</source><target>Choose a rating</target></trans-unit>
+
+
     </body>
   </file>
 </xliff>

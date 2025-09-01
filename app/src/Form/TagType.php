@@ -13,7 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class TagType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface      $builder
      * @param array<string, mixed> $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void

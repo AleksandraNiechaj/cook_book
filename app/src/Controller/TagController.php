@@ -16,10 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/tags')]
 final class TagController extends AbstractController
 {
-    #[Route('', name: 'tag_index', methods: ['GET'])]
+    #[Route('/tags', name: 'tag_index', methods: ['GET'])]
     public function index(TagRepository $tags): Response
     {
         return $this->render('tag/index.html.twig', [
@@ -27,7 +26,7 @@ final class TagController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'tag_new', methods: ['GET', 'POST'])]
+    #[Route('/tags/new', name: 'tag_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
@@ -40,6 +39,7 @@ final class TagController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Tag utworzony.');
+
             return $this->redirectToRoute('tag_index');
         }
 
@@ -48,7 +48,7 @@ final class TagController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'tag_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/tags/{id}/edit', name: 'tag_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Tag $tag, Request $request, EntityManagerInterface $em): Response
     {
@@ -58,6 +58,7 @@ final class TagController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Tag zaktualizowany.');
+
             return $this->redirectToRoute('tag_index');
         }
 
@@ -67,11 +68,11 @@ final class TagController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'tag_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
+    #[Route('/tags/{id}/delete', name: 'tag_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(Tag $tag, Request $request, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $tag->getId(), (string) $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$tag->getId(), (string) $request->request->get('_token'))) {
             $em->remove($tag);
             $em->flush();
             $this->addFlash('success', 'Tag usunięty.');
@@ -83,7 +84,7 @@ final class TagController extends AbstractController
     /**
      * Publiczny widok: lista przepisów w danym tagu (paginacja po 10, najnowsze najpierw).
      */
-    #[Route('/{slug}', name: 'tag_show', methods: ['GET'])]
+    #[Route('/tags/{slug}', name: 'tag_show', methods: ['GET'])]
     public function show(string $slug, TagRepository $tags, RecipeRepository $recipes, Request $request): Response
     {
         $tag = $tags->findOneBy(['slug' => $slug]);

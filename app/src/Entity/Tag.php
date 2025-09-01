@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\UniqueConstraint(name: 'uniq_tags_name', columns: ['name'])]
 #[UniqueEntity(fields: ['name'], message: 'Tag with this name already exists.')]
 #[UniqueEntity(fields: ['slug'], message: 'Tag with this slug already exists.')]
-final class Tag
+final class Tag implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

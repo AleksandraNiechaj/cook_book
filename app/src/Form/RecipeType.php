@@ -34,8 +34,6 @@ final class RecipeType extends AbstractType
     /**
      * @param FormBuilderInterface $builder Builder
      * @param array<string,mixed>  $options Options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -67,8 +65,6 @@ final class RecipeType extends AbstractType
 
     /**
      * @param OptionsResolver $resolver Resolver
-     *
-     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

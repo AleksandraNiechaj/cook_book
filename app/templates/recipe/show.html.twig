@@ -3,7 +3,7 @@
 
 {% block body %}
     <p class="mt-3">
-        <a href="{{ path('app_home') }}" class="btn btn-outline-primary btn-sm">🏠 Powrót do strony głównej</a>
+        <a href="{{ path('app_home') }}" class="nav-link">🏠 Powrót do strony głównej</a>
     </p>
 
     <div class="container mt-4">
@@ -21,32 +21,40 @@
                 {% endif %}
             </p>
 
-            {% if recipe.tags is not empty %}
-                <p class="mt-2">
-                    <em>Tagi:</em>
-                    {% for t in recipe.tags %}
-                    <a href="{{ path('tag_show', { slug: t.slug }) }}">#{{ t.name }}</a>{% if not loop.last %}, {% endif %}
-                    {% endfor %}
-                </p>
-            {% endif %}
+            {# Średnia ocena z komentarzy posiadających rating #}
+            {% set sum = 0 %}
+            {% set cnt = 0 %}
+            {% for c in recipe.comments %}
+                {% if c.rating is not null %}
+                    {% set sum = sum + c.rating %}
+                    {% set cnt = cnt + 1 %}
+                {% endif %}
+            {% endfor %}
+            {% set avg = cnt > 0 ? (sum / cnt) : 0 %}
 
+            <p class="text-muted">
+                Średnia ocena:
+                {% for i in 1..5 %}
+                    {% if i <= avg|round(0, 'floor') %}★{% else %}☆{% endif %}
+                {% endfor %}
+                {% if cnt > 0 %} ({{ avg|number_format(2, '.', ' ') }}/5, {{ cnt }} ocen){% else %} (brak ocen){% endif %}
+            </p>
 
             <div class="mt-3">
                 {{ recipe.content|nl2br }}
             </div>
 
             <div class="mt-4">
-                <a href="{{ path('app_recipe_index') }}" class="btn btn-outline-secondary btn-sm">← Wszystkie przepisy</a>
+                <a href="{{ path('app_recipe_index') }}" class="btn btn-sm btn-outline-secondary">← Wszystkie przepisy</a>
                 {% if recipe.category %}
-                    <a href="{{ path('category_show', { slug: recipe.category.slug }) }}" class="btn btn-outline-secondary btn-sm">Wróć do kategorii</a>
+                    <a href="{{ path('category_show', { slug: recipe.category.slug }) }}" class="btn btn-sm btn-outline-secondary">Wróć do kategorii</a>
                 {% endif %}
 
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_recipe_edit', { id: recipe.id }) }}" class="btn btn-primary btn-sm">✏️ Edytuj</a>
-                    <form method="post" action="{{ path('app_recipe_delete', { id: recipe.id }) }}" style="display:inline;"
-                          onsubmit="return confirm('Na pewno chcesz usunąć ten przepis?');">
+                    <a href="{{ path('app_recipe_edit', { id: recipe.id }) }}" class="btn btn-sm btn-primary">✏️ Edytuj</a>
+                    <form method="post" action="{{ path('app_recipe_delete', { id: recipe.id }) }}" style="display:inline;" onsubmit="return confirm('Na pewno chcesz usunąć ten przepis?');">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recipe.id) }}">
-                        <button class="btn btn-danger btn-sm">🗑️ Usuń</button>
+                        <button class="btn btn-sm btn-danger">🗑️ Usuń</button>
                     </form>
                 {% endif %}
             </div>
@@ -61,18 +69,20 @@
             <ul class="list-group mb-3">
                 {% for c in recipe.comments %}
                     <li class="list-group-item">
-                        {% if c.user %}
-                            <strong>{{ c.user.email }}</strong>
-                        {% else %}
-                            <strong>{{ c.authorName }}</strong> ({{ c.authorEmail }})
-                        {% endif %}
-                        <br>
+                        <strong>{{ c.authorName }}</strong> ({{ c.authorEmail }})<br>
                         {{ c.content|nl2br }}
                         <small class="text-muted d-block">{{ c.createdAt|date('Y-m-d H:i') }}</small>
 
+                        {% if c.rating is not null %}
+                            <div>
+                                {% for i in 1..5 %}
+                                    {% if i <= c.rating %}★{% else %}☆{% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
                         {% if is_granted('ROLE_ADMIN') %}
-                            <form method="post" action="{{ path('app_comment_delete', { id: c.id }) }}" style="display:inline"
-                                  onsubmit="return confirm('Usunąć komentarz?');">
+                            <form method="post" action="{{ path('app_comment_delete', { id: c.id }) }}" style="display:inline" onsubmit="return confirm('Usunąć komentarz?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
                                 <button class="btn btn-sm btn-danger mt-1">Usuń</button>
                             </form>
@@ -83,17 +93,15 @@
         {% endif %}
 
         <h4>Dodaj komentarz</h4>
+
         {% if app.user %}
             {{ form_start(commentForm, {'action': path('app_comment_add', { id: recipe.id })}) }}
             {{ form_row(commentForm.content) }}
+            {{ form_row(commentForm.rating) }}
             <button class="btn btn-success mt-2">💬 Dodaj komentarz</button>
             {{ form_end(commentForm) }}
         {% else %}
-            <p class="text-muted">
-                Musisz być zalogowany, aby dodać komentarz.
-                <a href="{{ path('app_login') }}">Zaloguj się</a> lub
-                <a href="{{ path('auth_register') }}">zarejestruj</a>.
-            </p>
+            <div class="alert alert-warning">Aby dodać komentarz i ocenę, <a href="{{ path('app_login') }}">zaloguj się</a>.</div>
         {% endif %}
     </div>
 {% endblock %}

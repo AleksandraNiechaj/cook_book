@@ -36,7 +36,14 @@
     <nav class="nav-right">
         {% if app.user %}
             <span>{{ app.user.email }}</span>
+
             <a class="nav-link" href="{{ path('account_profile_edit') }}">{{ 'nav.my_account'|trans }}</a>
+
+            {# 👇 Link „Users” tylko dla admina #}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="nav-link" href="{{ path('admin_user_index') }}">Users</a>
+            {% endif %}
+
             <a class="nav-link" href="{{ path('account_password_change') }}">{{ 'nav.change_password'|trans }}</a>
             <a class="nav-link" href="{{ path('app_logout') }}">{{ 'nav.logout'|trans }}</a>
         {% else %}

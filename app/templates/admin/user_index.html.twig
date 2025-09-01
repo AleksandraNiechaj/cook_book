@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block title %}Użytkownicy{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>👥 Użytkownicy</h1>
+
+        <div class="mb-3">
+            {% set nextDir = dir == 'ASC' ? 'DESC' : 'ASC' %}
+            Sortuj:
+            <a class="btn btn-sm btn-outline-secondary" href="{{ path('admin_user_index', { sort: 'email', dir: nextDir }) }}">E-mail</a>
+            <a class="btn btn-sm btn-outline-secondary" href="{{ path('admin_user_index', { sort: 'id', dir: nextDir }) }}">ID</a>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>E-mail</th>
+                <th>Role</th>
+                <th style="width: 220px;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for u in items %}
+                <tr>
+                    <td>{{ u.id }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>{{ u.roles|join(', ') }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{{ path('admin_user_edit', { id: u.id }) }}">✏️ Edytuj</a>
+                        <a class="btn btn-sm btn-warning" href="{{ path('admin_user_password', { id: u.id }) }}">🔑 Hasło</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4" class="text-muted">Brak użytkowników.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% if pages > 1 %}
+            <nav>
+                <ul class="pagination">
+                    {% for p in 1..pages %}
+                        <li class="page-item {{ p == page ? 'active' : '' }}">
+                            <a class="page-link" href="{{ path('admin_user_index', { page: p, sort: sort, dir: dir }) }}">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        {% endif %}
+
+        <p class="mt-3">
+            <a href="{{ path('app_admin') }}" class="btn btn-outline-secondary btn-sm">← Panel administratora</a>
+        </p>
+    </div>
+{% endblock %}

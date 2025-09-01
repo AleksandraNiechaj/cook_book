@@ -59,10 +59,10 @@ final class CommentController extends AbstractController
             $comment->setUser($user);
 
             // Dla kompatybilności z istniejącymi widokami (email/nick)
-            if ($comment->getAuthorEmail() === null) {
+            if (null === $comment->getAuthorEmail()) {
                 $comment->setAuthorEmail($user->getEmail());
             }
-            if ($comment->getAuthorName() === null) {
+            if (null === $comment->getAuthorName()) {
                 $comment->setAuthorName(\explode('@', (string) $user->getEmail())[0] ?: 'user');
             }
 
@@ -74,7 +74,7 @@ final class CommentController extends AbstractController
             foreach ($form->getErrors(true) as $error) {
                 $messages[] = $error->getMessage();
             }
-            $this->addFlash('danger', $messages ? \implode(' ', $messages) : 'Nie udało się dodać komentarza.');
+            $this->addFlash('danger', [] !== $messages ? \implode(' ', $messages) : 'Nie udało się dodać komentarza.');
         }
 
         return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
@@ -87,7 +87,7 @@ final class CommentController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function delete(Comment $comment, Request $request, CommentService $comments): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $comment->getId(), (string) $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), (string) $request->request->get('_token'))) {
             $comments->delete($comment);
             $this->addFlash('success', 'Komentarz został usunięty.');
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of the Cook Book project.
  *
@@ -11,8 +13,6 @@
  *
  * @license   For educational purposes (course project).
  */
-
-declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -78,17 +78,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return array_values(array_unique($roles));
     }
 
     /**
-     * Ustawia role użytkownika.
+     * Ustawia role użytkownika – zawsze dopisuje ROLE_USER.
      *
      * @param string[] $roles Tablica ról użytkownika
      */
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles;
+        $roles[] = 'ROLE_USER';
+        $this->roles = array_values(array_unique($roles));
 
         return $this;
     }

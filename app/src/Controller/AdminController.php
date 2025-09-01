@@ -24,33 +24,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
- * Kontroler odpowiedzialny za panel administracyjny użytkownika
- * (dashboard, edycja profilu i zmiana hasła).
+ * Kontroler panelu administracyjnego (własny profil admina).
  */
-class AdminController extends AbstractController
+#[IsGranted('ROLE_ADMIN')]
+final class AdminController extends AbstractController
 {
     /**
-     * Widok strony głównej panelu administracyjnego.
+     * Dashboard admina.
      *
-     * @return Response odpowiedź HTTP
+     * @return Response
      */
-    #[\Symfony\Component\Routing\Attribute\Route('/admin', name: 'app_admin')]
+    #[Route('/admin', name: 'app_admin', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
     }
 
     /**
-     * Edycja profilu zalogowanego użytkownika.
+     * Edycja swojego profilu (e-mail).
      *
-     * @param Request                $request obiekt żądania HTTP
-     * @param EntityManagerInterface $em      menedżer encji Doctrine
+     * @param Request                $request Żądanie
+     * @param EntityManagerInterface $em      Menedżer encji
      *
-     * @return Response odpowiedź HTTP
+     * @return Response
      */
-    #[\Symfony\Component\Routing\Attribute\Route('/admin/profile', name: 'admin_profile')]
+    #[Route('/admin/profile', name: 'admin_profile', methods: ['GET', 'POST'])]
     public function editProfile(Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
@@ -74,44 +76,39 @@ class AdminController extends AbstractController
     }
 
     /**
-     * Zmiana hasła zalogowanego użytkownika.
+     * Zmiana swojego hasła (wymaga podania aktualnego).
      *
-     * @param Request                     $request        obiekt żądania HTTP
-     * @param EntityManagerInterface      $em             menedżer encji Doctrine
-     * @param UserPasswordHasherInterface $passwordHasher hasher haseł
+     * @param Request                     $request Żądanie
+     * @param EntityManagerInterface      $em      Menedżer encji
+     * @param UserPasswordHasherInterface $hasher  Hasher haseł
      *
-     * @return Response odpowiedź HTTP
+     * @return Response
      */
-    #[\Symfony\Component\Routing\Attribute\Route('/admin/change-password', name: 'admin_change_password')]
-    public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
-    {
+    #[Route('/admin/change-password', name: 'admin_change_password', methods: ['GET', 'POST'])]
+    public function changePassword(
+        Request $request,
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $hasher
+    ): Response {
         $user = $this->getUser();
         if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         }
 
+        // Używamy Twojego globalnego ChangePasswordType (z currentPassword + newPassword RepeatedType)
         $form = $this->createForm(ChangePasswordType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $currentPassword = $form->get('currentPassword')->getData();
-            $newPassword = $form->get('newPassword')->getData();
-            $confirmPassword = $form->get('confirmPassword')->getData();
+            /** @var string $newPassword */
+            $newPassword = (string) $form->get('newPassword')->getData();
 
-            if (!$passwordHasher->isPasswordValid($user, $currentPassword)) {
-                $this->addFlash('danger', 'Aktualne hasło jest nieprawidłowe.');
-            } elseif ($newPassword !== $confirmPassword) {
-                $this->addFlash('danger', 'Hasła muszą być identyczne.');
-            } else {
-                $user->setPassword(
-                    $passwordHasher->hashPassword($user, $newPassword)
-                );
-                $em->flush();
+            $user->setPassword($hasher->hashPassword($user, $newPassword));
+            $em->flush();
 
-                $this->addFlash('success', 'Hasło zostało zmienione.');
+            $this->addFlash('success', 'Hasło zostało zmienione.');
 
-                return $this->redirectToRoute('app_admin');
-            }
+            return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('admin/change_password.html.twig', [

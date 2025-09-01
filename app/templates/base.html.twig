@@ -34,12 +34,15 @@
         <a class="nav-link brand" href="{{ path('app_home') }}">{{ 'app.title'|trans }}</a>
     </div>
     <nav class="nav-right">
+        {# Link do TOP – widoczny dla wszystkich #}
+        <a class="nav-link" href="{{ path('app_recipe_top') }}">Top</a>
+
         {% if app.user %}
             <span>{{ app.user.email }}</span>
 
             <a class="nav-link" href="{{ path('account_profile_edit') }}">{{ 'nav.my_account'|trans }}</a>
 
-            {# 👇 Link „Users” tylko dla admina #}
+            {# „Users” tylko dla administratora #}
             {% if is_granted('ROLE_ADMIN') %}
                 <a class="nav-link" href="{{ path('admin_user_index') }}">Users</a>
             {% endif %}

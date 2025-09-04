@@ -72,12 +72,10 @@ final class CommentController extends AbstractController
     }
 
     #[Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
-    public function delete(Comment $comment, Request $request, CommentServiceInterface $comments): Response
+    public function delete(Comment $comment, CommentServiceInterface $comments): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), (string) $request->request->get('_token'))) {
-            $comments->delete($comment);
-            $this->addFlash('success', 'Komentarz został usunięty.');
-        }
+        $comments->delete($comment);
+        $this->addFlash('success', 'Komentarz został usunięty.');
 
         return $this->redirectToRoute('recipe_show', ['id' => $comment->getRecipe()->getId()]);
     }

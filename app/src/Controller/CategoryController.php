@@ -98,12 +98,10 @@ final class CategoryController extends AbstractController
     }
 
     #[Route('/categories/{id}', name: 'category_delete', methods: ['POST'])]
-    public function delete(Request $request, Category $category, CategoryService $categories): Response
+    public function delete(Category $category, CategoryService $categories): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), (string) $request->request->get('_token'))) {
-            $categories->delete($category);
-            $this->addFlash('success', 'category.flash.deleted');
-        }
+        $categories->delete($category);
+        $this->addFlash('success', 'category.flash.deleted');
 
         return $this->redirectToRoute('category_list');
     }

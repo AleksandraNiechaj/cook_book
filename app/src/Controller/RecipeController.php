@@ -82,11 +82,10 @@ final class RecipeController extends AbstractController
     }
 
     #[Route('/recipe/{id}/delete', name: 'app_recipe_delete', methods: ['POST'])]
-    public function delete(Request $request, Recipe $recipe, RecipeService $recipes): Response
+    public function delete(Recipe $recipe, RecipeService $recipes): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$recipe->getId(), (string) $request->request->get('_token'))) {
-            $recipes->delete($recipe);
-        }
+        $recipes->delete($recipe);
+        $this->addFlash('success', 'Przepis został usunięty.');
 
         return $this->redirectToRoute('app_recipe_index');
     }

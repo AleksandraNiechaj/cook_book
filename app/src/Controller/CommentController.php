@@ -19,27 +19,19 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Recipe;
 use App\Form\CommentType;
-use App\Service\CommentService;
+use App\Service\CommentServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Obsługa komentarzy (dodawanie i usuwanie).
  */
 final class CommentController extends AbstractController
 {
-    /**
-     * Dodanie komentarza do przepisu.
-     *
-     * @param Recipe         $recipe   Przepis
-     * @param Request        $request  Żądanie
-     * @param CommentService $comments Serwis komentarzy
-     *
-     * @return Response
-     */
-    #[\Symfony\Component\Routing\Attribute\Route('/comment/add/{id}', name: 'app_comment_add', methods: ['POST'])]
-    public function add(Recipe $recipe, Request $request, CommentService $comments): Response
+    #[Route('/comment/add/{id}', name: 'app_comment_add', methods: ['POST'])]
+    public function add(Recipe $recipe, Request $request, CommentServiceInterface $comments): Response
     {
         if (!$this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             $this->addFlash('warning', 'Musisz być zalogowana/y, aby dodać komentarz.');
@@ -79,17 +71,8 @@ final class CommentController extends AbstractController
         return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
     }
 
-    /**
-     * Usunięcie komentarza.
-     *
-     * @param Comment        $comment  Komentarz
-     * @param Request        $request  Żądanie
-     * @param CommentService $comments Serwis komentarzy
-     *
-     * @return Response
-     */
-    #[\Symfony\Component\Routing\Attribute\Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
-    public function delete(Comment $comment, Request $request, CommentService $comments): Response
+    #[Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
+    public function delete(Comment $comment, Request $request, CommentServiceInterface $comments): Response
     {
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), (string) $request->request->get('_token'))) {
             $comments->delete($comment);

@@ -19,7 +19,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\ChangePasswordType;
 use App\Form\ProfileType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,23 +28,17 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Account (profile & password) controller for authenticated users.
- */
 #[IsGranted('ROLE_USER')]
 final class AccountController extends AbstractController
 {
-    /**
-     * Edit current user's profile.
-     *
-     * @param Request                $request    The current request
-     * @param EntityManagerInterface $em         The entity manager
-     * @param TranslatorInterface    $translator The translator
-     *
-     * @return Response HTTP response
-     */
+    public function __construct(
+        private readonly UserServiceInterface $userService,
+        private readonly UserPasswordHasherInterface $hasher,
+    ) {
+    }
+
     #[Route(path: '/account/profile', name: 'account_profile_edit', methods: ['GET', 'POST'])]
-    public function editProfile(Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response
+    public function editProfile(Request $request, TranslatorInterface $translator): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -53,7 +47,7 @@ final class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            $this->userService->save($user);
 
             $this->addFlash('success', $translator->trans('flash.profile_updated'));
 
@@ -65,18 +59,8 @@ final class AccountController extends AbstractController
         ]);
     }
 
-    /**
-     * Change current user's password.
-     *
-     * @param Request                     $request    The current request
-     * @param EntityManagerInterface      $em         The entity manager
-     * @param UserPasswordHasherInterface $hasher     The password hasher
-     * @param TranslatorInterface         $translator The translator
-     *
-     * @return Response HTTP response
-     */
     #[Route(path: '/account/password', name: 'account_password_change', methods: ['GET', 'POST'])]
-    public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $hasher, TranslatorInterface $translator): Response
+    public function changePassword(Request $request, TranslatorInterface $translator): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -88,9 +72,7 @@ final class AccountController extends AbstractController
             /** @var string $newPassword */
             $newPassword = (string) $form->get('newPassword')->getData();
 
-            // currentPassword jest weryfikowane przez constraint UserPassword w samym formularzu
-            $user->setPassword($hasher->hashPassword($user, $newPassword));
-            $em->flush();
+            $this->userService->changePassword($user, $newPassword, $this->hasher);
 
             $this->addFlash('success', $translator->trans('flash.password_changed'));
 

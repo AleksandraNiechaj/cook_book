@@ -18,7 +18,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,23 +26,16 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Controller responsible for user registration.
- */
 final class RegistrationController extends AbstractController
 {
-    /**
-     * Register a new user.
-     *
-     * @param Request                     $request    The current HTTP request
-     * @param EntityManagerInterface      $em         The entity manager
-     * @param UserPasswordHasherInterface $hasher     The password hasher
-     * @param TranslatorInterface         $translator The translator
-     *
-     * @return Response
-     */
+    public function __construct(
+        private readonly UserService $userService,
+        private readonly UserPasswordHasherInterface $hasher,
+    ) {
+    }
+
     #[Route(path: '/register', name: 'auth_register', methods: ['GET', 'POST'])]
-    public function register(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $hasher, TranslatorInterface $translator): Response
+    public function register(Request $request, TranslatorInterface $translator): Response
     {
         if ($this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             return $this->redirectToRoute('app_home');
@@ -59,11 +52,10 @@ final class RegistrationController extends AbstractController
 
             $user = new User();
             $user->setEmail($email);
-            $user->setPassword($hasher->hashPassword($user, $plainPassword));
+            $user->setPassword($this->hasher->hashPassword($user, $plainPassword));
             $user->setRoles(['ROLE_USER']);
 
-            $em->persist($user);
-            $em->flush();
+            $this->userService->save($user);
 
             $this->addFlash('success', $translator->trans('flash.registration_success'));
 

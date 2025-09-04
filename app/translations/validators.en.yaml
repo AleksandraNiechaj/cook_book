@@ -1,0 +1,17 @@
+comment:
+  validation:
+    name_required: "Name is required."
+    name_too_long: "Name is too long."
+    email_required: "Email is required."
+    email_invalid: "Please enter a valid email."
+    email_too_long: "Email is too long."
+    content_required: "Comment cannot be empty."
+    content_too_short: "Comment is too short."
+    rating_range: "Rating must be between 1 and 5."
+    choose_rating: "Please choose a rating."
+category:
+  not_found: "Category does not exist."
+  flash:
+    created: "Category created."
+    updated: "Category updated."
+    deleted: "Category deleted."

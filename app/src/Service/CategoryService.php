@@ -16,7 +16,7 @@ use App\Repository\CategoryRepository;
 /**
  * Logika biznesowa związana z kategoriami.
  */
-final class CategoryService
+final class CategoryService implements CategoryServiceInterface
 {
     /**
      * Konstruktor.

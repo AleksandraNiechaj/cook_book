@@ -33,23 +33,23 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank(message: 'Name is required.')]
-    #[Assert\Length(max: 100, maxMessage: 'Name is too long.')]
+    #[Assert\NotBlank(message: 'comment.validation.name_required')]
+    #[Assert\Length(max: 100, maxMessage: 'comment.validation.name_too_long')]
     #[ORM\Column(length: 100)]
     private ?string $authorName = null;
 
-    #[Assert\NotBlank(message: 'Email is required.')]
-    #[Assert\Email(message: 'Please enter a valid email.')]
-    #[Assert\Length(max: 180, maxMessage: 'Email is too long.')]
+    #[Assert\NotBlank(message: 'comment.validation.email_required')]
+    #[Assert\Email(message: 'comment.validation.email_invalid')]
+    #[Assert\Length(max: 180, maxMessage: 'comment.validation.email_too_long')]
     #[ORM\Column(length: 180)]
     private ?string $authorEmail = null;
 
-    #[Assert\NotBlank(message: 'Comment cannot be empty.')]
-    #[Assert\Length(min: 3, minMessage: 'Comment is too short.')]
+    #[Assert\NotBlank(message: 'comment.validation.content_required')]
+    #[Assert\Length(min: 3, minMessage: 'comment.validation.content_too_short')]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[Assert\Range(min: 1, max: 5, notInRangeMessage: 'Rating must be between 1 and 5.')]
+    #[Assert\Range(min: 1, max: 5, notInRangeMessage: 'comment.validation.rating_range')]
     #[ORM\Column(type: 'smallint', nullable: true)]
     private ?int $rating = null;
 
@@ -61,131 +61,74 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?Recipe $recipe = null;
 
-    /**
-     * @return int|null Id komentarza
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null Nick autora
-     */
     public function getAuthorName(): ?string
     {
         return $this->authorName;
     }
 
-    /**
-     * @param string $authorName Nick autora
-     *
-     * @return static
-     */
     public function setAuthorName(string $authorName): static
     {
         $this->authorName = $authorName;
-
         return $this;
     }
 
-    /**
-     * @return string|null Adres e-mail autora
-     */
     public function getAuthorEmail(): ?string
     {
         return $this->authorEmail;
     }
 
-    /**
-     * @param string $authorEmail Adres e-mail
-     *
-     * @return static
-     */
     public function setAuthorEmail(string $authorEmail): static
     {
         $this->authorEmail = $authorEmail;
-
         return $this;
     }
 
-    /**
-     * @return string|null Treść komentarza
-     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
-    /**
-     * @param string $content Treść komentarza
-     *
-     * @return static
-     */
     public function setContent(string $content): static
     {
         $this->content = $content;
-
         return $this;
     }
 
-    /**
-     * @return int|null Ocena 1–5
-     */
     public function getRating(): ?int
     {
         return $this->rating;
     }
 
-    /**
-     * @param int|null $rating Ocena 1–5
-     *
-     * @return static
-     */
     public function setRating(?int $rating): static
     {
         $this->rating = $rating;
-
         return $this;
     }
 
-    /**
-     * @return \DateTimeImmutable|null Data utworzenia
-     */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param \DateTimeImmutable $createdAt Data utworzenia
-     *
-     * @return static
-     */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
-    /**
-     * @return Recipe|null Powiązany przepis
-     */
     public function getRecipe(): ?Recipe
     {
         return $this->recipe;
     }
 
-    /**
-     * @param Recipe|null $recipe Przepis
-     *
-     * @return static
-     */
     public function setRecipe(?Recipe $recipe): static
     {
         $this->recipe = $recipe;
-
         return $this;
     }
 }

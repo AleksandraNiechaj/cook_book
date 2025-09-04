@@ -19,7 +19,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\ChangePasswordType;
 use App\Form\ProfileType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,33 +27,23 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-/**
- * Kontroler panelu administracyjnego (własny profil admina).
- */
 #[IsGranted('ROLE_ADMIN')]
 final class AdminController extends AbstractController
 {
-    /**
-     * Dashboard admina.
-     *
-     * @return Response
-     */
+    public function __construct(
+        private readonly UserServiceInterface $userService,
+        private readonly UserPasswordHasherInterface $hasher,
+    ) {
+    }
+
     #[Route('/admin', name: 'app_admin', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
     }
 
-    /**
-     * Edycja swojego profilu (e-mail).
-     *
-     * @param Request                $request Żądanie
-     * @param EntityManagerInterface $em      Menedżer encji
-     *
-     * @return Response
-     */
     #[Route('/admin/profile', name: 'admin_profile', methods: ['GET', 'POST'])]
-    public function editProfile(Request $request, EntityManagerInterface $em): Response
+    public function editProfile(Request $request): Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
@@ -64,7 +54,7 @@ final class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            $this->userService->save($user);
             $this->addFlash('success', 'Dane zostały zaktualizowane.');
 
             return $this->redirectToRoute('app_admin');
@@ -75,17 +65,8 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    /**
-     * Zmiana swojego hasła (wymaga podania aktualnego).
-     *
-     * @param Request                     $request Żądanie
-     * @param EntityManagerInterface      $em      Menedżer encji
-     * @param UserPasswordHasherInterface $hasher  Hasher haseł
-     *
-     * @return Response
-     */
     #[Route('/admin/change-password', name: 'admin_change_password', methods: ['GET', 'POST'])]
-    public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $hasher): Response
+    public function changePassword(Request $request): Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
@@ -99,8 +80,7 @@ final class AdminController extends AbstractController
             /** @var string $newPassword */
             $newPassword = (string) $form->get('newPassword')->getData();
 
-            $user->setPassword($hasher->hashPassword($user, $newPassword));
-            $em->flush();
+            $this->userService->changePassword($user, $newPassword, $this->hasher);
 
             $this->addFlash('success', 'Hasło zostało zmienione.');
 

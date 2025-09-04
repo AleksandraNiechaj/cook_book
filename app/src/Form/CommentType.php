@@ -18,15 +18,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-/**
- * Formularz komentarza (dla zalogowanych): treść + ocena 1–5.
- */
 final class CommentType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder builder formularza
-     * @param array<string,mixed>  $options opcje formularza
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -47,14 +40,11 @@ final class CommentType extends AbstractType
                 ],
                 'required' => true,
                 'constraints' => [
-                    new NotNull(message: 'Please choose a rating.'),
+                    new NotNull(message: 'comment.validation.choose_rating'),
                 ],
             ]);
     }
 
-    /**
-     * @param OptionsResolver $resolver resolver opcji
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

@@ -1,0 +1,17 @@
+comment:
+  validation:
+    name_required: "Imię jest wymagane."
+    name_too_long: "Imię jest za długie."
+    email_required: "Email jest wymagany."
+    email_invalid: "Podaj poprawny adres email."
+    email_too_long: "Email jest za długi."
+    content_required: "Treść komentarza nie może być pusta."
+    content_too_short: "Treść komentarza jest za krótka."
+    rating_range: "Ocena musi być między 1 a 5."
+    choose_rating: "Proszę wybrać ocenę."
+category:
+  not_found: "Kategoria nie istnieje."
+  flash:
+    created: "Kategoria została utworzona."
+    updated: "Kategoria została zaktualizowana."
+    deleted: "Kategoria została usunięta."

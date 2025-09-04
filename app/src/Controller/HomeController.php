@@ -16,10 +16,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Service\CategoryService;
-use App\Service\RecipeService;
+use App\Service\CategoryServiceInterface;
+use App\Service\RecipeServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Kontroler odpowiedzialny za stronę główną aplikacji.
@@ -28,14 +29,9 @@ final class HomeController extends AbstractController
 {
     /**
      * Strona główna z listą kategorii i najnowszymi przepisami.
-     *
-     * @param RecipeService   $recipes    serwis do obsługi przepisów
-     * @param CategoryService $categories serwis do obsługi kategorii
-     *
-     * @return Response odpowiedź HTTP
      */
-    #[\Symfony\Component\Routing\Attribute\Route('/', name: 'app_home', methods: ['GET'])]
-    public function index(RecipeService $recipes, CategoryService $categories): Response
+    #[Route('/', name: 'app_home', methods: ['GET'])]
+    public function index(RecipeServiceInterface $recipes, CategoryServiceInterface $categories): Response
     {
         $allCategories = $categories->allOrdered();
         $latest = $recipes->latest(3);

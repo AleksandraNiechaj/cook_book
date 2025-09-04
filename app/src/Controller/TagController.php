@@ -20,26 +20,20 @@ use App\Entity\Tag;
 use App\Form\TagType;
 use App\Repository\RecipeRepository;
 use App\Repository\TagRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use App\Service\TagServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-/**
- * Zarządzanie tagami i publiczne wyświetlanie przypisanych przepisów.
- */
 final class TagController extends AbstractController
 {
-    /**
-     * Lista wszystkich tagów.
-     *
-     * @param TagRepository $tags Repozytorium tagów
-     *
-     * @return Response
-     */
+    public function __construct(
+        private readonly TagServiceInterface $tagService,
+    ) {
+    }
+
     #[Route('/tags', name: 'tag_index', methods: ['GET'])]
     public function index(TagRepository $tags): Response
     {
@@ -48,25 +42,16 @@ final class TagController extends AbstractController
         ]);
     }
 
-    /**
-     * Utworzenie nowego tagu.
-     *
-     * @param Request                $request Żądanie
-     * @param EntityManagerInterface $em      Menedżer encji
-     *
-     * @return Response
-     */
     #[Route('/tags/new', name: 'tag_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function new(Request $request): Response
     {
         $tag = new Tag();
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($tag);
-            $em->flush();
+            $this->tagService->save($tag);
 
             $this->addFlash('success', 'Tag utworzony.');
 
@@ -78,24 +63,15 @@ final class TagController extends AbstractController
         ]);
     }
 
-    /**
-     * Edycja istniejącego tagu.
-     *
-     * @param Tag                    $tag     Tag
-     * @param Request                $request Żądanie
-     * @param EntityManagerInterface $em      Menedżer encji
-     *
-     * @return Response
-     */
     #[Route('/tags/{id}/edit', name: 'tag_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function edit(Tag $tag, Request $request, EntityManagerInterface $em): Response
+    public function edit(Tag $tag, Request $request): Response
     {
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            $this->tagService->save($tag);
             $this->addFlash('success', 'Tag zaktualizowany.');
 
             return $this->redirectToRoute('tag_index');
@@ -107,38 +83,18 @@ final class TagController extends AbstractController
         ]);
     }
 
-    /**
-     * Usunięcie tagu.
-     *
-     * @param Tag                    $tag     Tag
-     * @param Request                $request Żądanie
-     * @param EntityManagerInterface $em      Menedżer encji
-     *
-     * @return Response
-     */
     #[Route('/tags/{id}/delete', name: 'tag_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function delete(Tag $tag, Request $request, EntityManagerInterface $em): Response
+    public function delete(Tag $tag, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), (string) $request->request->get('_token'))) {
-            $em->remove($tag);
-            $em->flush();
+            $this->tagService->delete($tag);
             $this->addFlash('success', 'Tag usunięty.');
         }
 
         return $this->redirectToRoute('tag_index');
     }
 
-    /**
-     * Publiczny widok: lista przepisów w danym tagu (paginacja po 10, najnowsze najpierw).
-     *
-     * @param string           $slug    Slug tagu
-     * @param TagRepository    $tags    Repozytorium tagów
-     * @param RecipeRepository $recipes Repozytorium przepisów
-     * @param Request          $request Żądanie
-     *
-     * @return Response
-     */
     #[Route('/tags/{slug}', name: 'tag_show', methods: ['GET'])]
     public function show(string $slug, TagRepository $tags, RecipeRepository $recipes, Request $request): Response
     {
@@ -157,7 +113,7 @@ final class TagController extends AbstractController
             ->setFirstResult(($page - 1) * $limit)
             ->setMaxResults($limit);
 
-        $paginator = new Paginator($qb, true);
+        $paginator = new \Doctrine\ORM\Tools\Pagination\Paginator($qb, true);
         $total = \count($paginator);
         $pages = (int) \ceil($total / $limit);
 

@@ -21,7 +21,6 @@
                 {% endif %}
             </p>
 
-            {# ✅ Tagi #}
             {% if recipe.tags|length > 0 %}
                 <p class="text-muted">
                     <em>Tagi:</em>
@@ -31,9 +30,8 @@
                 </p>
             {% endif %}
 
-            {# Średnia ocena z komentarzy posiadających rating #}
-            {% set sum = 0 %}
-            {% set cnt = 0 %}
+            {# Średnia ocena #}
+            {% set sum, cnt = 0, 0 %}
             {% for c in recipe.comments %}
                 {% if c.rating is not null %}
                     {% set sum = sum + c.rating %}
@@ -103,13 +101,8 @@
         {% endif %}
 
         <h4>Dodaj komentarz</h4>
-
         {% if app.user %}
-            {{ form_start(commentForm, {'action': path('app_comment_add', { id: recipe.id })}) }}
-            {{ form_row(commentForm.content) }}
-            {{ form_row(commentForm.rating) }}
-            <button class="btn btn-success mt-2">💬 Dodaj komentarz</button>
-            {{ form_end(commentForm) }}
+            <a href="{{ path('app_comment_add', { id: recipe.id }) }}" class="btn btn-success">💬 Napisz komentarz</a>
         {% else %}
             <div class="alert alert-warning">Aby dodać komentarz i ocenę, <a href="{{ path('app_login') }}">zaloguj się</a>.</div>
         {% endif %}

@@ -30,7 +30,7 @@ use Symfony\Component\Routing\Attribute\Route;
  */
 final class CommentController extends AbstractController
 {
-    #[Route('/comment/add/{id}', name: 'app_comment_add', methods: ['POST'])]
+    #[Route('/comment/add/{id}', name: 'app_comment_add', methods: ['GET', 'POST'])]
     public function add(Recipe $recipe, Request $request, CommentServiceInterface $comments): Response
     {
         if (!$this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
@@ -59,16 +59,11 @@ final class CommentController extends AbstractController
             return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
         }
 
-        $errors = [];
-        foreach ($form->getErrors(true, true) as $error) {
-            $errors[] = $error->getMessage();
-        }
-        $msg = \count($errors) > 0
-            ? 'Nie udało się dodać komentarza: '.\implode(' ', $errors)
-            : 'Nie udało się dodać komentarza.';
-        $this->addFlash('error', $msg);
-
-        return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
+        // 🚀 Zamiast redirectu renderujemy osobny widok, żeby pola formularza pozostały
+        return $this->render('comment/new.html.twig', [
+            'recipe' => $recipe,
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]

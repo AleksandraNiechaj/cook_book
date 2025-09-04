@@ -16,7 +16,7 @@ use App\Repository\CommentRepository;
 /**
  * Serwis do obsługi logiki biznesowej komentarzy.
  */
-final class CommentService
+final class CommentService implements CommentServiceInterface
 {
     /**
      * Konstruktor.

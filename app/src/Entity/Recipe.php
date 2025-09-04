@@ -36,12 +36,12 @@ class Recipe
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank(message: 'Title is required.')]
+    #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 255, minMessage: 'Title is too short.', maxMessage: 'Title is too long.')]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[Assert\NotBlank(message: 'Content is required.')]
+    #[Assert\NotBlank]
     #[Assert\Length(min: 10, minMessage: 'Content is too short.')]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
@@ -52,8 +52,8 @@ class Recipe
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[Assert\NotNull(message: 'Category is required.')]
-    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[Assert\NotNull]
+    #[ORM\ManyToOne] // <-- usunięty "inversedBy"
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
@@ -75,36 +75,22 @@ class Recipe
     #[ORM\JoinTable(name: 'recipe_tag')]
     private Collection $tags;
 
-    /**
-     * Konstruktor.
-     */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
-    /**
-     * @return int|null Id przepisu
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null Tytuł przepisu
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title Tytuł przepisu
-     *
-     * @return static
-     */
     public function setTitle(string $title): static
     {
         $this->title = $title;
@@ -112,19 +98,11 @@ class Recipe
         return $this;
     }
 
-    /**
-     * @return string|null Treść przepisu
-     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
-    /**
-     * @param string $content Treść przepisu
-     *
-     * @return static
-     */
     public function setContent(string $content): static
     {
         $this->content = $content;
@@ -132,19 +110,11 @@ class Recipe
         return $this;
     }
 
-    /**
-     * @return \DateTimeImmutable|null Data utworzenia
-     */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param \DateTimeImmutable $createdAt Data utworzenia
-     *
-     * @return static
-     */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
@@ -152,19 +122,11 @@ class Recipe
         return $this;
     }
 
-    /**
-     * @return \DateTimeImmutable|null Data modyfikacji
-     */
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param \DateTimeImmutable $updatedAt Data modyfikacji
-     *
-     * @return static
-     */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
@@ -172,19 +134,11 @@ class Recipe
         return $this;
     }
 
-    /**
-     * @return Category|null Kategoria
-     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    /**
-     * @param Category|null $category Kategoria
-     *
-     * @return static
-     */
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
@@ -192,19 +146,11 @@ class Recipe
         return $this;
     }
 
-    /**
-     * @return Collection<int, Comment> Lista komentarzy
-     */
     public function getComments(): Collection
     {
         return $this->comments;
     }
 
-    /**
-     * @param Comment $comment Komentarz
-     *
-     * @return static
-     */
     public function addComment(Comment $comment): static
     {
         if (!$this->comments->contains($comment)) {
@@ -215,11 +161,6 @@ class Recipe
         return $this;
     }
 
-    /**
-     * @param Comment $comment Komentarz
-     *
-     * @return static
-     */
     public function removeComment(Comment $comment): static
     {
         if ($this->comments->removeElement($comment) && $comment->getRecipe() === $this) {
@@ -229,19 +170,11 @@ class Recipe
         return $this;
     }
 
-    /**
-     * @return Collection<int, Tag> Kolekcja tagów
-     */
     public function getTags(): Collection
     {
         return $this->tags;
     }
 
-    /**
-     * @param Tag $tag Tag
-     *
-     * @return static
-     */
     public function addTag(Tag $tag): static
     {
         if (!$this->tags->contains($tag)) {
@@ -251,11 +184,6 @@ class Recipe
         return $this;
     }
 
-    /**
-     * @param Tag $tag Tag
-     *
-     * @return static
-     */
     public function removeTag(Tag $tag): static
     {
         $this->tags->removeElement($tag);

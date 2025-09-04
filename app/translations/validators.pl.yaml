@@ -1,3 +1,13 @@
+category:
+  validation:
+    name_required: "Nazwa kategorii jest wymagana."
+    name_too_short: "Nazwa kategorii jest za krótka."
+    name_too_long: "Nazwa kategorii jest za długa."
+    slug_required: "Slug jest wymagany."
+    slug_too_long: "Slug jest za długi."
+    slug_invalid: "Slug może zawierać tylko małe litery, cyfry i myślniki."
+    slug_unique: "Slug musi być unikalny."
+
 comment:
   validation:
     name_required: "Imię jest wymagane."
@@ -9,9 +19,24 @@ comment:
     content_too_short: "Treść komentarza jest za krótka."
     rating_range: "Ocena musi być między 1 a 5."
     choose_rating: "Proszę wybrać ocenę."
-category:
-  not_found: "Kategoria nie istnieje."
-  flash:
-    created: "Kategoria została utworzona."
-    updated: "Kategoria została zaktualizowana."
-    deleted: "Kategoria została usunięta."
+
+recipe:
+  validation:
+    title_required: "Tytuł jest wymagany."
+    title_too_short: "Tytuł jest za krótki."
+    title_too_long: "Tytuł jest za długi."
+    content_required: "Treść jest wymagana."
+    content_too_short: "Treść jest za krótka."
+    category_required: "Kategoria jest wymagana."
+
+tag:
+  validation:
+    name_required: "Nazwa tagu jest wymagana."
+    name_too_short: "Nazwa tagu jest za krótka."
+    name_too_long: "Nazwa tagu jest za długa."
+    slug_required: "Slug jest wymagany."
+    slug_too_short: "Slug jest za krótki."
+    slug_too_long: "Slug jest za długi."
+    slug_invalid: "Dozwolone są tylko małe litery, cyfry i myślniki."
+    name_unique: "Tag o tej nazwie już istnieje."
+    slug_unique: "Tag o tym slugu już istnieje."

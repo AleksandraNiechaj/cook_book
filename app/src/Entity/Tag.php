@@ -48,27 +48,16 @@ final class Tag implements \Stringable
     #[ORM\Column(length: 80)]
     private ?string $slug = null;
 
-    /**
-     * @return int|null Id tagu
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null Nazwa tagu
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name Nazwa tagu
-     *
-     * @return self
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -76,19 +65,11 @@ final class Tag implements \Stringable
         return $this;
     }
 
-    /**
-     * @return string|null Slug tagu
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @param string $slug Slug tagu
-     *
-     * @return self
-     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -96,9 +77,6 @@ final class Tag implements \Stringable
         return $this;
     }
 
-    /**
-     * @return string Reprezentacja tagu jako string
-     */
     public function __toString(): string
     {
         return (string) $this->name;

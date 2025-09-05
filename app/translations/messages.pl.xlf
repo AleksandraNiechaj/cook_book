@@ -127,7 +127,8 @@
   <source>category.flash.deleted</source>
   <target>Kategoria została usunięta.</target>
 </trans-unit>
-
+<trans-unit id="nav.top"><source>nav.top</source><target>TOP przepisy</target></trans-unit>
+<trans-unit id="nav.users"><source>nav.users</source><target>Użytkownicy</target></trans-unit>
 
     </body>
   </file>

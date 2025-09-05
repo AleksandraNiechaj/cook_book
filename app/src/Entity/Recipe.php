@@ -53,7 +53,7 @@ class Recipe
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[Assert\NotNull]
-    #[ORM\ManyToOne] // <-- usunięty "inversedBy"
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
@@ -75,22 +75,42 @@ class Recipe
     #[ORM\JoinTable(name: 'recipe_tag')]
     private Collection $tags;
 
+    /**
+     * Konstruktor – inicjalizuje kolekcje komentarzy i tagów.
+     */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * Zwraca identyfikator przepisu.
+     *
+     * @return int|null id przepisu
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Zwraca tytuł przepisu.
+     *
+     * @return string|null tytuł
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * Ustawia tytuł przepisu.
+     *
+     * @param string $title tytuł przepisu
+     *
+     * @return static
+     */
     public function setTitle(string $title): static
     {
         $this->title = $title;
@@ -98,11 +118,23 @@ class Recipe
         return $this;
     }
 
+    /**
+     * Zwraca treść przepisu.
+     *
+     * @return string|null treść przepisu
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * Ustawia treść przepisu.
+     *
+     * @param string $content treść przepisu
+     *
+     * @return static
+     */
     public function setContent(string $content): static
     {
         $this->content = $content;
@@ -110,11 +142,23 @@ class Recipe
         return $this;
     }
 
+    /**
+     * Zwraca datę utworzenia przepisu.
+     *
+     * @return \DateTimeImmutable|null data utworzenia
+     */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
+    /**
+     * Ustawia datę utworzenia przepisu.
+     *
+     * @param \DateTimeImmutable $createdAt data utworzenia
+     *
+     * @return static
+     */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
@@ -122,11 +166,23 @@ class Recipe
         return $this;
     }
 
+    /**
+     * Zwraca datę ostatniej aktualizacji przepisu.
+     *
+     * @return \DateTimeImmutable|null data aktualizacji
+     */
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
+    /**
+     * Ustawia datę ostatniej aktualizacji przepisu.
+     *
+     * @param \DateTimeImmutable $updatedAt data aktualizacji
+     *
+     * @return static
+     */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
@@ -134,11 +190,23 @@ class Recipe
         return $this;
     }
 
+    /**
+     * Zwraca kategorię przypisaną do przepisu.
+     *
+     * @return Category|null kategoria
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * Ustawia kategorię przepisu.
+     *
+     * @param Category|null $category kategoria
+     *
+     * @return static
+     */
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
@@ -146,11 +214,23 @@ class Recipe
         return $this;
     }
 
+    /**
+     * Zwraca kolekcję komentarzy przypisanych do przepisu.
+     *
+     * @return Collection<int, Comment>
+     */
     public function getComments(): Collection
     {
         return $this->comments;
     }
 
+    /**
+     * Dodaje komentarz do przepisu.
+     *
+     * @param Comment $comment komentarz
+     *
+     * @return static
+     */
     public function addComment(Comment $comment): static
     {
         if (!$this->comments->contains($comment)) {
@@ -161,6 +241,13 @@ class Recipe
         return $this;
     }
 
+    /**
+     * Usuwa komentarz z przepisu.
+     *
+     * @param Comment $comment komentarz
+     *
+     * @return static
+     */
     public function removeComment(Comment $comment): static
     {
         if ($this->comments->removeElement($comment) && $comment->getRecipe() === $this) {
@@ -170,11 +257,23 @@ class Recipe
         return $this;
     }
 
+    /**
+     * Zwraca kolekcję tagów przypisanych do przepisu.
+     *
+     * @return Collection<int, Tag>
+     */
     public function getTags(): Collection
     {
         return $this->tags;
     }
 
+    /**
+     * Dodaje tag do przepisu.
+     *
+     * @param Tag $tag tag
+     *
+     * @return static
+     */
     public function addTag(Tag $tag): static
     {
         if (!$this->tags->contains($tag)) {
@@ -184,6 +283,13 @@ class Recipe
         return $this;
     }
 
+    /**
+     * Usuwa tag z przepisu.
+     *
+     * @param Tag $tag tag
+     *
+     * @return static
+     */
     public function removeTag(Tag $tag): static
     {
         $this->tags->removeElement($tag);

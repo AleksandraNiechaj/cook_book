@@ -27,13 +27,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+/**
+ * Kontroler odpowiedzialny za obsługę tagów (CRUD i widok).
+ */
 final class TagController extends AbstractController
 {
-    public function __construct(
-        private readonly TagServiceInterface $tagService,
-    ) {
+    /**
+     * Konstruktor.
+     *
+     * @param TagServiceInterface $tagService serwis obsługi tagów
+     */
+    public function __construct(private readonly TagServiceInterface $tagService)
+    {
     }
 
+    /**
+     * Lista wszystkich tagów posortowanych alfabetycznie.
+     *
+     * @param TagRepository $tags repozytorium tagów
+     *
+     * @return Response
+     */
     #[Route('/tags', name: 'tag_index', methods: ['GET'])]
     public function index(TagRepository $tags): Response
     {
@@ -42,6 +56,13 @@ final class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Dodawanie nowego tagu.
+     *
+     * @param Request $request obiekt żądania
+     *
+     * @return Response
+     */
     #[Route('/tags/new', name: 'tag_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request): Response
@@ -63,6 +84,14 @@ final class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Edycja istniejącego tagu.
+     *
+     * @param Tag     $tag     encja tagu
+     * @param Request $request obiekt żądania
+     *
+     * @return Response
+     */
     #[Route('/tags/{id}/edit', name: 'tag_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Tag $tag, Request $request): Response
@@ -83,6 +112,13 @@ final class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Usuwanie tagu.
+     *
+     * @param Tag $tag encja tagu
+     *
+     * @return Response
+     */
     #[Route('/tags/{id}/delete', name: 'tag_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(Tag $tag): Response
@@ -93,6 +129,17 @@ final class TagController extends AbstractController
         return $this->redirectToRoute('tag_index');
     }
 
+    /**
+     * Wyświetlanie przepisów powiązanych z danym tagiem.
+     *
+     * @param string           $slug    slug tagu
+     * @param TagRepository    $tags    repozytorium
+     *                                  tagów
+     * @param RecipeRepository $recipes repozytorium przepisów
+     * @param Request          $request obiekt żądania
+     *
+     * @return Response
+     */
     #[Route('/tags/{slug}', name: 'tag_show', methods: ['GET'])]
     public function show(string $slug, TagRepository $tags, RecipeRepository $recipes, Request $request): Response
     {

@@ -26,14 +26,29 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Kontroler rejestracji nowych użytkowników.
+ */
 final class RegistrationController extends AbstractController
 {
-    public function __construct(
-        private readonly UserService $userService,
-        private readonly UserPasswordHasherInterface $hasher,
-    ) {
+    /**
+     * Konstruktor.
+     *
+     * @param UserService                 $userService serwis użytkowników
+     * @param UserPasswordHasherInterface $hasher      hasher haseł
+     */
+    public function __construct(private readonly UserService $userService, private readonly UserPasswordHasherInterface $hasher)
+    {
     }
 
+    /**
+     * Formularz rejestracji użytkownika.
+     *
+     * @param Request             $request    obiekt żądania
+     * @param TranslatorInterface $translator tłumacz komunikatów
+     *
+     * @return Response
+     */
     #[Route(path: '/register', name: 'auth_register', methods: ['GET', 'POST'])]
     public function register(Request $request, TranslatorInterface $translator): Response
     {

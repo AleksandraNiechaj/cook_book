@@ -33,14 +33,22 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 final class AdminUserController extends AbstractController
 {
-    public function __construct(
-        private readonly UserServiceInterface $userService,
-        private readonly UserPasswordHasherInterface $hasher,
-    ) {
+    /**
+     * Konstruktor.
+     *
+     * @param UserServiceInterface        $userService serwis użytkowników
+     * @param UserPasswordHasherInterface $hasher      hasher haseł
+     */
+    public function __construct(private readonly UserServiceInterface $userService, private readonly UserPasswordHasherInterface $hasher)
+    {
     }
 
     /**
      * Lista użytkowników z paginacją i sortowaniem.
+     *
+     * @param Request $request obiekt żądania
+     *
+     * @return Response
      */
     #[Route('/admin/users', name: 'admin_user_index', methods: ['GET'])]
     public function index(Request $request): Response
@@ -66,6 +74,11 @@ final class AdminUserController extends AbstractController
 
     /**
      * Edycja danych użytkownika (email, role).
+     *
+     * @param Request $request obiekt żądania
+     * @param User    $user    encja użytkownika
+     *
+     * @return Response
      */
     #[Route('/admin/users/{id}/edit', name: 'admin_user_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user): Response
@@ -88,6 +101,11 @@ final class AdminUserController extends AbstractController
 
     /**
      * Zmiana hasła użytkownika przez admina (bez wymagania starego hasła).
+     *
+     * @param Request $request obiekt żądania
+     * @param User    $user    encja użytkownika
+     *
+     * @return Response
      */
     #[Route('/admin/users/{id}/password', name: 'admin_user_password', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function changePassword(Request $request, User $user): Response

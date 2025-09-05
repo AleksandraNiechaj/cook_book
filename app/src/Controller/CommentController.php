@@ -30,6 +30,15 @@ use Symfony\Component\Routing\Attribute\Route;
  */
 final class CommentController extends AbstractController
 {
+    /**
+     * Dodaje komentarz do przepisu.
+     *
+     * @param Recipe                  $recipe   encja przepisu
+     * @param Request                 $request  obiekt żądania
+     * @param CommentServiceInterface $comments serwis komentarzy
+     *
+     * @return Response
+     */
     #[Route('/comment/add/{id}', name: 'app_comment_add', methods: ['GET', 'POST'])]
     public function add(Recipe $recipe, Request $request, CommentServiceInterface $comments): Response
     {
@@ -59,13 +68,20 @@ final class CommentController extends AbstractController
             return $this->redirectToRoute('recipe_show', ['id' => $recipe->getId()]);
         }
 
-        // 🚀 Zamiast redirectu renderujemy osobny widok, żeby pola formularza pozostały
         return $this->render('comment/new.html.twig', [
             'recipe' => $recipe,
             'form' => $form->createView(),
         ]);
     }
 
+    /**
+     * Usuwa komentarz powiązany z przepisem.
+     *
+     * @param Comment                 $comment  encja komentarza
+     * @param CommentServiceInterface $comments serwis komentarzy
+     *
+     * @return Response
+     */
     #[Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, CommentServiceInterface $comments): Response
     {

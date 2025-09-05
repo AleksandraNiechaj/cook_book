@@ -29,6 +29,12 @@ final class HomeController extends AbstractController
 {
     /**
      * Strona główna z listą kategorii i najnowszymi przepisami.
+     *
+     * @param RecipeServiceInterface   $recipes    serwis
+     *                                             przepisów
+     * @param CategoryServiceInterface $categories serwis kategorii
+     *
+     * @return Response
      */
     #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(RecipeServiceInterface $recipes, CategoryServiceInterface $categories): Response

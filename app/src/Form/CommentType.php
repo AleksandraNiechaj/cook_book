@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 /**
  * This file is part of the Cook Book project.
- * (c) 2025 Aleksandra Niechaj
- * License: For educational purposes (course project).
+ *
+ * PHP version 8.3
+ *
+ * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
+ *
+ * @copyright 2025 Aleksandra Niechaj
+ *
+ * @license   For educational purposes (course project).
  */
 
 namespace App\Form;
@@ -18,8 +24,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotNull;
 
+/**
+ * Formularz dodawania/edycji komentarzy.
+ */
 final class CommentType extends AbstractType
 {
+    /**
+     * Buduje formularz komentarza.
+     *
+     * @param FormBuilderInterface $builder obiekt budowniczego formularza
+     * @param array<string,mixed>  $options opcje formularza
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -45,6 +62,13 @@ final class CommentType extends AbstractType
             ]);
     }
 
+    /**
+     * Konfiguruje opcje formularza.
+     *
+     * @param OptionsResolver $resolver obiekt konfiguratora opcji
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

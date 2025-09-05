@@ -61,74 +61,157 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?Recipe $recipe = null;
 
+    /**
+     * Zwraca identyfikator komentarza.
+     *
+     * @return int|null ID komentarza
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Zwraca imię autora komentarza.
+     *
+     * @return string|null imię autora
+     */
     public function getAuthorName(): ?string
     {
         return $this->authorName;
     }
 
+    /**
+     * Ustawia imię autora komentarza.
+     *
+     * @param string $authorName imię autora
+     *
+     * @return static
+     */
     public function setAuthorName(string $authorName): static
     {
         $this->authorName = $authorName;
+
         return $this;
     }
 
+    /**
+     * Zwraca email autora komentarza.
+     *
+     * @return string|null email autora
+     */
     public function getAuthorEmail(): ?string
     {
         return $this->authorEmail;
     }
 
+    /**
+     * Ustawia email autora komentarza.
+     *
+     * @param string $authorEmail email autora
+     *
+     * @return static
+     */
     public function setAuthorEmail(string $authorEmail): static
     {
         $this->authorEmail = $authorEmail;
+
         return $this;
     }
 
+    /**
+     * Zwraca treść komentarza.
+     *
+     * @return string|null treść komentarza
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * Ustawia treść komentarza.
+     *
+     * @param string $content treść komentarza
+     *
+     * @return static
+     */
     public function setContent(string $content): static
     {
         $this->content = $content;
+
         return $this;
     }
 
+    /**
+     * Zwraca ocenę komentarza.
+     *
+     * @return int|null ocena w skali 1–5
+     */
     public function getRating(): ?int
     {
         return $this->rating;
     }
 
+    /**
+     * Ustawia ocenę komentarza.
+     *
+     * @param int|null $rating ocena w skali 1–5
+     *
+     * @return static
+     */
     public function setRating(?int $rating): static
     {
         $this->rating = $rating;
+
         return $this;
     }
 
+    /**
+     * Zwraca datę utworzenia komentarza.
+     *
+     * @return \DateTimeImmutable|null data utworzenia
+     */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
+    /**
+     * Ustawia datę utworzenia komentarza.
+     *
+     * @param \DateTimeImmutable $createdAt data utworzenia
+     *
+     * @return static
+     */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
+    /**
+     * Zwraca powiązany przepis.
+     *
+     * @return Recipe|null przepis
+     */
     public function getRecipe(): ?Recipe
     {
         return $this->recipe;
     }
 
+    /**
+     * Ustawia powiązany przepis.
+     *
+     * @param Recipe|null $recipe przepis
+     *
+     * @return static
+     */
     public function setRecipe(?Recipe $recipe): static
     {
         $this->recipe = $recipe;
+
         return $this;
     }
 }

@@ -27,8 +27,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * Kontroler do obsługi przepisów.
+ */
 final class RecipeController extends AbstractController
 {
+    /**
+     * Lista przepisów z paginacją.
+     *
+     * @param Request       $request obiekt żądania
+     * @param RecipeService $recipes serwis przepisów
+     *
+     * @return Response
+     */
     #[Route('/recipe/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(Request $request, RecipeService $recipes): Response
     {
@@ -40,6 +51,14 @@ final class RecipeController extends AbstractController
         ]);
     }
 
+    /**
+     * Dodawanie nowego przepisu.
+     *
+     * @param Request       $request obiekt żądania
+     * @param RecipeService $recipes serwis przepisów
+     *
+     * @return Response
+     */
     #[Route('/recipe/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, RecipeService $recipes): Response
     {
@@ -62,6 +81,15 @@ final class RecipeController extends AbstractController
         ]);
     }
 
+    /**
+     * Edycja przepisu.
+     *
+     * @param Request       $request obiekt żądania
+     * @param Recipe        $recipe  encja przepisu
+     * @param RecipeService $recipes serwis przepisów
+     *
+     * @return Response
+     */
     #[Route('/recipe/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, RecipeService $recipes): Response
     {
@@ -81,6 +109,14 @@ final class RecipeController extends AbstractController
         ]);
     }
 
+    /**
+     * Usuwanie przepisu.
+     *
+     * @param Recipe        $recipe  encja przepisu
+     * @param RecipeService $recipes serwis przepisów
+     *
+     * @return Response
+     */
     #[Route('/recipe/{id}/delete', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Recipe $recipe, RecipeService $recipes): Response
     {
@@ -90,6 +126,16 @@ final class RecipeController extends AbstractController
         return $this->redirectToRoute('app_recipe_index');
     }
 
+    /**
+     * Szczegóły przepisu wraz z możliwością dodania komentarza.
+     *
+     * @param int            $id       identyfikator przepisu
+     * @param Request        $request  obiekt żądania
+     * @param RecipeService  $recipes  serwis przepisów
+     * @param CommentService $comments serwis komentarzy
+     *
+     * @return Response
+     */
     #[Route('/recipe/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function show(int $id, Request $request, RecipeService $recipes, CommentService $comments): Response
     {

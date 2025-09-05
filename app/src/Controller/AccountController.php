@@ -28,15 +28,30 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Kontroler odpowiedzialny za operacje na koncie użytkownika.
+ */
 #[IsGranted('ROLE_USER')]
 final class AccountController extends AbstractController
 {
-    public function __construct(
-        private readonly UserServiceInterface $userService,
-        private readonly UserPasswordHasherInterface $hasher,
-    ) {
+    /**
+     * Konstruktor.
+     *
+     * @param UserServiceInterface        $userService serwis użytkowników
+     * @param UserPasswordHasherInterface $hasher      hasher haseł
+     */
+    public function __construct(private readonly UserServiceInterface $userService, private readonly UserPasswordHasherInterface $hasher)
+    {
     }
 
+    /**
+     * Edycja profilu użytkownika.
+     *
+     * @param Request             $request    obiekt żądania
+     * @param TranslatorInterface $translator tłumacz komunikatów
+     *
+     * @return Response
+     */
     #[Route(path: '/account/profile', name: 'account_profile_edit', methods: ['GET', 'POST'])]
     public function editProfile(Request $request, TranslatorInterface $translator): Response
     {
@@ -59,6 +74,14 @@ final class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * Zmiana hasła użytkownika.
+     *
+     * @param Request             $request    obiekt żądania
+     * @param TranslatorInterface $translator tłumacz komunikatów
+     *
+     * @return Response
+     */
     #[Route(path: '/account/password', name: 'account_password_change', methods: ['GET', 'POST'])]
     public function changePassword(Request $request, TranslatorInterface $translator): Response
     {

@@ -54,16 +54,33 @@ class Category
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    /**
+     * Zwraca identyfikator kategorii.
+     *
+     * @return int|null ID kategorii
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Zwraca nazwę kategorii.
+     *
+     * @return string|null nazwa kategorii
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Ustawia nazwę kategorii.
+     *
+     * @param string $name nazwa kategorii
+     *
+     * @return static
+     */
     public function setName(string $name): static
     {
         $this->name = $name;
@@ -71,11 +88,23 @@ class Category
         return $this;
     }
 
+    /**
+     * Zwraca slug kategorii.
+     *
+     * @return string|null slug
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * Ustawia slug kategorii.
+     *
+     * @param string $slug slug
+     *
+     * @return static
+     */
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
@@ -83,11 +112,23 @@ class Category
         return $this;
     }
 
+    /**
+     * Zwraca datę utworzenia.
+     *
+     * @return \DateTimeImmutable|null data utworzenia
+     */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
+    /**
+     * Ustawia datę utworzenia.
+     *
+     * @param \DateTimeImmutable $createdAt data utworzenia
+     *
+     * @return static
+     */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
@@ -95,11 +136,23 @@ class Category
         return $this;
     }
 
+    /**
+     * Zwraca datę ostatniej aktualizacji.
+     *
+     * @return \DateTimeImmutable|null data aktualizacji
+     */
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
+    /**
+     * Ustawia datę ostatniej aktualizacji.
+     *
+     * @param \DateTimeImmutable $updatedAt data aktualizacji
+     *
+     * @return static
+     */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;

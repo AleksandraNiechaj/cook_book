@@ -48,16 +48,33 @@ final class Tag implements \Stringable
     #[ORM\Column(length: 80)]
     private ?string $slug = null;
 
+    /**
+     * Zwraca identyfikator taga.
+     *
+     * @return int|null id taga
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Zwraca nazwę taga.
+     *
+     * @return string|null nazwa
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Ustawia nazwę taga.
+     *
+     * @param string $name nazwa taga
+     *
+     * @return self
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -65,11 +82,23 @@ final class Tag implements \Stringable
         return $this;
     }
 
+    /**
+     * Zwraca slug taga.
+     *
+     * @return string|null slug
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * Ustawia slug taga.
+     *
+     * @param string $slug slug taga
+     *
+     * @return self
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -77,6 +106,11 @@ final class Tag implements \Stringable
         return $this;
     }
 
+    /**
+     * Reprezentacja obiektu jako string (nazwa taga).
+     *
+     * @return string nazwa taga
+     */
     public function __toString(): string
     {
         return (string) $this->name;

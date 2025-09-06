@@ -111,25 +111,15 @@
       <trans-unit id="comment.form.rating"><source>comment.form.rating</source><target>Ocena</target></trans-unit>
       <trans-unit id="comment.form.choose_rating"><source>comment.form.choose_rating</source><target>Wybierz ocenę</target></trans-unit>
 
-<trans-unit id="category.not_found">
-  <source>category.not_found</source>
-  <target>Kategoria nie istnieje.</target>
-</trans-unit>
-<trans-unit id="category.flash.created">
-  <source>category.flash.created</source>
-  <target>Kategoria została utworzona.</target>
-</trans-unit>
-<trans-unit id="category.flash.updated">
-  <source>category.flash.updated</source>
-  <target>Kategoria została zaktualizowana.</target>
-</trans-unit>
-<trans-unit id="category.flash.deleted">
-  <source>category.flash.deleted</source>
-  <target>Kategoria została usunięta.</target>
-</trans-unit>
-<trans-unit id="nav.top"><source>nav.top</source><target>TOP przepisy</target></trans-unit>
-<trans-unit id="nav.users"><source>nav.users</source><target>Użytkownicy</target></trans-unit>
+      <!-- Missing nav items -->
+      <trans-unit id="nav.top"><source>nav.top</source><target>TOP przepisy</target></trans-unit>
+      <trans-unit id="nav.users"><source>nav.users</source><target>Użytkownicy</target></trans-unit>
 
+      <!-- Category flashes -->
+      <trans-unit id="category.not_found"><source>category.not_found</source><target>Kategoria nie istnieje.</target></trans-unit>
+      <trans-unit id="category.flash.created"><source>category.flash.created</source><target>Kategoria została utworzona.</target></trans-unit>
+      <trans-unit id="category.flash.updated"><source>category.flash.updated</source><target>Kategoria została zaktualizowana.</target></trans-unit>
+      <trans-unit id="category.flash.deleted"><source>category.flash.deleted</source><target>Kategoria została usunięta.</target></trans-unit>
     </body>
   </file>
 </xliff>

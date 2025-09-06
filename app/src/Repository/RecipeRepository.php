@@ -43,8 +43,6 @@ class RecipeRepository extends ServiceEntityRepository
      * Zapis encji przepisu.
      *
      * @param Recipe $entity Encja przepisu
-     *
-     * @return void
      */
     public function save(Recipe $entity): void
     {
@@ -57,8 +55,6 @@ class RecipeRepository extends ServiceEntityRepository
      * Usunięcie encji przepisu.
      *
      * @param Recipe $entity Encja przepisu
-     *
-     * @return void
      */
     public function delete(Recipe $entity): void
     {

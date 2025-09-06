@@ -27,8 +27,6 @@ interface CommentServiceInterface
      * Zapisuje komentarz.
      *
      * @param Comment $comment encja komentarza
-     *
-     * @return void
      */
     public function save(Comment $comment): void;
 
@@ -36,8 +34,6 @@ interface CommentServiceInterface
      * Usuwa komentarz.
      *
      * @param Comment $comment encja komentarza
-     *
-     * @return void
      */
     public function delete(Comment $comment): void;
 }

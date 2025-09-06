@@ -41,15 +41,16 @@ tag:
     name_unique: "Tag o tej nazwie już istnieje."
     slug_unique: "Tag o tym slugu już istnieje."
 
-Slug must be unique.: 'Slug musi być unikalny.'
-Name is too short.: 'Nazwa jest za krótka.'
-Name is too long.: 'Nazwa jest za długa.'
-Slug is too long.: 'Slug jest za długi.'
-Slug may contain lowercase letters, numbers and hyphens.: 'Slug może zawierać tylko małe litery, cyfry i myślniki.'
-Title is too short.: 'Tytuł jest za krótki.'
-Title is too long.: 'Tytuł jest za długi.'
-Content is too short.: 'Treść jest za krótka.'
-Tag with this name already exists.: 'Tag o tej nazwie już istnieje.'
-Tag with this slug already exists.: 'Tag o tym slugu już istnieje.'
-Only lowercase letters, digits and dashes are allowed.: 'Dozwolone są tylko małe litery, cyfry i myślniki.'
-account.password.current_invalid: 'Podane aktualne hasło jest nieprawidłowe.'
+# Missing keys added:
+Slug must be unique.: "Slug musi być unikalny."
+Name is too short.: "Nazwa jest za krótka."
+Name is too long.: "Nazwa jest za długa."
+Slug is too long.: "Slug jest za długi."
+Slug may contain lowercase letters, numbers and hyphens.: "Slug może zawierać tylko małe litery, cyfry i myślniki."
+Title is too short.: "Tytuł jest za krótki."
+Title is too long.: "Tytuł jest za długi."
+Content is too short.: "Treść jest za krótka."
+Tag with this name already exists.: "Tag o tej nazwie już istnieje."
+Tag with this slug already exists.: "Tag o tym slugu już istnieje."
+Only lowercase letters, digits and dashes are allowed.: "Dozwolone są tylko małe litery, cyfry i myślniki."
+account.password.current_invalid: "Podane aktualne hasło jest nieprawidłowe."

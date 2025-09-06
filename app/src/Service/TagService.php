@@ -41,8 +41,6 @@ final class TagService implements TagServiceInterface
      * Zapisuje (persist + flush) tag.
      *
      * @param Tag $tag encja tagu
-     *
-     * @return void
      */
     public function save(Tag $tag): void
     {
@@ -54,8 +52,6 @@ final class TagService implements TagServiceInterface
      * Usuwa tag.
      *
      * @param Tag $tag encja tagu
-     *
-     * @return void
      */
     public function delete(Tag $tag): void
     {

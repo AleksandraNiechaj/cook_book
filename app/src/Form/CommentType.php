@@ -34,8 +34,6 @@ final class CommentType extends AbstractType
      *
      * @param FormBuilderInterface $builder obiekt budowniczego formularza
      * @param array<string,mixed>  $options opcje formularza
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -66,8 +64,6 @@ final class CommentType extends AbstractType
      * Konfiguruje opcje formularza.
      *
      * @param OptionsResolver $resolver obiekt konfiguratora opcji
-     *
-     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

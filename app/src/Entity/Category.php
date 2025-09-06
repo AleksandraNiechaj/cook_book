@@ -79,7 +79,7 @@ class Category
      *
      * @param string $name nazwa kategorii
      *
-     * @return static
+     * @return self
      */
     public function setName(string $name): static
     {
@@ -103,7 +103,7 @@ class Category
      *
      * @param string $slug slug
      *
-     * @return static
+     * @return self
      */
     public function setSlug(string $slug): static
     {
@@ -127,7 +127,7 @@ class Category
      *
      * @param \DateTimeImmutable $createdAt data utworzenia
      *
-     * @return static
+     * @return self
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
@@ -151,7 +151,7 @@ class Category
      *
      * @param \DateTimeImmutable $updatedAt data aktualizacji
      *
-     * @return static
+     * @return self
      */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {

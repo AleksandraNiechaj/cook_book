@@ -68,8 +68,6 @@ interface RecipeServiceInterface
      * Zapisuje przepis.
      *
      * @param Recipe $recipe encja przepisu
-     *
-     * @return void
      */
     public function save(Recipe $recipe): void;
 
@@ -77,8 +75,6 @@ interface RecipeServiceInterface
      * Usuwa przepis.
      *
      * @param Recipe $recipe encja przepisu
-     *
-     * @return void
      */
     public function delete(Recipe $recipe): void;
 }

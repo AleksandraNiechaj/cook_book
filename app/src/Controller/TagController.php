@@ -133,8 +133,7 @@ final class TagController extends AbstractController
      * Wyświetlanie przepisów powiązanych z danym tagiem.
      *
      * @param string           $slug    slug tagu
-     * @param TagRepository    $tags    repozytorium
-     *                                  tagów
+     * @param TagRepository    $tags    repozytorium tagów
      * @param RecipeRepository $recipes repozytorium przepisów
      * @param Request          $request obiekt żądania
      *

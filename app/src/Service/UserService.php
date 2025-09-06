@@ -49,15 +49,15 @@ final class UserService implements UserServiceInterface
     public function getPaginatedList(int $page, int $limit, string $sort, string $dir): array
     {
         $allowedSorts = ['id', 'email'];
-        if (!\in_array($sort, $allowedSorts, true)) {
+        if (false === \in_array($sort, $allowedSorts, true)) { // ✅ Yoda style
             $sort = 'email';
         }
-        $dir = \strtoupper($dir) === 'DESC' ? 'DESC' : 'ASC';
+        $dir = 'DESC' === \strtoupper($dir) ? 'DESC' : 'ASC'; // ✅ Yoda style
 
         $offset = ($page - 1) * $limit;
 
         $qb = $this->users->createQueryBuilder('u')
-            ->orderBy('u.'.$sort, $dir)
+            ->orderBy('u.'.$sort, $dir) // ✅ concat bez spacji
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 
@@ -83,8 +83,6 @@ final class UserService implements UserServiceInterface
      * Zapisuje użytkownika.
      *
      * @param User $user encja użytkownika
-     *
-     * @return void
      */
     public function save(User $user): void
     {
@@ -98,8 +96,6 @@ final class UserService implements UserServiceInterface
      * @param User                        $user          encja użytkownika
      * @param string                      $plainPassword nowe hasło w postaci jawnej
      * @param UserPasswordHasherInterface $hasher        serwis haszujący hasła
-     *
-     * @return void
      */
     public function changePassword(User $user, string $plainPassword, UserPasswordHasherInterface $hasher): void
     {
@@ -112,8 +108,6 @@ final class UserService implements UserServiceInterface
      * Usuwa użytkownika.
      *
      * @param User $user encja użytkownika
-     *
-     * @return void
      */
     public function delete(User $user): void
     {

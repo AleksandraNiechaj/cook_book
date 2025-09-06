@@ -27,8 +27,6 @@ interface TagServiceInterface
      * Zapisuje tag (persist + flush).
      *
      * @param Tag $tag encja tagu
-     *
-     * @return void
      */
     public function save(Tag $tag): void;
 
@@ -36,8 +34,6 @@ interface TagServiceInterface
      * Usuwa tag.
      *
      * @param Tag $tag encja tagu
-     *
-     * @return void
      */
     public function delete(Tag $tag): void;
 }

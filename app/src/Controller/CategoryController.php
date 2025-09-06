@@ -82,11 +82,9 @@ final class CategoryController extends AbstractController
      * Wyświetla pojedynczą kategorię wraz z przepisami.
      *
      * @param string              $slug       identyfikator slug kategorii
-     * @param Request             $request    obiekt
-     *                                        żądania
+     * @param Request             $request    obiekt żądania
      * @param CategoryService     $categories serwis kategorii
-     * @param RecipeService       $recipes    serwis
-     *                                        przepisów
+     * @param RecipeService       $recipes    serwis przepisów
      * @param TranslatorInterface $translator tłumaczenia komunikatów
      *
      * @return Response

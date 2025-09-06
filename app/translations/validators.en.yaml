@@ -40,3 +40,17 @@ tag:
     slug_invalid: "Only lowercase letters, digits and dashes are allowed."
     name_unique: "Tag with this name already exists."
     slug_unique: "Tag with this slug already exists."
+
+# Missing keys added:
+Slug must be unique.: "Slug must be unique."
+Name is too short.: "Name is too short."
+Name is too long.: "Name is too long."
+Slug is too long.: "Slug is too long."
+Slug may contain lowercase letters, numbers and hyphens.: "Slug may contain lowercase letters, numbers and hyphens."
+Title is too short.: "Title is too short."
+Title is too long.: "Title is too long."
+Content is too short.: "Content is too short."
+Tag with this name already exists.: "Tag with this name already exists."
+Tag with this slug already exists.: "Tag with this slug already exists."
+Only lowercase letters, digits and dashes are allowed.: "Only lowercase letters, digits and dashes are allowed."
+account.password.current_invalid: "Current password is invalid."

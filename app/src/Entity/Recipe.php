@@ -109,7 +109,7 @@ class Recipe
      *
      * @param string $title tytuł przepisu
      *
-     * @return static
+     * @return self
      */
     public function setTitle(string $title): static
     {
@@ -133,7 +133,7 @@ class Recipe
      *
      * @param string $content treść przepisu
      *
-     * @return static
+     * @return self
      */
     public function setContent(string $content): static
     {
@@ -157,7 +157,7 @@ class Recipe
      *
      * @param \DateTimeImmutable $createdAt data utworzenia
      *
-     * @return static
+     * @return self
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
@@ -181,7 +181,7 @@ class Recipe
      *
      * @param \DateTimeImmutable $updatedAt data aktualizacji
      *
-     * @return static
+     * @return self
      */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
@@ -205,7 +205,7 @@ class Recipe
      *
      * @param Category|null $category kategoria
      *
-     * @return static
+     * @return self
      */
     public function setCategory(?Category $category): static
     {
@@ -229,7 +229,7 @@ class Recipe
      *
      * @param Comment $comment komentarz
      *
-     * @return static
+     * @return self
      */
     public function addComment(Comment $comment): static
     {
@@ -246,7 +246,7 @@ class Recipe
      *
      * @param Comment $comment komentarz
      *
-     * @return static
+     * @return self
      */
     public function removeComment(Comment $comment): static
     {
@@ -272,7 +272,7 @@ class Recipe
      *
      * @param Tag $tag tag
      *
-     * @return static
+     * @return self
      */
     public function addTag(Tag $tag): static
     {
@@ -288,7 +288,7 @@ class Recipe
      *
      * @param Tag $tag tag
      *
-     * @return static
+     * @return self
      */
     public function removeTag(Tag $tag): static
     {

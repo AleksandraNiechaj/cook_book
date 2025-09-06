@@ -35,8 +35,6 @@ final class AdminUserType extends AbstractType
      *
      * @param FormBuilderInterface $builder The builder
      * @param array<string, mixed> $options The options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -64,8 +62,6 @@ final class AdminUserType extends AbstractType
      * Configure options.
      *
      * @param OptionsResolver $resolver The resolver
-     *
-     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

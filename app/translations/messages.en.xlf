@@ -111,24 +111,15 @@
       <trans-unit id="comment.form.rating"><source>comment.form.rating</source><target>Rating</target></trans-unit>
       <trans-unit id="comment.form.choose_rating"><source>comment.form.choose_rating</source><target>Choose a rating</target></trans-unit>
 
-<trans-unit id="category.not_found">
-  <source>category.not_found</source>
-  <target>Category does not exist.</target>
-</trans-unit>
-<trans-unit id="category.flash.created">
-  <source>category.flash.created</source>
-  <target>Category has been created.</target>
-</trans-unit>
-<trans-unit id="category.flash.updated">
-  <source>category.flash.updated</source>
-  <target>Category has been updated.</target>
-</trans-unit>
-<trans-unit id="category.flash.deleted">
-  <source>category.flash.deleted</source>
-  <target>Category has been deleted.</target>
-</trans-unit>
+      <!-- Missing nav items -->
+      <trans-unit id="nav.top"><source>nav.top</source><target>TOP recipes</target></trans-unit>
+      <trans-unit id="nav.users"><source>nav.users</source><target>Users</target></trans-unit>
 
-
+      <!-- Category flashes -->
+      <trans-unit id="category.not_found"><source>category.not_found</source><target>Category does not exist.</target></trans-unit>
+      <trans-unit id="category.flash.created"><source>category.flash.created</source><target>Category has been created.</target></trans-unit>
+      <trans-unit id="category.flash.updated"><source>category.flash.updated</source><target>Category has been updated.</target></trans-unit>
+      <trans-unit id="category.flash.deleted"><source>category.flash.deleted</source><target>Category has been deleted.</target></trans-unit>
     </body>
   </file>
 </xliff>

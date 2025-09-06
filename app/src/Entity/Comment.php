@@ -86,7 +86,7 @@ class Comment
      *
      * @param string $authorName imię autora
      *
-     * @return static
+     * @return self
      */
     public function setAuthorName(string $authorName): static
     {
@@ -110,7 +110,7 @@ class Comment
      *
      * @param string $authorEmail email autora
      *
-     * @return static
+     * @return self
      */
     public function setAuthorEmail(string $authorEmail): static
     {
@@ -134,7 +134,7 @@ class Comment
      *
      * @param string $content treść komentarza
      *
-     * @return static
+     * @return self
      */
     public function setContent(string $content): static
     {
@@ -158,7 +158,7 @@ class Comment
      *
      * @param int|null $rating ocena w skali 1–5
      *
-     * @return static
+     * @return self
      */
     public function setRating(?int $rating): static
     {
@@ -182,7 +182,7 @@ class Comment
      *
      * @param \DateTimeImmutable $createdAt data utworzenia
      *
-     * @return static
+     * @return self
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
@@ -206,7 +206,7 @@ class Comment
      *
      * @param Recipe|null $recipe przepis
      *
-     * @return static
+     * @return self
      */
     public function setRecipe(?Recipe $recipe): static
     {

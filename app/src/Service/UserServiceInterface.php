@@ -28,8 +28,6 @@ interface UserServiceInterface
      * Zapisuje użytkownika.
      *
      * @param User $user encja użytkownika
-     *
-     * @return void
      */
     public function save(User $user): void;
 
@@ -37,8 +35,6 @@ interface UserServiceInterface
      * Usuwa użytkownika.
      *
      * @param User $user encja użytkownika
-     *
-     * @return void
      */
     public function delete(User $user): void;
 
@@ -48,8 +44,6 @@ interface UserServiceInterface
      * @param User                        $user          encja użytkownika
      * @param string                      $plainPassword nowe hasło w postaci jawnej
      * @param UserPasswordHasherInterface $hasher        serwis haszujący hasła
-     *
-     * @return void
      */
     public function changePassword(User $user, string $plainPassword, UserPasswordHasherInterface $hasher): void;
 
@@ -58,7 +52,7 @@ interface UserServiceInterface
      *
      * @param int    $page  numer strony
      * @param int    $limit liczba elementów na stronę
-     * @param string $sort  pole do sortowania (np. email)
+     * @param string $sort  pole do sortowania
      * @param string $dir   kierunek sortowania (ASC/DESC)
      *
      * @return array<string, mixed> dane paginacji

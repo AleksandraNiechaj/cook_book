@@ -43,8 +43,6 @@ interface CategoryServiceInterface
      * Zapisuje kategorię.
      *
      * @param Category $category encja kategorii
-     *
-     * @return void
      */
     public function save(Category $category): void;
 
@@ -52,8 +50,6 @@ interface CategoryServiceInterface
      * Usuwa kategorię.
      *
      * @param Category $category encja kategorii
-     *
-     * @return void
      */
     public function delete(Category $category): void;
 }

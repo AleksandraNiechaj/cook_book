@@ -8,9 +8,7 @@ declare(strict_types=1);
  * PHP version 8.3
  *
  * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
  * @copyright 2025 Aleksandra Niechaj
- *
  * @license   For educational purposes (course project).
  */
 
@@ -19,8 +17,8 @@ namespace App\Service;
 use App\Entity\Category;
 use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
-use Knp\Component\Pager\PaginatorInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Serwis do obsługi logiki biznesowej przepisów.

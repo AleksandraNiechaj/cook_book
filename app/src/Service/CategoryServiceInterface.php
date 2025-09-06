@@ -8,9 +8,7 @@ declare(strict_types=1);
  * PHP version 8.3
  *
  * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
  * @copyright 2025 Aleksandra Niechaj
- *
  * @license   For educational purposes (course project).
  */
 

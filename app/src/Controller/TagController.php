@@ -8,9 +8,7 @@ declare(strict_types=1);
  * PHP version 8.3
  *
  * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
  * @copyright 2025 Aleksandra Niechaj
- *
  * @license   For educational purposes (course project).
  */
 
@@ -137,7 +135,7 @@ final class TagController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $page  = \max(1, (int) $request->query->get('page', 1));
+        $page = \max(1, (int) $request->query->get('page', 1));
         $limit = 10;
         $qb = $recipes->createQueryBuilder('r')
             ->innerJoin('r.tags', 't')
@@ -152,9 +150,9 @@ final class TagController extends AbstractController
         $pages = (int) \ceil($total / $limit);
 
         return $this->render('tag/show.html.twig', [
-            'tag'   => $tag,
+            'tag' => $tag,
             'items' => \iterator_to_array($paginator->getIterator()),
-            'page'  => $page,
+            'page' => $page,
             'pages' => $pages,
             'total' => $total,
         ]);

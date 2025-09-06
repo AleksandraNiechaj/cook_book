@@ -8,9 +8,7 @@ declare(strict_types=1);
  * PHP version 8.3
  *
  * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
  * @copyright 2025 Aleksandra Niechaj
- *
  * @license   For educational purposes (course project).
  */
 
@@ -44,14 +42,15 @@ final class Tag implements \Stringable
 
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 80)]
-    #[Assert\Regex(pattern: '/^[a-z0-9\-]+$/', message: 'Only lowercase letters, digits and dashes are allowed.')]
+    #[Assert\Regex(
+        pattern: '/^[a-z0-9\-]+$/',
+        message: 'Only lowercase letters, digits and dashes are allowed.'
+    )]
     #[ORM\Column(length: 80)]
     private ?string $slug = null;
 
     /**
      * Zwraca identyfikator taga.
-     *
-     * @return int|null id taga
      */
     public function getId(): ?int
     {
@@ -60,8 +59,6 @@ final class Tag implements \Stringable
 
     /**
      * Zwraca nazwę taga.
-     *
-     * @return string|null nazwa
      */
     public function getName(): ?string
     {
@@ -70,8 +67,6 @@ final class Tag implements \Stringable
 
     /**
      * Ustawia nazwę taga.
-     *
-     * @param string $name nazwa taga
      */
     public function setName(string $name): self
     {
@@ -82,8 +77,6 @@ final class Tag implements \Stringable
 
     /**
      * Zwraca slug taga.
-     *
-     * @return string|null slug
      */
     public function getSlug(): ?string
     {
@@ -92,8 +85,6 @@ final class Tag implements \Stringable
 
     /**
      * Ustawia slug taga.
-     *
-     * @param string $slug slug taga
      */
     public function setSlug(string $slug): self
     {
@@ -104,8 +95,6 @@ final class Tag implements \Stringable
 
     /**
      * Reprezentacja obiektu jako string (nazwa taga).
-     *
-     * @return string nazwa taga
      */
     public function __toString(): string
     {

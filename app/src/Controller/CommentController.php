@@ -8,9 +8,7 @@ declare(strict_types=1);
  * PHP version 8.3
  *
  * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
  * @copyright 2025 Aleksandra Niechaj
- *
  * @license   For educational purposes (course project).
  */
 
@@ -49,7 +47,7 @@ final class CommentController extends AbstractController
         $comment = new Comment();
 
         $email = (string) $this->getUser()?->getUserIdentifier();
-        $nick  = \strstr($email, '@', true) ?: $email;
+        $nick = \strstr($email, '@', true) ?: $email;
 
         $comment->setAuthorEmail($email);
         $comment->setAuthorName($nick);

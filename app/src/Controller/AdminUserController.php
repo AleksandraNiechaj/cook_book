@@ -8,9 +8,7 @@ declare(strict_types=1);
  * PHP version 8.3
  *
  * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
  * @copyright 2025 Aleksandra Niechaj
- *
  * @license   For educational purposes (course project).
  */
 
@@ -51,21 +49,21 @@ final class AdminUserController extends AbstractController
     #[Route('/admin/users', name: 'admin_user_index', methods: ['GET'])]
     public function index(Request $request): Response
     {
-        $page  = max(1, (int) $request->query->get('page', 1));
+        $page = max(1, (int) $request->query->get('page', 1));
         $limit = 10;
 
         $sort = (string) $request->query->get('sort', 'email');
-        $dir  = strtoupper((string) $request->query->get('dir', 'ASC'));
+        $dir = strtoupper((string) $request->query->get('dir', 'ASC'));
 
         $pagination = $this->userService->getPaginatedList($page, $limit, $sort, $dir);
 
         return $this->render('admin/user_index.html.twig', [
             'items' => $pagination['items'],
-            'page'  => $page,
+            'page' => $page,
             'pages' => $pagination['pages'],
             'total' => $pagination['total'],
-            'sort'  => $pagination['sort'],
-            'dir'   => $pagination['dir'],
+            'sort' => $pagination['sort'],
+            'dir' => $pagination['dir'],
             'limit' => $limit,
         ]);
     }

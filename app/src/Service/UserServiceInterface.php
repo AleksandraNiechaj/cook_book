@@ -3,13 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- * @copyright 2025 Aleksandra Niechaj
- * @license   For educational purposes (course project).
+ * Interfejs serwisu użytkowników.
  */
 
 namespace App\Service;

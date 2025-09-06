@@ -1,243 +1,269 @@
+   1) src/Service/TagService.php (align_multiline_comment, line_ending)
+   2) src/Service/UserService.php (align_multiline_comment, line_ending)
 
-Found 0 of 43 files that can be fixed in 1.316 seconds, 18.00 MB memory used
+Found 2 of 43 files that can be fixed in 1.061 seconds, 18.00 MB memory used
 
 FILE: /home/wwwroot/app/src/Controller/AccountController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 4 ERRORS AFFECTING 4 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
  50 | ERROR | [ ] Missing @return tag in function comment
  78 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/AdminController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/AdminUserController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 5 ERRORS AFFECTING 5 LINES
--------------------------------------------------------------------------------------------------------
-  10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
-  11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
+-----------------------------------------------------------------------------------
+  10 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
+  11 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
   48 | ERROR | [ ] Missing @return tag in function comment
   76 | ERROR | [ ] Missing @return tag in function comment
  101 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/CategoryController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 7 ERRORS AFFECTING 7 LINES
--------------------------------------------------------------------------------------------------------
-  10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
-  11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
+-----------------------------------------------------------------------------------
+  10 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
+  11 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
   36 | ERROR | [ ] Missing @return tag in function comment
   50 | ERROR | [ ] Missing @return tag in function comment
   83 | ERROR | [ ] Missing @return tag in function comment
  107 | ERROR | [ ] Missing @return tag in function comment
  133 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/CommentController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 4 ERRORS AFFECTING 4 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
  37 | ERROR | [ ] Missing @return tag in function comment
  78 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/HomeController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 3 ERRORS AFFECTING 3 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
  33 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/RecipeController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 7 ERRORS AFFECTING 7 LINES
--------------------------------------------------------------------------------------------------------
-  10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
-  11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
+-----------------------------------------------------------------------------------
+  10 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
+  11 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
   38 | ERROR | [ ] Missing @return tag in function comment
   55 | ERROR | [ ] Missing @return tag in function comment
   84 | ERROR | [ ] Missing @return tag in function comment
  109 | ERROR | [ ] Missing @return tag in function comment
  126 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/RegistrationController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 3 ERRORS AFFECTING 3 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
  47 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/SecurityController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 3 ERRORS AFFECTING 3 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
  31 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/TagController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 7 ERRORS AFFECTING 7 LINES
--------------------------------------------------------------------------------------------------------
-  10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
-  11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
+-----------------------------------------------------------------------------------
+  10 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
+  11 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
   46 | ERROR | [ ] Missing @return tag in function comment
   59 | ERROR | [ ] Missing @return tag in function comment
   86 | ERROR | [ ] Missing @return tag in function comment
  111 | ERROR | [ ] Missing @return tag in function comment
  129 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Controller/TopRecipeController.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 3 ERRORS AFFECTING 3 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
  31 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/DataFixtures/AppFixtures.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Entity/Category.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Entity/Comment.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Entity/Recipe.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Entity/Tag.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 10 ERRORS AFFECTING 10 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
  54 | ERROR | [ ] Missing @return tag in function comment
  62 | ERROR | [ ] Missing @return tag in function comment
  68 | ERROR | [ ] Doc comment for parameter "$name" missing
@@ -246,263 +272,397 @@ FOUND 10 ERRORS AFFECTING 10 LINES
  86 | ERROR | [ ] Doc comment for parameter "$slug" missing
  88 | ERROR | [ ] Missing @return tag in function comment
  98 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Entity/User.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 5 ERRORS AFFECTING 5 LINES
--------------------------------------------------------------------------------------------------------
-  10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
-  11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-     |       |     each other, and annotations of a different type are separated by a single blank
-     |       |     line
+-----------------------------------------------------------------------------------
+  10 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
+  11 | ERROR | [x] Group annotations together so that annotations of the same type
+     |       |     immediately follow each other, and annotations of a different
+     |       |     type are separated by a single blank line
   67 | ERROR | [ ] Missing @return tag in function comment
  102 | ERROR | [ ] Missing @return tag in function comment
  125 | ERROR | [ ] Missing @return tag in function comment
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Form/AdminChangePasswordType.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Form/AdminUserType.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Form/ChangePasswordType.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Form/CommentType.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Form/ProfileType.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Form/RecipeType.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Form/RegistrationType.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Form/TagType.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Repository/RecipeRepository.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Repository/TagRepository.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Service/CategoryServiceInterface.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Service/CommentServiceInterface.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Service/RecipeService.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Service/RecipeServiceInterface.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Service/TagService.php
--------------------------------------------------------------------------------------------------------
-FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
-PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+FOUND 3 ERRORS AND 33 WARNINGS AFFECTING 36 LINES
+-----------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found
+    |         |     "\r\n"
+  2 | WARNING | [x] Please trim any trailing whitespace
+  3 | WARNING | [x] Please trim any trailing whitespace
+  4 | WARNING | [x] Please trim any trailing whitespace
+ 10 | ERROR   | [x] Group annotations together so that annotations of the same
+    |         |     type immediately follow each other, and annotations of a
+    |         |     different type are separated by a single blank line
+ 11 | ERROR   | [x] Group annotations together so that annotations of the same
+    |         |     type immediately follow each other, and annotations of a
+    |         |     different type are separated by a single blank line
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 15 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 18 | WARNING | [x] Please trim any trailing whitespace
+ 19 | WARNING | [x] Please trim any trailing whitespace
+ 20 | WARNING | [x] Please trim any trailing whitespace
+ 23 | WARNING | [x] Please trim any trailing whitespace
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 31 | WARNING | [x] Please trim any trailing whitespace
+ 32 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 40 | WARNING | [x] Please trim any trailing whitespace
+ 41 | WARNING | [x] Please trim any trailing whitespace
+ 42 | WARNING | [x] Please trim any trailing whitespace
+ 43 | WARNING | [x] Please trim any trailing whitespace
+ 44 | WARNING | [x] Please trim any trailing whitespace
+ 45 | WARNING | [x] Please trim any trailing whitespace
+ 46 | WARNING | [x] Please trim any trailing whitespace
+ 51 | WARNING | [x] Please trim any trailing whitespace
+ 52 | WARNING | [x] Please trim any trailing whitespace
+ 53 | WARNING | [x] Please trim any trailing whitespace
+ 54 | WARNING | [x] Please trim any trailing whitespace
+ 55 | WARNING | [x] Please trim any trailing whitespace
+ 56 | WARNING | [x] Please trim any trailing whitespace
+ 57 | WARNING | [x] Please trim any trailing whitespace
+-----------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 36 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Service/TagServiceInterface.php
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+ 10 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+ 11 | ERROR | [x] Group annotations together so that annotations of the same type
+    |       |     immediately follow each other, and annotations of a different
+    |       |     type are separated by a single blank line
+-----------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 
 FILE: /home/wwwroot/app/src/Service/UserService.php
--------------------------------------------------------------------------------------------------------
-FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
-PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+FOUND 3 ERRORS AND 76 WARNINGS AFFECTING 79 LINES
+-----------------------------------------------------------------------------------
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found
+     |         |     "\r\n"
+   2 | WARNING | [x] Please trim any trailing whitespace
+   3 | WARNING | [x] Please trim any trailing whitespace
+   4 | WARNING | [x] Please trim any trailing whitespace
+  10 | ERROR   | [x] Group annotations together so that annotations of the same
+     |         |     type immediately follow each other, and annotations of a
+     |         |     different type are separated by a single blank line
+  11 | ERROR   | [x] Group annotations together so that annotations of the same
+     |         |     type immediately follow each other, and annotations of a
+     |         |     different type are separated by a single blank line
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | WARNING | [x] Please trim any trailing whitespace
+  18 | WARNING | [x] Please trim any trailing whitespace
+  19 | WARNING | [x] Please trim any trailing whitespace
+  20 | WARNING | [x] Please trim any trailing whitespace
+  21 | WARNING | [x] Please trim any trailing whitespace
+  24 | WARNING | [x] Please trim any trailing whitespace
+  25 | WARNING | [x] Please trim any trailing whitespace
+  26 | WARNING | [x] Please trim any trailing whitespace
+  32 | WARNING | [x] Please trim any trailing whitespace
+  33 | WARNING | [x] Please trim any trailing whitespace
+  34 | WARNING | [x] Please trim any trailing whitespace
+  35 | WARNING | [x] Please trim any trailing whitespace
+  36 | WARNING | [x] Please trim any trailing whitespace
+  46 | WARNING | [x] Please trim any trailing whitespace
+  47 | WARNING | [x] Please trim any trailing whitespace
+  48 | WARNING | [x] Please trim any trailing whitespace
+  49 | WARNING | [x] Please trim any trailing whitespace
+  50 | WARNING | [x] Please trim any trailing whitespace
+  51 | WARNING | [x] Please trim any trailing whitespace
+  52 | WARNING | [x] Please trim any trailing whitespace
+  53 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | WARNING | [x] Please trim any trailing whitespace
+  56 | WARNING | [x] Please trim any trailing whitespace
+  57 | WARNING | [x] Please trim any trailing whitespace
+  58 | WARNING | [x] Please trim any trailing whitespace
+  59 | WARNING | [x] Please trim any trailing whitespace
+  60 | WARNING | [x] Please trim any trailing whitespace
+  61 | WARNING | [x] Please trim any trailing whitespace
+  62 | WARNING | [x] Please trim any trailing whitespace
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [x] Please trim any trailing whitespace
+  66 | WARNING | [x] Please trim any trailing whitespace
+  67 | WARNING | [x] Please trim any trailing whitespace
+  68 | WARNING | [x] Please trim any trailing whitespace
+  69 | WARNING | [x] Please trim any trailing whitespace
+  70 | WARNING | [x] Please trim any trailing whitespace
+  71 | WARNING | [x] Please trim any trailing whitespace
+  72 | WARNING | [x] Please trim any trailing whitespace
+  73 | WARNING | [x] Please trim any trailing whitespace
+  74 | WARNING | [x] Please trim any trailing whitespace
+  75 | WARNING | [x] Please trim any trailing whitespace
+  76 | WARNING | [x] Please trim any trailing whitespace
+  77 | WARNING | [x] Please trim any trailing whitespace
+  78 | WARNING | [x] Please trim any trailing whitespace
+  79 | WARNING | [x] Please trim any trailing whitespace
+  84 | WARNING | [x] Please trim any trailing whitespace
+  85 | WARNING | [x] Please trim any trailing whitespace
+  86 | WARNING | [x] Please trim any trailing whitespace
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  90 | WARNING | [x] Please trim any trailing whitespace
+  97 | WARNING | [x] Please trim any trailing whitespace
+  98 | WARNING | [x] Please trim any trailing whitespace
+  99 | WARNING | [x] Please trim any trailing whitespace
+ 100 | WARNING | [x] Please trim any trailing whitespace
+ 101 | WARNING | [x] Please trim any trailing whitespace
+ 102 | WARNING | [x] Please trim any trailing whitespace
+ 103 | WARNING | [x] Please trim any trailing whitespace
+ 104 | WARNING | [x] Please trim any trailing whitespace
+ 109 | WARNING | [x] Please trim any trailing whitespace
+ 110 | WARNING | [x] Please trim any trailing whitespace
+ 111 | WARNING | [x] Please trim any trailing whitespace
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | WARNING | [x] Please trim any trailing whitespace
+ 114 | WARNING | [x] Please trim any trailing whitespace
+ 115 | WARNING | [x] Please trim any trailing whitespace
+-----------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 79 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-----------------------------------------------------------------------------------
 
-
-FILE: /home/wwwroot/app/src/Service/UserServiceInterface.php
--------------------------------------------------------------------------------------------------------
-FOUND 2 ERRORS AFFECTING 2 LINES
--------------------------------------------------------------------------------------------------------
- 10 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
- 11 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow
-    |       |     each other, and annotations of a different type are separated by a single blank line
--------------------------------------------------------------------------------------------------------
-PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
--------------------------------------------------------------------------------------------------------
-
-Time: 3.11 secs; Memory: 10MB
+Time: 2.38 secs; Memory: 10MB
 
  ------- -------- ---- ---------------------- ------------------------------- 
   State   Domain   Id   Message Preview (en)   Fallback Message Preview (pl)  

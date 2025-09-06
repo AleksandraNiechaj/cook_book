@@ -72,8 +72,6 @@ final class Tag implements \Stringable
      * Ustawia nazwę taga.
      *
      * @param string $name nazwa taga
-     *
-     * @return self
      */
     public function setName(string $name): self
     {
@@ -96,8 +94,6 @@ final class Tag implements \Stringable
      * Ustawia slug taga.
      *
      * @param string $slug slug taga
-     *
-     * @return self
      */
     public function setSlug(string $slug): self
     {

@@ -49,8 +49,6 @@ final class AccountController extends AbstractController
      *
      * @param Request             $request    obiekt żądania
      * @param TranslatorInterface $translator tłumacz komunikatów
-     *
-     * @return Response
      */
     #[Route(path: '/account/profile', name: 'account_profile_edit', methods: ['GET', 'POST'])]
     public function editProfile(Request $request, TranslatorInterface $translator): Response
@@ -79,8 +77,6 @@ final class AccountController extends AbstractController
      *
      * @param Request             $request    obiekt żądania
      * @param TranslatorInterface $translator tłumacz komunikatów
-     *
-     * @return Response
      */
     #[Route(path: '/account/password', name: 'account_password_change', methods: ['GET', 'POST'])]
     public function changePassword(Request $request, TranslatorInterface $translator): Response

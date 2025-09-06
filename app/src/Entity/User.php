@@ -66,8 +66,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia e-mail.
      *
      * @param string $email E-mail użytkownika
-     *
-     * @return self
      */
     public function setEmail(string $email): self
     {
@@ -103,8 +101,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia role użytkownika – zawsze dopisuje ROLE_USER.
      *
      * @param string[] $roles Tablica ról użytkownika
-     *
-     * @return self
      */
     public function setRoles(array $roles): self
     {
@@ -128,8 +124,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia zaszyfrowane hasło.
      *
      * @param string $password Zaszyfrowane hasło
-     *
-     * @return self
      */
     public function setPassword(string $password): self
     {
@@ -140,8 +134,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Czyści dane tymczasowe (np. plainPassword).
-     *
-     * @return void
      */
     public function eraseCredentials(): void
     {

@@ -45,8 +45,6 @@ final class TagController extends AbstractController
      * Lista wszystkich tagów posortowanych alfabetycznie.
      *
      * @param TagRepository $tags repozytorium tagów
-     *
-     * @return Response
      */
     #[Route('/tags', name: 'tag_index', methods: ['GET'])]
     public function index(TagRepository $tags): Response
@@ -60,8 +58,6 @@ final class TagController extends AbstractController
      * Dodawanie nowego tagu.
      *
      * @param Request $request obiekt żądania
-     *
-     * @return Response
      */
     #[Route('/tags/new', name: 'tag_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
@@ -89,8 +85,6 @@ final class TagController extends AbstractController
      *
      * @param Tag     $tag     encja tagu
      * @param Request $request obiekt żądania
-     *
-     * @return Response
      */
     #[Route('/tags/{id}/edit', name: 'tag_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
@@ -116,8 +110,6 @@ final class TagController extends AbstractController
      * Usuwanie tagu.
      *
      * @param Tag $tag encja tagu
-     *
-     * @return Response
      */
     #[Route('/tags/{id}/delete', name: 'tag_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
@@ -136,8 +128,6 @@ final class TagController extends AbstractController
      * @param TagRepository    $tags    repozytorium tagów
      * @param RecipeRepository $recipes repozytorium przepisów
      * @param Request          $request obiekt żądania
-     *
-     * @return Response
      */
     #[Route('/tags/{slug}', name: 'tag_show', methods: ['GET'])]
     public function show(string $slug, TagRepository $tags, RecipeRepository $recipes, Request $request): Response

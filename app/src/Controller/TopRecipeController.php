@@ -30,8 +30,6 @@ final class TopRecipeController extends AbstractController
      * Wyświetlenie listy najwyżej ocenianych przepisów.
      *
      * @param RecipeRepository $recipes Repozytorium przepisów
-     *
-     * @return Response
      */
     #[Route('/recipes/top', name: 'app_recipe_top', methods: ['GET'])]
     public function top(RecipeRepository $recipes): Response

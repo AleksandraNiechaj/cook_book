@@ -47,15 +47,15 @@ final class UserService implements UserServiceInterface
     public function getPaginatedList(int $page, int $limit, string $sort, string $dir): array
     {
         $allowedSorts = ['id', 'email'];
-        if (false === \in_array($sort, $allowedSorts, true)) { // ✅ Yoda style
+        if (false === \in_array($sort, $allowedSorts, true)) {
             $sort = 'email';
         }
-        $dir = 'DESC' === \strtoupper($dir) ? 'DESC' : 'ASC'; // ✅ Yoda style
+        $dir = 'DESC' === \strtoupper($dir) ? 'DESC' : 'ASC';
 
         $offset = ($page - 1) * $limit;
 
         $qb = $this->users->createQueryBuilder('u')
-            ->orderBy('u.'.$sort, $dir) // ✅ concat bez spacji
+            ->orderBy('u.'.$sort, $dir)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 

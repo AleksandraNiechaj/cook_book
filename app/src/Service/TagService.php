@@ -26,10 +26,8 @@ final class TagService implements TagServiceInterface
     /**
      * Konstruktor serwisu tagów.
      *
-     * @param TagRepository          $tags repozytorium
-     *                                     tagów
-     * @param EntityManagerInterface $em   menedżer
-     *                                     encji
+     * @param TagRepository          $tags repozytorium tagów
+     * @param EntityManagerInterface $em   menedżer encji
      */
     public function __construct(private readonly TagRepository $tags, private readonly EntityManagerInterface $em)
     {

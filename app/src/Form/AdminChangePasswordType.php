@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj
- *
- * @copyright 2025
- *
- * @license   For educational purposes (course project).
+ * Formularz zmiany hasła użytkownika przez admina (bez podawania starego hasła).
  */
 
 namespace App\Form;

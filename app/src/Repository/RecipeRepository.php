@@ -3,15 +3,9 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
+ * Repozytorium encji Recipe.
  *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj
- *
- * @copyright 2025
- *
- * @license   For educational purposes (course project).
+ * @extends ServiceEntityRepository<Recipe>
  */
 
 namespace App\Repository;
@@ -25,7 +19,6 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * Repozytorium encji Recipe.
  *
- * @extends ServiceEntityRepository<Recipe>
  */
 class RecipeRepository extends ServiceEntityRepository
 {

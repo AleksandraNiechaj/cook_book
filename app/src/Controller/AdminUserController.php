@@ -40,7 +40,7 @@ final class AdminUserController extends AbstractController
      *
      * @param Request $request obiekt żądania
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/admin/users', name: 'admin_user_index', methods: ['GET'])]
     public function index(Request $request): Response
@@ -70,7 +70,7 @@ final class AdminUserController extends AbstractController
      * @param Request $request obiekt żądania
      * @param User    $user    encja użytkownika
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/admin/users/{id}/edit', name: 'admin_user_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user): Response
@@ -97,7 +97,7 @@ final class AdminUserController extends AbstractController
      * @param Request $request obiekt żądania
      * @param User    $user    encja użytkownika
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/admin/users/{id}/password', name: 'admin_user_password', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function changePassword(Request $request, User $user): Response

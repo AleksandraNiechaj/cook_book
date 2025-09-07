@@ -23,7 +23,7 @@ final class TopRecipeController extends AbstractController
      *
      * @param RecipeRepository $recipes Repozytorium przepisów
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/recipes/top', name: 'app_recipe_top', methods: ['GET'])]
     public function top(RecipeRepository $recipes): Response

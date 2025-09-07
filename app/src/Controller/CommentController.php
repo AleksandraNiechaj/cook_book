@@ -29,7 +29,7 @@ final class CommentController extends AbstractController
      * @param Request                 $request  obiekt żądania
      * @param CommentServiceInterface $comments serwis komentarzy
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/comment/add/{id}', name: 'app_comment_add', methods: ['GET', 'POST'])]
     public function add(Recipe $recipe, Request $request, CommentServiceInterface $comments): Response
@@ -72,7 +72,7 @@ final class CommentController extends AbstractController
      * @param Comment                 $comment  encja komentarza
      * @param CommentServiceInterface $comments serwis komentarzy
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, CommentServiceInterface $comments): Response

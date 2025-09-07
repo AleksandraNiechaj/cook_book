@@ -59,7 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param string $email E-mail użytkownika
      *
-     * @return self
+     * @return array Result
      */
     public function setEmail(string $email): self
     {
@@ -96,7 +96,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param string[] $roles Tablica ról użytkownika
      *
-     * @return self
+     * @return array Result
      */
     public function setRoles(array $roles): self
     {
@@ -121,7 +121,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param string $password Zaszyfrowane hasło
      *
-     * @return self
+     * @return array Result
      */
     public function setPassword(string $password): self
     {

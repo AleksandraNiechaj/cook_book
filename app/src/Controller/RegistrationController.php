@@ -39,7 +39,7 @@ final class RegistrationController extends AbstractController
      * @param Request             $request    obiekt żądania
      * @param TranslatorInterface $translator tłumacz komunikatów
      *
-     * @return Response
+     * @return array Result
      */
     #[Route(path: '/register', name: 'auth_register', methods: ['GET', 'POST'])]
     public function register(Request $request, TranslatorInterface $translator): Response

@@ -25,7 +25,7 @@ final class HomeController extends AbstractController
      * @param RecipeServiceInterface   $recipes    serwis przepisów
      * @param CategoryServiceInterface $categories serwis kategorii
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(RecipeServiceInterface $recipes, CategoryServiceInterface $categories): Response

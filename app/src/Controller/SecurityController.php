@@ -23,7 +23,7 @@ final class SecurityController extends AbstractController
      *
      * @param AuthenticationUtils $authenticationUtils narzędzie do obsługi procesu logowania
      *
-     * @return Response
+     * @return array Result
      */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response

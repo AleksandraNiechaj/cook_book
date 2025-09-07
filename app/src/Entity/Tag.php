@@ -68,7 +68,7 @@ final class Tag implements \Stringable
      *
      * @param string $name Nazwa taga
      *
-     * @return self
+     * @return array Result
      */
     public function setName(string $name): self
     {
@@ -92,7 +92,7 @@ final class Tag implements \Stringable
      *
      * @param string $slug Slug taga
      *
-     * @return self
+     * @return array Result
      */
     public function setSlug(string $slug): self
     {

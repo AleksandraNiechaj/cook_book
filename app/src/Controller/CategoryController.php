@@ -28,7 +28,7 @@ final class CategoryController extends AbstractController
      *
      * @param CategoryService $categories serwis kategorii
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/categories', name: 'category_list', methods: ['GET'])]
     public function list(CategoryService $categories): Response
@@ -44,7 +44,7 @@ final class CategoryController extends AbstractController
      * @param Request         $request    obiekt żądania
      * @param CategoryService $categories serwis kategorii
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/categories/new', name: 'category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CategoryService $categories): Response
@@ -79,7 +79,7 @@ final class CategoryController extends AbstractController
      * @param RecipeService       $recipes    serwis przepisów
      * @param TranslatorInterface $translator tłumaczenia komunikatów
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/categories/{slug}', name: 'category_show', methods: ['GET'])]
     public function show(string $slug, Request $request, CategoryService $categories, RecipeService $recipes, TranslatorInterface $translator): Response
@@ -105,7 +105,7 @@ final class CategoryController extends AbstractController
      * @param Category        $category   encja kategorii
      * @param CategoryService $categories serwis kategorii
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/categories/{id}/edit', name: 'category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, CategoryService $categories): Response
@@ -133,7 +133,7 @@ final class CategoryController extends AbstractController
      * @param Category        $category   encja kategorii
      * @param CategoryService $categories serwis kategorii
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/categories/{id}', name: 'category_delete', methods: ['POST'])]
     public function delete(Category $category, CategoryService $categories): Response

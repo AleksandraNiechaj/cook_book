@@ -30,7 +30,7 @@ final class RecipeController extends AbstractController
      * @param Request       $request obiekt żądania
      * @param RecipeService $recipes serwis przepisów
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/recipe/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(Request $request, RecipeService $recipes): Response
@@ -49,7 +49,7 @@ final class RecipeController extends AbstractController
      * @param Request       $request obiekt żądania
      * @param RecipeService $recipes serwis przepisów
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/recipe/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, RecipeService $recipes): Response
@@ -80,7 +80,7 @@ final class RecipeController extends AbstractController
      * @param Recipe        $recipe  encja przepisu
      * @param RecipeService $recipes serwis przepisów
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/recipe/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, RecipeService $recipes): Response
@@ -107,7 +107,7 @@ final class RecipeController extends AbstractController
      * @param Recipe        $recipe  encja przepisu
      * @param RecipeService $recipes serwis przepisów
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/recipe/{id}/delete', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Recipe $recipe, RecipeService $recipes): Response
@@ -126,7 +126,7 @@ final class RecipeController extends AbstractController
      * @param RecipeService  $recipes  serwis przepisów
      * @param CommentService $comments serwis komentarzy
      *
-     * @return Response
+     * @return array Result
      */
     #[Route('/recipe/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function show(int $id, Request $request, RecipeService $recipes, CommentService $comments): Response

@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
- * @copyright 2025 Aleksandra Niechaj
- *
- * @license   For educational purposes (course project).
+ * Tag przypisany do przepisu (unikalna nazwa i slug).
  */
 
 namespace App\Entity;
@@ -21,17 +13,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Tag przypisany do przepisu (unikalna nazwa i slug).
- */
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 #[ORM\Table(name: 'tags')]
 #[ORM\UniqueConstraint(name: 'uniq_tags_slug', columns: ['slug'])]
 #[ORM\UniqueConstraint(name: 'uniq_tags_name', columns: ['name'])]
 #[UniqueEntity(fields: ['name'], message: 'Tag with this name already exists.')]
 #[UniqueEntity(fields: ['slug'], message: 'Tag with this slug already exists.')]
+/**
+ * Klasa encji Tag (unikalna nazwa i slug).
+ */
 final class Tag implements \Stringable
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -53,6 +46,8 @@ final class Tag implements \Stringable
 
     /**
      * Zwraca identyfikator taga.
+     *
+     * @return int|null Id taga
      */
     public function getId(): ?int
     {
@@ -61,6 +56,8 @@ final class Tag implements \Stringable
 
     /**
      * Zwraca nazwę taga.
+     *
+     * @return string|null Nazwa taga
      */
     public function getName(): ?string
     {
@@ -69,6 +66,10 @@ final class Tag implements \Stringable
 
     /**
      * Ustawia nazwę taga.
+     *
+     * @param string $name Nazwa taga
+     *
+     * @return self
      */
     public function setName(string $name): self
     {
@@ -79,6 +80,8 @@ final class Tag implements \Stringable
 
     /**
      * Zwraca slug taga.
+     *
+     * @return string|null Slug taga
      */
     public function getSlug(): ?string
     {
@@ -87,6 +90,10 @@ final class Tag implements \Stringable
 
     /**
      * Ustawia slug taga.
+     *
+     * @param string $slug Slug taga
+     *
+     * @return self
      */
     public function setSlug(string $slug): self
     {
@@ -97,6 +104,8 @@ final class Tag implements \Stringable
 
     /**
      * Reprezentacja obiektu jako string (nazwa taga).
+     *
+     * @return string Nazwa taga
      */
     public function __toString(): string
     {

@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
- * @copyright 2025 Aleksandra Niechaj
- *
- * @license   For educational purposes (course project).
+ * Kontroler odpowiedzialny za stronę główną aplikacji.
  */
 
 namespace App\Controller;
@@ -32,6 +24,8 @@ final class HomeController extends AbstractController
      *
      * @param RecipeServiceInterface   $recipes    serwis przepisów
      * @param CategoryServiceInterface $categories serwis kategorii
+     *
+     * @return Response
      */
     #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(RecipeServiceInterface $recipes, CategoryServiceInterface $categories): Response

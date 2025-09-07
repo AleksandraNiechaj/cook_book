@@ -14,7 +14,7 @@
   14) src/Entity/Comment.php (phpdoc_separation)
   15) src/Entity/Recipe.php (phpdoc_separation)
   16) src/Entity/Tag.php (phpdoc_separation)
-  17) src/Entity/User.php (phpdoc_separation)
+  17) src/Entity/User.php (no_superfluous_phpdoc_tags, phpdoc_trim, single_blank_line_at_eof)
   18) src/Form/AdminChangePasswordType.php (phpdoc_separation)
   19) src/Form/AdminUserType.php (phpdoc_separation)
   20) src/Form/ChangePasswordType.php (phpdoc_separation)
@@ -32,7 +32,7 @@
   32) src/Service/TagService.php (phpdoc_separation)
   33) src/Service/TagServiceInterface.php (phpdoc_separation)
 
-Found 33 of 43 files that can be fixed in 1.079 seconds, 18.00 MB memory used
+Found 33 of 43 files that can be fixed in 1.071 seconds, 18.00 MB memory used
 
 FILE: /home/wwwroot/app/src/Controller/AccountController.php
 ----------------------------------------------------------------------
@@ -147,11 +147,12 @@ FOUND 8 ERRORS AFFECTING 8 LINES
 
 FILE: /home/wwwroot/app/src/Entity/User.php
 ----------------------------------------------------------------------
-FOUND 3 ERRORS AFFECTING 3 LINES
+FOUND 2 ERRORS AFFECTING 2 LINES
 ----------------------------------------------------------------------
-  69 | ERROR | Missing @return tag in function comment
- 104 | ERROR | Missing @return tag in function comment
- 127 | ERROR | Missing @return tag in function comment
+  18 | ERROR | [ ] Missing doc comment for class User
+ 138 | ERROR | [x] Expected 1 blank line at end of file; 2 found
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 ----------------------------------------------------------------------
 
 Time: 2.29 secs; Memory: 10MB
@@ -164,3 +165,6 @@ Time: 2.29 secs; Memory: 10MB
   State   Domain   Id   Message Preview (pl)  
  ------- -------- ---- ---------------------- 
 
+[notice] Migrating up to DoctrineMigrations\Version20250906143754
+   > purging database
+   > loading App\DataFixtures\AppFixtures

@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
- * @copyright 2025 Aleksandra Niechaj
- *
- * @license   For educational purposes (course project).
+ * Kontroler obsługujący operacje CRUD na kategoriach.
  */
 
 namespace App\Controller;
@@ -27,7 +19,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Kontroler obsługujący operacje CRUD na kategoriach.
+ * Kontroler odpowiedzialny za operacje CRUD na kategoriach.
  */
 final class CategoryController extends AbstractController
 {
@@ -35,6 +27,8 @@ final class CategoryController extends AbstractController
      * Wyświetla listę kategorii.
      *
      * @param CategoryService $categories serwis kategorii
+     *
+     * @return Response
      */
     #[Route('/categories', name: 'category_list', methods: ['GET'])]
     public function list(CategoryService $categories): Response
@@ -49,6 +43,8 @@ final class CategoryController extends AbstractController
      *
      * @param Request         $request    obiekt żądania
      * @param CategoryService $categories serwis kategorii
+     *
+     * @return Response
      */
     #[Route('/categories/new', name: 'category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CategoryService $categories): Response
@@ -82,6 +78,8 @@ final class CategoryController extends AbstractController
      * @param CategoryService     $categories serwis kategorii
      * @param RecipeService       $recipes    serwis przepisów
      * @param TranslatorInterface $translator tłumaczenia komunikatów
+     *
+     * @return Response
      */
     #[Route('/categories/{slug}', name: 'category_show', methods: ['GET'])]
     public function show(string $slug, Request $request, CategoryService $categories, RecipeService $recipes, TranslatorInterface $translator): Response
@@ -106,6 +104,8 @@ final class CategoryController extends AbstractController
      * @param Request         $request    obiekt żądania
      * @param Category        $category   encja kategorii
      * @param CategoryService $categories serwis kategorii
+     *
+     * @return Response
      */
     #[Route('/categories/{id}/edit', name: 'category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, CategoryService $categories): Response
@@ -132,6 +132,8 @@ final class CategoryController extends AbstractController
      *
      * @param Category        $category   encja kategorii
      * @param CategoryService $categories serwis kategorii
+     *
+     * @return Response
      */
     #[Route('/categories/{id}', name: 'category_delete', methods: ['POST'])]
     public function delete(Category $category, CategoryService $categories): Response

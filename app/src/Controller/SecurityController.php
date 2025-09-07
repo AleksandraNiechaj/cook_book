@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
- * @copyright 2025 Aleksandra Niechaj
- *
- * @license   For educational purposes (course project).
+ * Kontroler odpowiedzialny za logowanie i wylogowanie użytkowników.
  */
 
 namespace App\Controller;
@@ -22,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * Kontroler odpowiedzialny za logowanie i wylogowanie użytkowników.
+ * Kontroler obsługujący logowanie i wylogowanie użytkowników.
  */
 final class SecurityController extends AbstractController
 {
@@ -30,6 +22,8 @@ final class SecurityController extends AbstractController
      * Formularz logowania użytkownika.
      *
      * @param AuthenticationUtils $authenticationUtils narzędzie do obsługi procesu logowania
+     *
+     * @return Response
      */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response

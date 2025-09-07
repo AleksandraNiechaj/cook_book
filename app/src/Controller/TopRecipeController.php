@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
- * @copyright 2025 Aleksandra Niechaj
- *
- * @license   For educational purposes (course project).
+ * Lista najwyżej ocenianych przepisów.
  */
 
 namespace App\Controller;
@@ -22,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * Lista najwyżej ocenianych przepisów.
+ * Kontroler odpowiedzialny za listę najwyżej ocenianych przepisów.
  */
 final class TopRecipeController extends AbstractController
 {
@@ -30,6 +22,8 @@ final class TopRecipeController extends AbstractController
      * Wyświetlenie listy najwyżej ocenianych przepisów.
      *
      * @param RecipeRepository $recipes Repozytorium przepisów
+     *
+     * @return Response
      */
     #[Route('/recipes/top', name: 'app_recipe_top', methods: ['GET'])]
     public function top(RecipeRepository $recipes): Response

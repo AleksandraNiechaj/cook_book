@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
- * @copyright 2025 Aleksandra Niechaj
- *
- * @license   For educational purposes (course project).
+ * Użytkownik aplikacji (konto logowania i role).
  */
 
 namespace App\Entity;
@@ -66,6 +58,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia e-mail.
      *
      * @param string $email E-mail użytkownika
+     *
+     * @return self
      */
     public function setEmail(string $email): self
     {
@@ -101,6 +95,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia role użytkownika – zawsze dopisuje ROLE_USER.
      *
      * @param string[] $roles Tablica ról użytkownika
+     *
+     * @return self
      */
     public function setRoles(array $roles): self
     {
@@ -124,6 +120,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Ustawia zaszyfrowane hasło.
      *
      * @param string $password Zaszyfrowane hasło
+     *
+     * @return self
      */
     public function setPassword(string $password): self
     {

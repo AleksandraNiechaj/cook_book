@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
- * @copyright 2025 Aleksandra Niechaj
- *
- * @license   For educational purposes (course project).
+ * Kontroler odpowiedzialny za operacje na koncie użytkownika.
  */
 
 namespace App\Controller;
@@ -29,7 +21,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Kontroler odpowiedzialny za operacje na koncie użytkownika.
+ * Kontroler zarządzania kontem użytkownika (edycja profilu i hasła).
  */
 #[IsGranted('ROLE_USER')]
 final class AccountController extends AbstractController
@@ -49,6 +41,8 @@ final class AccountController extends AbstractController
      *
      * @param Request             $request    obiekt żądania
      * @param TranslatorInterface $translator tłumacz komunikatów
+     *
+     * @return Response
      */
     #[Route(path: '/account/profile', name: 'account_profile_edit', methods: ['GET', 'POST'])]
     public function editProfile(Request $request, TranslatorInterface $translator): Response
@@ -77,6 +71,8 @@ final class AccountController extends AbstractController
      *
      * @param Request             $request    obiekt żądania
      * @param TranslatorInterface $translator tłumacz komunikatów
+     *
+     * @return Response
      */
     #[Route(path: '/account/password', name: 'account_password_change', methods: ['GET', 'POST'])]
     public function changePassword(Request $request, TranslatorInterface $translator): Response

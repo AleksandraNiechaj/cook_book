@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
- * @copyright 2025 Aleksandra Niechaj
- *
- * @license   For educational purposes (course project).
+ * Obsługa komentarzy (dodawanie i usuwanie).
  */
 
 namespace App\Controller;
@@ -26,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * Obsługa komentarzy (dodawanie i usuwanie).
+ * Kontroler odpowiedzialny za dodawanie i usuwanie komentarzy.
  */
 final class CommentController extends AbstractController
 {
@@ -36,6 +28,8 @@ final class CommentController extends AbstractController
      * @param Recipe                  $recipe   encja przepisu
      * @param Request                 $request  obiekt żądania
      * @param CommentServiceInterface $comments serwis komentarzy
+     *
+     * @return Response
      */
     #[Route('/comment/add/{id}', name: 'app_comment_add', methods: ['GET', 'POST'])]
     public function add(Recipe $recipe, Request $request, CommentServiceInterface $comments): Response
@@ -77,6 +71,8 @@ final class CommentController extends AbstractController
      *
      * @param Comment                 $comment  encja komentarza
      * @param CommentServiceInterface $comments serwis komentarzy
+     *
+     * @return Response
      */
     #[Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, CommentServiceInterface $comments): Response

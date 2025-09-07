@@ -3,15 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- *
- * @copyright 2025 Aleksandra Niechaj
- *
- * @license   For educational purposes (course project).
+ * Admin: zarządzanie kontami użytkowników.
  */
 
 namespace App\Controller;
@@ -28,7 +20,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
- * Admin: zarządzanie kontami użytkowników.
+ * Kontroler administracyjny do zarządzania użytkownikami.
  */
 #[IsGranted('ROLE_ADMIN')]
 final class AdminUserController extends AbstractController
@@ -47,6 +39,8 @@ final class AdminUserController extends AbstractController
      * Lista użytkowników z paginacją i sortowaniem.
      *
      * @param Request $request obiekt żądania
+     *
+     * @return Response
      */
     #[Route('/admin/users', name: 'admin_user_index', methods: ['GET'])]
     public function index(Request $request): Response
@@ -75,6 +69,8 @@ final class AdminUserController extends AbstractController
      *
      * @param Request $request obiekt żądania
      * @param User    $user    encja użytkownika
+     *
+     * @return Response
      */
     #[Route('/admin/users/{id}/edit', name: 'admin_user_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user): Response
@@ -100,6 +96,8 @@ final class AdminUserController extends AbstractController
      *
      * @param Request $request obiekt żądania
      * @param User    $user    encja użytkownika
+     *
+     * @return Response
      */
     #[Route('/admin/users/{id}/password', name: 'admin_user_password', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function changePassword(Request $request, User $user): Response

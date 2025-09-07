@@ -24,7 +24,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 final class Tag implements \Stringable
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

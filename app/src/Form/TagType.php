@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Formularz tagu.
  */
-
 final class TagType extends AbstractType
 {
     /**

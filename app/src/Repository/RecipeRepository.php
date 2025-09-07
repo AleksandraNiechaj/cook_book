@@ -18,7 +18,6 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Repozytorium encji Recipe.
- *
  */
 class RecipeRepository extends ServiceEntityRepository
 {

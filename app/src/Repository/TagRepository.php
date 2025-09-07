@@ -16,7 +16,6 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Repozytorium encji Tag.
- *
  */
 final class TagRepository extends ServiceEntityRepository
 {

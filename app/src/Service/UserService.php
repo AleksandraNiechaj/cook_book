@@ -3,13 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the Cook Book project.
- *
- * PHP version 8.3
- *
- * @author    Aleksandra Niechaj <aleksandra.niechaj@example.com>
- * @copyright 2025 Aleksandra Niechaj
- * @license   For educational purposes (course project).
+ * Serwis do obsługi logiki użytkowników.
  */
 
 namespace App\Service;
@@ -47,11 +41,11 @@ final class UserService implements UserServiceInterface
     public function getPaginatedList(int $page, int $limit, string $sort, string $dir): array
     {
         $allowedSorts = ['id', 'email'];
-        if (false === \in_array($sort, $allowedSorts, true)) {
+        if (!\in_array($sort, $allowedSorts, true)) {
             $sort = 'email';
         }
-        $dir = 'DESC' === \strtoupper($dir) ? 'DESC' : 'ASC';
 
+        $dir    = 'DESC' === \strtoupper($dir) ? 'DESC' : 'ASC';
         $offset = ($page - 1) * $limit;
 
         $qb = $this->users->createQueryBuilder('u')
@@ -72,8 +66,8 @@ final class UserService implements UserServiceInterface
             'items' => $items,
             'total' => $total,
             'pages' => $pages,
-            'sort' => $sort,
-            'dir' => $dir,
+            'sort'  => $sort,
+            'dir'   => $dir,
         ];
     }
 
